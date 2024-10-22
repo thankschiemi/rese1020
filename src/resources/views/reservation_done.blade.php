@@ -1,4 +1,4 @@
-@extends('rese_layout')
+@extends('layouts.rese_layout')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/reservation_done.css') }}">
@@ -6,6 +6,11 @@
 
 @section('content')
 
-//記述する
+<main class="reservation-done__content">
+    <div class="reservation-done__message-box">
+        <p class="reservation-done__message">ご予約ありがとうございます</p>
+        <button class="reservation-done__button">戻る</button>
+    </div>
+</main>
 
 @endsection

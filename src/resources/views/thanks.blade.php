@@ -1,4 +1,4 @@
-@extends('rese_layout')
+@extends('layouts.rese_layout')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/thanks.css') }}">
