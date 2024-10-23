@@ -1,0 +1,71 @@
+/* ヘッダー全体のスタイル */
+.header {
+    background-color: F5F5F5;
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* 左寄せ */
+}
+
+/* ヘッダー内のコンテナ */
+.header__inner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+        /* アイコンとテキストの間隔を調整 */
+}
+
+/* Block: icon (メニューアイコン) */
+.icon {
+    width: 40px;
+    /* アイコン全体の幅 */
+    height: 40px;
+    /* アイコン全体の高さ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* 左揃えに変更 */
+    gap: 6px;
+    background-color: #005DFF;
+    /* 背景色 */
+    border-radius: 8px;
+    /* 角を丸くする */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    /* 影を追加 */
+    padding-left: 5px;
+    /* 左側に余白を追加して線を内側に配置 */
+    cursor: pointer
+}
+
+/* Element: icon line (水平線) */
+.icon__line {
+    height: 1px;
+    background-color: white;
+}
+
+/* 個別の線の長さ */
+.icon__line--short {
+    width: 5px;
+}
+
+.icon__line--medium {
+    width: 10px;
+}
+
+.icon__line--long {
+    width: 25px;
+}
+
+/* Element: header title ("Rese" テキスト) */
+.header__title {
+    font-family: 'Roboto', sans-serif;
+    /* Robotoフォントを使用 */
+    font-size: 30px;
+    /* フォントサイズを28pxに設定 */
+    font-weight: 700;
+    /* 太字にする */
+    color: #005DFF;
+    /* テキスト色を青に設定 */
+}

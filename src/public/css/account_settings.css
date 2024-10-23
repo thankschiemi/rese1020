@@ -1,0 +1,57 @@
+/* 左側の線を消すための修正 */
+body {
+    background-color: #ffffff;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Element: menu nav */
+.menu__nav {
+    display: flex;
+    flex-direction: column;
+    /* 縦並びに配置 */
+    align-items: center;
+    /* 中央揃え */
+    gap: 20px;
+    /* 各リンクの間にスペースを追加 */
+    padding-top: 100px;
+}
+
+/* Element: menu list */
+.menu__list {
+    list-style: none;
+    /* リストの点を削除 */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    /* 縦並びに配置 */
+    align-items: center;
+    /* 中央揃え */
+    gap: 20px;
+    /* 各リンクの間にスペースを追加 */
+}
+
+/* Element: menu link */
+.menu__link {
+    text-decoration: none;
+    /* アンダーラインを削除 */
+    color: #005DFF;
+    /* 青色のテキスト */
+    font-size: 28px;
+    /* フォントサイズ */
+    font-weight: 500;
+    /* 太字にする */
+    line-height: 1.5;
+    /* 行の高さを調整 */
+    transition: color 0.3s;
+    /* ホバー時のアニメーション */
+}
+
+.menu__link:hover {
+    color: #003bb5;
+    /* ホバー時に色を少し暗くする */
+}

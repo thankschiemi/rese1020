@@ -1,13 +1,12 @@
-@extends('layouts.rese_layout')
+@extends('layouts.rese_layouts_menu')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/mein_menu.css') }}">
+<link rel="stylesheet" href="{{ asset('css/main_menu.css') }}">
 @endsection
 
 @section('content')
 
 <div class="menu">
-    <button class="menu__close-button">✖</button>
     <nav class="menu__nav">
         <ul class="menu__list">
             <li class="menu__item">

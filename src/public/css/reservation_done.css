@@ -1,0 +1,60 @@
+body {
+    background-color: #f2f2f2;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    height: 100vh;
+}
+
+/* メッセージボックスのスタイル */
+.thanks__message-box {
+    background-color: #fff;
+    padding: 80px 60px;
+    /* 内側の余白をさらに増やす */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    /* 最大幅を600pxに設定 */
+    height: 300px;
+    /* 高さを260pxに設定 */
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* メッセージのスタイル */
+.thanks__message {
+    font-size: 24px;
+    /* フォントサイズを大きく */
+    font-weight: bold;
+    /* 太字にする */
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
+    /* 行間を広くする */
+    margin-bottom: 20px;
+    /* ボタンとの余白を調整 */
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ボタンのスタイル */
+.thanks__button {
+    background-color: #005DFF;
+    color: #fff;
+    border: none;
+    padding: 6px 15px;
+    /* ボタンの内側の余白を増やす */
+    font-size: 12px;
+    /* ボタンのフォントサイズを大きく */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    /* ボタンとメッセージの間の余白を増やす */
+    transition: background-color 0.3s;
+}
+
+.thanks__button:hover {
+    background-color: #003bb5;
+}

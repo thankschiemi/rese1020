@@ -1,0 +1,49 @@
+/* ヘッダー全体のスタイル */
+.header {
+    background-color: F5F5F5;
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* 左寄せ */
+}
+
+/* ヘッダー内のコンテナ */
+.header__inner {
+    display: flex;
+    align-items: center;
+}
+
+/* Block: icon */
+.icon {
+    width: 40px;
+    height: 40px;
+    background-color: #005DFF;
+    /* 青い背景 */
+    border-radius: 8px;
+    /* 角を丸くする */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    /* 影を追加 */
+    cursor: pointer;
+}
+
+/* Element: icon line (✖の線) */
+.icon__line {
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: white;
+}
+
+/* クロスにするための回転 */
+.icon__line--cross:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.icon__line--cross:nth-child(2) {
+    transform: rotate(-45deg);
+}
