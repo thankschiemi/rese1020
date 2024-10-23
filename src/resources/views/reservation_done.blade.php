@@ -6,10 +6,10 @@
 
 @section('content')
 
-<main class="reservation-done__content">
-    <div class="reservation-done__message-box">
-        <p class="reservation-done__message">ご予約ありがとうございます</p>
-        <button class="reservation-done__button">戻る</button>
+<main class="done__content">
+    <div class="done__message-box">
+        <p class="done__message">ご予約ありがとうございます</p>
+        <button class="done__button">戻る</button>
     </div>
 </main>
 
