@@ -1,141 +1,90 @@
-/* login.css */
-
-/* ページ全体のスタイル */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #F5F5F5;
-    /* 背景色をライトグレーに設定 */
+/* ログインフォームを中央に配置するためのコンテナ */
+.login__container {
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    /* ビューポートの全高を使用 */
-    margin: 0;
+    min-height: 100vh;
+    /* 画面全体の高さで中央揃え */
+    background-color: #f5f5f5;
+    /* 背景色をライトグレーに設定 */
 }
 
 /* ログインフォームのスタイル */
 .login__form {
     background-color: #fff;
-    /* フォームの背景色を白に設定 */
-    border-radius: 8px;
-    /* 角を丸くする */
+    border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    /* 影を追加 */
+    width: 500px;
+    display: flex;
+    flex-direction: column;
     padding: 0;
-    /* パディングをリセット */
-    width: 100%;
-    max-width: 350px;
-    /* 最大幅を350pxに設定 */
     overflow: hidden;
-    /* ボックス内でのオーバーフローを隠す */
 }
 
 /* フォームタイトルのスタイル */
 .login__form-title {
     background-color: #005DFF;
-    /* タイトル部分の背景を青に設定 */
     color: #fff;
-    /* タイトルのテキスト色を白に設定 */
     font-size: 20px;
-    /* フォントサイズを20pxに設定 */
     font-weight: bold;
-    /* 太字に設定 */
-    padding: 15px;
-    /* タイトル部分の内側余白 */
-    text-align: left;
-    /* テキストを左揃え */
+    padding: 15px 20px;
     margin: 0;
-    /* マージンを削除 */
+    text-align: left;
 }
 
 /* フォームグループのスタイル */
 .login__form-group {
-    padding: 15px;
-    /* フォームグループの内側余白 */
     display: flex;
     align-items: center;
-    /* アイコンとテキストを中央揃え */
+    padding: 10px 20px;
     gap: 10px;
-    /* アイコンと入力フィールドの間隔を設定 */
 }
 
 /* ラベルのスタイル */
 .login__label {
-    display: flex;
-    align-items: center;
-    /* アイコンとテキストを中央揃え */
+    width: 100px; /* ラベルの固定幅 */
+    font-size: 16px;
     color: #333;
-    /* テキストの色をダークグレーに設定 */
-    margin-bottom: 5px;
-    /* 下に余白を追加 */
+    white-space: nowrap; /* テキストの折り返しを防止 */
+    text-align: right; /* テキストを右揃え */
+    margin-right: 10px; /* ラベルと入力フィールドの間の余白 */
+    padding-bottom: 10px;
+    margin-top: 10px;
 }
 
 /* アイコンのスタイル */
 .login__icon {
-    font-size: 18px;
-    /* アイコンのサイズ */
-    color: #333;
-    /* アイコンの色をダークグレーに設定 */
+    width: 30px;
+    height: 30px;
 }
 
 /* 入力フィールドのスタイル */
 .login__input {
     width: 100%;
-    /* 入力フィールドをフル幅に設定 */
-    padding: 10px;
-    /* 入力内のパディング */
-    border: 1px solid #ccc;
-    /* ボーダーをライトグレーに設定 */
-    border-radius: 5px;
-    /* 角を丸くする */
+    border: none;
+    outline: none;
+    padding: 5px 0;
     font-size: 16px;
-    /* フォントサイズを設定 */
+    border-bottom: 1.5px solid #ccc;
 }
 
 .login__input:focus {
-    border-color: #005DFF;
-    /* フォーカス時にボーダーを青に変更 */
-    outline: none;
-    /* デフォルトのアウトラインを削除 */
+    border-bottom: 2px solid #005DFF;
 }
 
-/* ボタンのスタイルを調整 */
+/* ボタンのスタイル */
 .login__button {
-    width: auto;
-    /* 幅を自動に設定 */
     padding: 10px 20px;
-    /* 上下のパディングは10px、左右のパディングは20pxに設定 */
     background-color: #005DFF;
-    /* ボタンの背景色を青に設定 */
-    color: #ffffff;
-    /* テキストの色を白に設定 */
+    color: #fff;
     border: none;
-    /* ボーダーを削除 */
-    border-radius: 5px;
-    /* 角を丸くする */
+    border-radius: 4px;
     font-size: 16px;
-    /* フォントサイズを設定 */
     cursor: pointer;
-    /* ポインターカーソルを表示 */
-    margin: 0;
-    /* マージンを削除 */
-    float: right;
-    /* ボタンを右に配置 */
+    align-self: flex-end;
+    margin: 15px 20px;
 }
 
 .login__button:hover {
     background-color: #004BB5;
-    /* ホバー時に背景色を濃い青に変更 */
-}
-
-/* フォームグループのスタイルを修正 */
-.login__form-group {
-    padding: 15px;
-    /* フォームグループの内側余白 */
-    display: flex;
-    align-items: center;
-    /* アイコンとテキストを中央揃え */
-    gap: 10px;
-    /* アイコンと入力フィールドの間隔を設定 */
-    justify-content: flex-start;
-    /* フォーム要素を左寄せに設定 */
 }
