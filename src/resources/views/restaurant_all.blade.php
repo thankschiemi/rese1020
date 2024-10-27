@@ -6,37 +6,46 @@
 
 @section('content')
 
-<nav class="filter">
-    <select class="filter__area">
-        <option value="">All area</option>
-        <option value="tokyo">Tokyo</option>
-        <option value="osaka">Osaka</option>
-        <option value="fukuoka">Fukuoka</option>
-    </select>
-    <select class="filter__genre">
-        <option value="">All genre</option>
-        <!-- ジャンルのオプションが続く -->
-    </select>
-    <input type="search" class="filter__search" placeholder="Search ...">
-</nav>
+<div class="restaurant__container">
+    <form method="GET" action="{{ route('restaurants.index') }}" class="filter">
+        <select name="region_id" class="filter__area" onchange="this.form.submit()">
+            <option value="">All area</option>
+            <option value="tokyo">Tokyo</option>
+            <option value="osaka">Osaka</option>
+            <option value="fukuoka">Fukuoka</option>
+        </select>
 
-<main class="page__content">
-    <section class="restaurant-list">
-        <article class="restaurant">
-            <div class="restaurant__image">
-                <img src="sushi.jpg" alt="店舗画像">
-            </div>
-            <div class="restaurant__details">
-                <h2 class="restaurant__name">仙人</h2>
-                <p class="restaurant__tags">#東京都 #寿司</p>
-                <button class="restaurant__button">詳しくみる</button>
-            </div>
-            <div class="restaurant__favorite">
-                <button class="restaurant__favorite-button">❤️</button>
-            </div>
-        </article>
-        <!-- 他の店舗も同様に続く -->
-    </section>
-</main>
+        <select name="genre_id" class="filter__genre" onchange="this.form.submit()">
+            <option value="">All genre</option>
+            <option value="sushi">寿司</option>
+            <option value="yakiniku">焼肉</option>
+            <option value="izakaya">居酒屋</option>
+            <option value="itarian">イタリアン</option>
+        </select>
 
-@endsection
+        <input type="search" name="keyword" class="filter__search" placeholder="Search ..." value="{{ request('keyword') }}">
+    </form>
+
+
+    <main class="page__content">
+        <section class="restaurant-list">
+            @foreach ($restaurants as $restaurant)
+            <article class="restaurant">
+                <div class="restaurant__image">
+                    <img src="{{ asset('image/' . $restaurant->image_url) }}" alt="店舗画像" class="login__icon">
+                </div>
+                <div class="restaurant__details">
+                    <h2 class="restaurant__name">{{ $restaurant->name }}</h2>
+                    <p class="restaurant__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>
+                    <a href="{{ route('restaurants.detail', $restaurant->id) }}" class="restaurant__button">詳しくみる</a>
+                </div>
+                <div class="restaurant__favorite">
+                    <button class="restaurant__favorite-button"></button>
+                </div>
+            </article>
+            @endforeach
+        </section>
+
+    </main>
+
+    @endsection
