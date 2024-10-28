@@ -16,6 +16,6 @@ Route::get('/thanks', [MemberController::class, 'thanks']); // サンクスペ�
 Route::get('/mypage', [MyPageController::class, 'index']); // マイページ
 
 // 予約関連のルート
-Route::get('/', [ReservationController::class, 'index']); // 飲食店一覧ページ
-Route::get('/detail/{shop_id}', [ReservationController::class, 'detail']); // 飲食店詳細ページ
+Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧ページ
+Route::get('/detail/{shop_id}', [ReservationController::class, 'detail'])->name('restaurants.detail'); // 飲食店詳細ページ
 Route::get('/done', [ReservationController::class, 'done']); // 予約完了ページ

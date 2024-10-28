@@ -5,47 +5,36 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* 左寄せ */
 }
 
-/* ヘッダー内のコンテナ */
 .header__inner {
     display: flex;
     align-items: center;
     gap: 15px;
-        /* アイコンとテキストの間隔を調整 */
+    width: 100%;
 }
 
-/* Block: icon (メニューアイコン) */
+/* メニューアイコンのスタイル */
 .icon {
     width: 40px;
-    /* アイコン全体の幅 */
     height: 40px;
-    /* アイコン全体の高さ */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    /* 左揃えに変更 */
     gap: 6px;
     background-color: #005DFF;
-    /* 背景色 */
     border-radius: 8px;
-    /* 角を丸くする */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    /* 影を追加 */
     padding-left: 5px;
-    /* 左側に余白を追加して線を内側に配置 */
-    cursor: pointer
+    cursor: pointer;
 }
 
-/* Element: icon line (水平線) */
 .icon__line {
     height: 1px;
     background-color: white;
 }
 
-/* 個別の線の長さ */
 .icon__line--short {
     width: 5px;
 }
@@ -58,14 +47,99 @@
     width: 25px;
 }
 
-/* Element: header title ("Rese" テキスト) */
+/* "Rese"テキストのスタイル */
 .header__title {
     font-family: 'Roboto', sans-serif;
-    /* Robotoフォントを使用 */
     font-size: 30px;
-    /* フォントサイズを28pxに設定 */
     font-weight: 700;
-    /* 太字にする */
     color: #005DFF;
-    /* テキスト色を青に設定 */
+}
+
+/* フィルターフォームの調整 */
+.header_filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+    padding: 12px 20px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    margin-left: 50px;
+    /* 左に20px移動 */
+}
+
+.filter-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.filter_area,
+.filter_genre {
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-right: 1px solid #ccc;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 100px;
+    /* 幅を固定 */
+    padding-right: 30px;
+    /* 右側に30pxの余裕を追加 */
+}
+
+/* カスタムドロップダウンアイコン */
+.dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #ccc;
+    /* アイコン色を灰色に設定 */
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* 検索ボックスのスタイル */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    background-color: white;
+    width: 350px;
+
+
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    background: url('/image/magnifying-glass-icon.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.7;
+    /* 薄い灰色 */
+}
+
+.filter_search {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    /* 調整 */
+    padding: 4px 10px;
+    background-color: transparent;
+    color: black;
+    /* テキストを黒に変更 */
+}
+
+.filter_search::placeholder {
+    color: #aaa;
+    /* プレースホルダーの色を薄い灰色に設定 */
+    opacity: 1;
+    /* プレースホルダーの透明度を調整 */
 }

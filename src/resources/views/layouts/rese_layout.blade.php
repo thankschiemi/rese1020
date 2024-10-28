@@ -26,6 +26,9 @@
             </div>
             <!-- "Rese" テキスト -->
             <span class="header__title">Rese</span>
+
+            @yield('header_filters')
+
         </div>
     </header>
 
