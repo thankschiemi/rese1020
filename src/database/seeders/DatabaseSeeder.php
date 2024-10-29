@@ -13,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // 他のシーダーを追加する場合は、ここに追加
+        $this->call([
+
+            RegionSeeder::class,
+            GenreSeeder::class,
+            RestaurantSeeder::class,
+            MemberSeeder::class,
+            ReservationSeeder::class,
+        ]);
     }
 }

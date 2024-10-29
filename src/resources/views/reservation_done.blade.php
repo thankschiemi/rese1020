@@ -9,7 +9,7 @@
 <main class="done__content">
     <div class="done__message-box">
         <p class="done__message">ご予約ありがとうございます</p>
-        <button class="done__button">戻る</button>
+        <a href="{{ url()->previous() }}" class="back-button">戻る</a>
     </div>
 </main>
 

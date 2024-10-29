@@ -9,6 +9,8 @@ class RegionSeeder extends Seeder
 {
     public function run()
     {
+        Region::query()->delete();
+
         $regions = [
             ['name' => '東京都'],
             ['name' => '大阪府'],

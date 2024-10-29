@@ -39,22 +39,18 @@
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-/* ボタンのスタイル */
-.done__button {
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
     background-color: #005DFF;
     color: #fff;
-    border: none;
-    padding: 6px 15px;
-    /* ボタンの内側の余白を増やす */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
     font-size: 12px;
-    /* ボタンのフォントサイズを大きく */
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 15px;
-    /* ボタンとメッセージの間の余白を増やす */
-    transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
-.done__button:hover {
-    background-color: #003bb5;
+.back-button:hover {
+    background-color: #0041CC;
 }
