@@ -31,25 +31,33 @@
             <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
             <input type="hidden" name="member_id" value="1"> <!-- 仮に1と設定 -->
 
+            <!-- 日付フィールド -->
             <div class="reservation-form__group">
                 <label for="date" class="reservation-form__label">Date</label>
-                <input type="date" id="date" name="date" value="{{ old('date') }}" class="reservation-form__input" required>
+                <input type="date" id="date" name="date"
+                    value="{{ old('date') }}"
+                    class="reservation-form__input" required>
                 @error('date')
                 <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
 
+            <!-- 時間フィールド -->
             <div class="reservation-form__group">
                 <label for="time" class="reservation-form__label">Time</label>
-                <input type="time" id="time" name="time" value="{{ old('time') }}" class="reservation-form__input" required>
+                <input type="time" id="time" name="time"
+                    value="{{ old('time') }}"
+                    class="reservation-form__input" required>
                 @error('time')
                 <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
 
+            <!-- 人数フィールド -->
             <div class="reservation-form__group">
                 <label for="number" class="reservation-form__label">Number</label>
-                <select id="number" name="number" class="reservation-form__select" required>
+                <select id="number" name="number"
+                    class="reservation-form__select" required>
                     <option value="1" {{ old('number') == 1 ? 'selected' : '' }}>1人</option>
                     <option value="2" {{ old('number') == 2 ? 'selected' : '' }}>2人</option>
                     <option value="3" {{ old('number') == 3 ? 'selected' : '' }}>3人</option>
@@ -61,23 +69,27 @@
             </div>
 
             <!-- 予約詳細の表示 -->
-            @if(Session::has('reservation_preview'))
             <div class="reservation-summary">
-
+                <h3>予約のプレビュー</h3>
                 <div class="reservation-summary__item">
-                    <p><strong>Shop</strong> {{ Session::get('reservation_preview.restaurant_name') ?? $restaurant->name }}</p>
-                    <p><strong>Date</strong> {{ Session::get('reservation_preview.date') ?? 'N/A' }}</p>
-                    <p><strong>Time</strong> {{ Session::get('reservation_preview.time') ?? 'N/A' }}</p>
-                    <p><strong>Number</strong> {{ Session::get('reservation_preview.number') ?? 'N/A' }}人</p>
+                    <p><strong>Shop:</strong>
+                        {{ Session::get('reservation_preview.restaurant_name') ?? $restaurant->name }}
+                    </p>
+                    <p><strong>Date:</strong>
+                        {{ Session::get('reservation_preview.date') ?? old('date') ?? 'N/A' }}
+                    </p>
+                    <p><strong>Time:</strong>
+                        {{ Session::get('reservation_preview.time') ?? old('time') ?? 'N/A' }}
+                    </p>
+                    <p><strong>Number:</strong>
+                        {{ Session::get('reservation_preview.number') ?? old('number') ?? 'N/A' }}人
+                    </p>
                 </div>
             </div>
-            @endif
 
             <!-- 確認ボタンと予約ボタン -->
             <button type="submit" name="action" value="preview" class="reservation-form__preview-button">確認</button>
-            @if(Session::has('reservation_preview'))
             <button type="submit" name="action" value="reserve" class="reservation-form__submit-button">予約する</button>
-            @endif
         </form>
     </section>
 

@@ -22,3 +22,4 @@ Route::get('/detail/{shop_id}', [ReservationController::class, 'detail'])->name(
 Route::get('/done', [ReservationController::class, 'done'])->name('reserve.done');
 
 Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store');
+Route::get('/reserve', [ReservationController::class, 'index'])->name('reserve.index');

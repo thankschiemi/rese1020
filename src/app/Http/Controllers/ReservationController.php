@@ -46,7 +46,6 @@ class ReservationController extends Controller
     }
 
     public function store(StoreReservationRequest $request)
-
     {
         // 'action'の値を確認
         if ($request->input('action') === 'preview') {
@@ -56,39 +55,41 @@ class ReservationController extends Controller
                 'time' => $request->time,
                 'number' => $request->number,
             ]);
-            return redirect()->back()->withInput(); // プレビュー表示
+
+            // プレビューのリダイレクト
+            return redirect()->back()->withInput()->with('preview', true);
         }
 
-        if (
-            $request->input('action') === 'reserve'
-        ) {
+        if ($request->input('action') === 'reserve') {
             try {
-                // 予約情報を作成
-                $reservation = Reservation::create([
+                // 予約情報をデータベースに保存
+                Reservation::create([
                     'member_id' => $request->member_id,
                     'restaurant_id' => $request->restaurant_id,
                     'reservation_date' => $request->date,
                     'reservation_time' => $request->time,
                     'number_of_people' => $request->number,
                 ]);
-                // セッションをクリア
+
+                // プレビュー情報をクリア
                 Session::forget('reservation_preview');
 
-                // 予約成功時のリダイレクト
+                // 予約完了画面にリダイレクト
                 return redirect()->route('reserve.done')->with('success', '予約が完了しました！');
             } catch (\Exception $e) {
-                // エラーメッセージを表示
-                return redirect()->back()->with('error', '予約に失敗しました。もう一度お試しください。');
+                // エラー時は入力内容を保持してリダイレクト
+                return redirect()->back()->withInput()->with('error', '予約に失敗しました。もう一度お試しください。');
             }
         }
-        return redirect()->route('reserve.done');
+
+        // 不正な操作の場合
+        return redirect()->back()->withInput()->with('error', '不正な操作が行われました。');
     }
-
-
 
     public function done()
     {
-        Session::forget('reservation_preview');
+        Session::reflash();
+        // 完了ページの表示
         return view('reservation_done');
     }
 }
