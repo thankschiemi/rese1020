@@ -10,6 +10,7 @@ use App\Models\Region;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Session;
 
+
 class ReservationController extends Controller
 {
     public function index(Request $request)
@@ -44,26 +45,50 @@ class ReservationController extends Controller
         return view('restaurant_detail', compact('restaurant', 'reservation'));
     }
 
-
-
     public function store(StoreReservationRequest $request)
-    {
-        // 予約データの作成
-        $reservation = Reservation::create([
-            'member_id' => $request->member_id,
-            'restaurant_id' => $request->restaurant_id,
-            'reservation_date' => $request->date,
-            'reservation_time' => $request->time,
-            'number_of_people' => $request->number,
-        ]);
 
-        // 予約完了ページへのリダイレクト
+    {
+        // 'action'の値を確認
+        if ($request->input('action') === 'preview') {
+            Session::put('reservation_preview', [
+                'restaurant_name' => Restaurant::find($request->restaurant_id)->name,
+                'date' => $request->date,
+                'time' => $request->time,
+                'number' => $request->number,
+            ]);
+            return redirect()->back()->withInput(); // プレビュー表示
+        }
+
+        if (
+            $request->input('action') === 'reserve'
+        ) {
+            try {
+                // 予約情報を作成
+                $reservation = Reservation::create([
+                    'member_id' => $request->member_id,
+                    'restaurant_id' => $request->restaurant_id,
+                    'reservation_date' => $request->date,
+                    'reservation_time' => $request->time,
+                    'number_of_people' => $request->number,
+                ]);
+                // セッションをクリア
+                Session::forget('reservation_preview');
+
+                // 予約成功時のリダイレクト
+                return redirect()->route('reserve.done')->with('success', '予約が完了しました！');
+            } catch (\Exception $e) {
+                // エラーメッセージを表示
+                return redirect()->back()->with('error', '予約に失敗しました。もう一度お試しください。');
+            }
+        }
         return redirect()->route('reserve.done');
     }
 
 
+
     public function done()
     {
+        Session::forget('reservation_preview');
         return view('reservation_done');
     }
 }
