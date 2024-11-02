@@ -19,4 +19,10 @@ class Member extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

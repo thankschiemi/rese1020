@@ -53,7 +53,12 @@
             <p class="restaurant__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>
             <div class="restaurant_buttons">
                 <a href="{{ route('restaurants.detail', $restaurant->id) }}" class="restaurant_button">詳しくみる</a>
-                <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}">❤️</button>
+
+                <form action="{{ route('favorites.store', ['restaurant_id' => $restaurant->id]) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="favorites__favorite-button">❤️</button>
+                </form>
+
             </div>
         </div>
     </article>
