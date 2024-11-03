@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Favorite;
 
 class Restaurant extends Model
 {
-    // restaurantsテーブルに対応するモデルであることを指定（省略可能）
+    use HasFactory;
+
     protected $table = 'restaurants';
 
-    // 複数代入可能な属性を指定（fillable）
     protected $fillable = [
         'name',
         'region_id',
@@ -29,5 +30,13 @@ class Restaurant extends Model
     public function genre()
     {
         return $this->belongsTo(Genre::class);
+    }
+
+    // お気に入り状態を取得するアクセサ
+    public function getIsFavoriteAttribute()
+    {
+        $user_id = 1; // 仮のユーザーIDでテスト
+        // 現在のレストランがユーザーのお気に入りに登録されているかを確認
+        return Favorite::where('member_id', $user_id)->where('restaurant_id', $this->id)->exists();
     }
 }

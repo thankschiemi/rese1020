@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/restaurant_all.css') }}">
+<link rel="stylesheet" href="{{ asset('css/common_restaurant.css') }}">
 @endsection
 
 @section('header_filters')
@@ -56,9 +57,8 @@
 
                 <form action="{{ route('favorites.store', ['restaurant_id' => $restaurant->id]) }}" method="POST">
                     @csrf
-                    <button type="submit" class="favorites__favorite-button">❤️</button>
+                    <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}">❤️</button>
                 </form>
-
             </div>
         </div>
     </article>
