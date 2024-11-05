@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use App\Models\Region;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 
 class ReservationController extends Controller
@@ -30,10 +31,13 @@ class ReservationController extends Controller
             $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        $restaurants = $query->orderBy('id')->get();
+        // 重複するレストランIDを排除
+        $restaurants = $query->distinct()->get();
 
         return view('restaurant_all', compact('restaurants', 'regions', 'genres'));
     }
+
+
 
 
 

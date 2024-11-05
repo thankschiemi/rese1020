@@ -8,18 +8,27 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
-    public function store($restaurant_id)
+    public function store(Request $request, $restaurant_id)
     {
-        $user_id = 1; // 仮のユーザーIDを指定
+        $user_id = 1; // 現在のユーザーIDを仮に設定
 
-        // お気に入りの重複登録を防止
-        if (!Favorite::where('member_id', $user_id)->where('restaurant_id', $restaurant_id)->exists()) {
+        // 既にいいねされているかを確認
+        $favorite = Favorite::where('member_id', $user_id)
+            ->where('restaurant_id', $restaurant_id)
+            ->first();
+
+        if ($favorite) {
+            // いいねを削除
+            $favorite->delete();
+        } else {
+            // いいねを追加
             Favorite::create([
                 'member_id' => $user_id,
                 'restaurant_id' => $restaurant_id,
             ]);
         }
 
-        return redirect()->back()->with('status', 'お気に入りに追加しました');
+        // ページをリロードして「いいね」状態を反映
+        return redirect()->back();
     }
 }

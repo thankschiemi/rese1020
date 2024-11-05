@@ -39,4 +39,8 @@ class Restaurant extends Model
         // 現在のレストランがユーザーのお気に入りに登録されているかを確認
         return Favorite::where('member_id', $user_id)->where('restaurant_id', $this->id)->exists();
     }
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class, 'restaurant_id');
+    }
 }
