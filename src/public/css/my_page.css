@@ -1,55 +1,98 @@
+/* ページ全体の背景色 */
+body {
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 0;
+}
+
 .mypage__content {
     display: flex;
     gap: 20px;
     align-items: flex-start;
-    /* 高さの開始位置を上に揃える */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: #F5F5F5;
 }
 
 .mypage__reservations {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
-    /* 適度な余白を追加 */
+    margin-top: 65px;
+    max-width: 50%;
+
 }
 
 .mypage__favorites {
     flex: 1;
     display: flex;
     flex-direction: column;
+    max-width: 50%;
 }
 
 .mypage__user-name {
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.mypage__section-title {
-    font-size: 18px;
+.mypage__status-title {
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    padding-left: 80px;
 }
 
-/* 予約カードのスタイル */
-.reservation-card {
-    background-color: #005DFF;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.mypage__section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
 }
+
+/* 全体の文字色を白に */
+.reservation-card,
+.reservation-card__details,
+.reservation-card__detail {
+    color: white;
+    /* 文字を白に設定 */
+}
+/* 通常のカード */
+.reservation-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #005DFF;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px auto 30px 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 250px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* ホバー時のカード */
+.reservation-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #004BBB;
+}
+
 
 .reservation__card-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 0 20px;
+    gap: 10px;
+
 }
 
 .reservation__icon img {
     width: 24px;
     height: 24px;
+    margin-right: 20px;
 }
 
 .reservation__card-title {
@@ -58,18 +101,81 @@
     margin: 0;
 }
 
+/* 閉じるボタン */
+.reservation__close-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    /* 上から20px */
+    right: 30px;
+    /* 右から30px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 閉じるアイコン */
+.close-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #005DFF;
+    border-radius: 50%;
+    border: 2px solid white;
+    position: relative;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.close-icon::before,
+.close-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 2px;
+    background-color: white;
+    transform-origin: center;
+}
+
+.close-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* 予約カード内の詳細リスト */
 .reservation-card__details {
     list-style: none;
-    padding: 0;
-    margin-top: 10px;
+    padding: 20px;
+    margin-top: 20px;
 }
-
 .reservation-card__detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
     font-size: 14px;
-    margin-bottom: 8px;
+
 }
 
-/* 「お気に入り店舗」のレイアウト調整 */
+.detail-label {
+    width: 80px;
+    /* ラベル部分を固定幅に */
+    text-align: left;
+    padding-right: 10px;
+    /* ラベルと値の間にスペースを追加 */
+}
+
+.detail-value {
+    flex: 1;
+    text-align: left;
+}
+
+/* お気に入り店舗のレイアウト調整 */
 .favorites__list {
     display: flex;
     gap: 20px;
