@@ -55,56 +55,41 @@ class ReservationController extends Controller
     public function detail($shop_id)
     {
         $restaurant = Restaurant::with(['region', 'genre'])->findOrFail($shop_id);
-        $reservation = Reservation::where('restaurant_id', $shop_id)->first();
+        $user_id = 1; // 仮のユーザーIDを使用
 
-        return view('restaurant_detail', compact('restaurant', 'reservation'));
+        // 最新の予約情報を取得
+        $latest_reservation = Reservation::where('member_id', $user_id)
+            ->where('restaurant_id', $shop_id)
+            ->latest()
+            ->first();
+
+        return view('restaurant_detail', compact('restaurant', 'latest_reservation'));
     }
 
     public function store(StoreReservationRequest $request)
     {
-        // 'action'の値を確認
-        if ($request->input('action') === 'preview') {
-            Session::put('reservation_preview', [
-                'restaurant_name' => Restaurant::find($request->restaurant_id)->name,
-                'date' => $request->date,
-                'time' => $request->time,
-                'number' => $request->number,
-            ]);
+        $user_id = 1; // 仮のユーザーIDを使用
 
-            // プレビューのリダイレクト
-            return redirect()->back()->withInput()->with('preview', true);
-        }
+        // 予約情報をデータベースに保存
+        $reservation = Reservation::create([
+            'member_id' => $user_id,
+            'restaurant_id' => $request->restaurant_id,
+            'reservation_date' => $request->date,
+            'reservation_time' => $request->time,
+            'number_of_people' => $request->number,
+        ]);
 
-        if ($request->input('action') === 'reserve') {
-            try {
-                // 予約情報をデータベースに保存
-                Reservation::create([
-                    'member_id' => $request->member_id,
-                    'restaurant_id' => $request->restaurant_id,
-                    'reservation_date' => $request->date,
-                    'reservation_time' => $request->time,
-                    'number_of_people' => $request->number,
-                ]);
-
-                // プレビュー情報をクリア
-                Session::forget('reservation_preview');
-
-                // 予約完了画面にリダイレクト
-                return redirect()->route('reserve.done')->with('success', '予約が完了しました！');
-            } catch (\Exception $e) {
-                // エラー時は入力内容を保持してリダイレクト
-                return redirect()->back()->withInput()->with('error', '予約に失敗しました。もう一度お試しください。');
-            }
-        }
-
-        // 不正な操作の場合
-        return redirect()->back()->withInput()->with('error', '不正な操作が行われました。');
+        // 予約完了画面にリダイレクト
+        return redirect()->route('reserve.done')->with('restaurant_id', $request->restaurant_id);
     }
+
 
     public function done()
     {
-        Session::reflash();
-        // 完了ページの表示
-        return view('reservation_done');
+        // リダイレクトされたときのデータを受け取る
+        $restaurant_id = session('restaurant_id');
+
+        // リダイレクト後に戻るためのリンクを設定
+        return view('reservation_done', compact('restaurant_id'));
     }
 }

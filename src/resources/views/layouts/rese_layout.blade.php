@@ -18,19 +18,18 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <!-- アイコン -->
-            <div class="icon">
+            <!-- アイコンとテキストをリンク化 -->
+            <a href="{{ route('restaurants.index') }}" class="icon">
                 <div class="icon__line icon__line--medium"></div>
                 <div class="icon__line icon__line--long"></div>
                 <div class="icon__line icon__line--short"></div>
-            </div>
-            <!-- "Rese" テキスト -->
-            <span class="header__title">Rese</span>
+            </a>
+            <a href="{{ route('restaurants.index') }}" class="header__title">Rese</a>
 
             @yield('header_filters')
-
         </div>
     </header>
+
 
     <main>
         @yield('content')

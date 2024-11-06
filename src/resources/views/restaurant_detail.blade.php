@@ -89,11 +89,6 @@
                 @enderror
             </div>
 
-            <!-- 確認ボタン -->
-            <button type="submit" name="action" value="preview"
-                class="reservation-form__button--preview">確認</button>
-            </div>
-
             <!-- 予約するボタン -->
             <button type="submit" name="action" value="reserve"
                 class="reservation-form__button--submit">予約する</button>
@@ -103,19 +98,20 @@
     <section class="reservation-summary__container">
         <div class="reservation-summary">
             <p class="reservation-summary__text">
-                <strong>Shop:</strong> {{ Session::get('reservation_preview.restaurant_name') ?? $restaurant->name }}
+                <strong>Shop:</strong> {{ $restaurant->name }}
             </p>
             <p class="reservation-summary__text">
-                <strong>Date:</strong> {{ Session::get('reservation_preview.date') ?? old('date') ?? 'N/A' }}
+                <strong>Date:</strong> {{ $latest_reservation ? $latest_reservation->reservation_date : 'N/A' }}
             </p>
             <p class="reservation-summary__text">
-                <strong>Time:</strong> {{ Session::get('reservation_preview.time') ?? old('time') ?? 'N/A' }}
+                <strong>Time:</strong> {{ $latest_reservation ? $latest_reservation->reservation_time : 'N/A' }}
             </p>
             <p class="reservation-summary__text">
-                <strong>Number:</strong> {{ Session::get('reservation_preview.number') ?? old('number') ?? 'N/A' }}人
+                <strong>Number:</strong> {{ $latest_reservation ? $latest_reservation->number_of_people : 'N/A' }}人
             </p>
         </div>
     </section>
+
 </main>
 
 @endsection

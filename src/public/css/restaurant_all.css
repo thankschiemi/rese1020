@@ -65,3 +65,45 @@ body {
     /* 中央揃え */
     padding-bottom: 30px;
 }
+/* レスポンシブデザイン */
+@media (max-width: 1024px) {
+    .page_content {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3列に減らす */
+        gap: 15px;
+        /* カード間のスペースを縮小 */
+    }
+}
+
+@media (max-width: 768px) {
+    .page_content {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2列に減らす */
+        gap: 10px;
+        /* カード間のスペースをさらに縮小 */
+    }
+
+    .filter {
+        flex-direction: column;
+        /* フィルターフォームを縦に配置 */
+        align-items: flex-start;
+        /* 左揃えにする */
+    }
+
+    .filter_search {
+        width: 100%;
+        /* 検索ボックスを画面幅いっぱいにする */
+    }
+}
+
+@media (max-width: 480px) {
+    .page_content {
+        grid-template-columns: 1fr;
+        /* 1列表示に変更 */
+    }
+
+    .filter {
+        gap: 5px;
+        /* スペースをさらに縮小 */
+    }
+}

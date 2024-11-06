@@ -26,7 +26,7 @@ Route::get('/done', [ReservationController::class, 'done'])->name('reserve.done'
 
 Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store');
 Route::get('/reserve', [ReservationController::class, 'index'])->name('reserve.index');
-
+Route::get('/restaurant/{restaurant_id}', [ReservationController::class, 'show'])->name('restaurants.show');
 
 // お気に入り登録関連のルート
 

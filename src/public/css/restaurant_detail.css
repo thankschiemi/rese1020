@@ -48,11 +48,12 @@ body {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 50px;
+    object-fit: contain;
 }
 
 .shop-info__image img {
     width: 100%;
-    height: 380px;
+    height: auto;
     object-fit: cover;
 }
 
@@ -71,7 +72,7 @@ body {
     top: 50px;
     right: 100px;
     width: 600px;
-    height: 730px;
+    height: auto;
     background-color: #005DFF;
     color: #fff;
     border-radius: 5px;
@@ -79,19 +80,18 @@ body {
     flex-direction: column;
     gap: 10px;
 }
+
 .reservation-form__title {
     font-size: 24px;
     font-weight: bold;
     padding: 20px;
 }
 
-
 .reservation-form__group {
     margin-top: -40px;
     margin-bottom: 20px;
     position: relative;
     padding: 20px;
-
 }
 
 .reservation-form__label {
@@ -130,7 +130,6 @@ body {
     padding: 5px;
     border-radius: 5px;
     font-size: 12px;
-
 }
 
 /* 予約詳細エリアと確認ボタンのコンテナ */
@@ -144,15 +143,7 @@ body {
 .reservation-summary {
     padding: 15px;
     background-color: #4e6bec;
-    border-top-left-radius: 5px;
-        /* 左上の角を丸く */
-        border-top-right-radius: 5px;
-        /* 右上の角を丸く */
-        border-bottom-left-radius: 0;
-        /* 左下の角を直角にする */
-        border-bottom-right-radius: 0;
-        /* 右下の角を直角にする */
-
+    border-radius: 5px;
 }
 
 .reservation-summary__text {
@@ -166,34 +157,8 @@ body {
     color: white;
 }
 
-/* 確認ボタンのスタイル */
-.reservation-form__button--preview {
-    display: block;
-    width: 480px;
-    padding: 10px 0;
-    background-color: #3a59e2;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 210px;
-    /* 上部の間隔 */
-    margin-left: 20px;
-    
-}
-
-.reservation-form__button--preview:hover {
-    background-color: #23397a;
-}
-
 /* 予約するボタンのスタイル */
 .reservation-form__button--submit {
-
     width: 600px;
     padding: 15px 0;
     background-color: #002a99;
@@ -206,22 +171,26 @@ body {
     border-bottom-right-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 160px;
+    margin-top: 400px;
     float: left;
-
 }
 
 .reservation-form__button--submit:hover {
     background-color: #001a66;
 }
-/* ここにレスポンシブデザインを追加 */
 
 /* タブレット・スマートフォン用のレスポンシブデザイン */
 @media (max-width: 768px) {
     .shop-page__content {
         flex-direction: column;
+        align-items: center;
+        /* 子要素を中央揃え */
         padding: 20px;
         gap: 20px;
+    }
+
+    .shop-info {
+        max-width: 100%;
     }
 
     .reservation-form {
@@ -238,6 +207,7 @@ body {
     .reservation-form__select--time,
     .reservation-form__select--people {
         width: 100%;
+        margin-bottom: 10px;
     }
 
     .reservation-summary__container {
@@ -246,7 +216,6 @@ body {
         width: 100%;
     }
 
-    .reservation-form__button--preview,
     .reservation-form__button--submit {
         width: 100%;
         margin-top: 10px;
@@ -254,5 +223,6 @@ body {
 
     .reservation-summary {
         width: 100%;
+        padding: 10px;
     }
 }
