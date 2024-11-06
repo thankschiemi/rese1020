@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use App\Models\Restaurant;
 use App\Models\Region;
 use App\Models\Genre;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 
@@ -31,8 +32,18 @@ class ReservationController extends Controller
             $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        // 重複するレストランIDを排除
-        $restaurants = $query->distinct()->get();
+        // レストランの重複をIDベースで排除
+        $restaurants = $query->select('id', 'name', 'region_id', 'genre_id', 'image_url')->distinct()->get();
+
+
+
+        // ユーザーIDに基づいて各レストランがお気に入りかどうかを確認
+        $user_id = 1; // 仮のユーザーIDを使用
+        foreach ($restaurants as $restaurant) {
+            $restaurant->is_favorite = Favorite::where('member_id', $user_id)->where('restaurant_id', $restaurant->id)->exists();
+        }
+
+
 
         return view('restaurant_all', compact('restaurants', 'regions', 'genres'));
     }

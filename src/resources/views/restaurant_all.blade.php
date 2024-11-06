@@ -9,7 +9,7 @@
 <div class="header_filters">
     <form method="GET" action="{{ route('restaurants.index') }}" class="filter">
         <div class="filter-wrapper">
-            <select name="region_id" class="filter_area">
+            <select name="region_id" class="filter_area" onchange="this.form.submit()">
                 <option value="">All area</option>
                 @foreach ($regions as $region)
                 <option value="{{ $region->id }}" {{ request('region_id') == $region->id ? 'selected' : '' }}>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="filter-wrapper">
-            <select name="genre_id" class="filter_genre">
+            <select name="genre_id" class="filter_genre" onchange="this.form.submit()">
                 <option value="">All genre</option>
                 @foreach ($genres as $genre)
                 <option value="{{ $genre->id }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>

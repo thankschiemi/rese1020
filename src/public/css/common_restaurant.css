@@ -100,4 +100,5 @@
 /* Hover時のスタイル（任意） */
 .restaurant_favorite-button:hover {
     color: #ff5a5a;
+    transform: scale(1.3);
 }
