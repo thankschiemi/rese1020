@@ -1,14 +1,31 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MyPageController;
+use App\Http\Controllers\HomeController;
 
 // ユーザー関連のルート
 Route::get('/login', [MemberController::class, 'login'])->name('login'); // ログインページ
-Route::get('/register', [MemberController::class, 'register']); // 会員登録ページ
+Route::post('/login', [MemberController::class, 'authenticate'])->name('login.authenticate');
+
+Route::get('/register', [MemberController::class, 'register'])->name('register'); // 会員登録ページ
+Route::post('/register', [MemberController::class, 'store'])->name('register.store');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    // ホームページにリダイレクト
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+
 Route::get('/account-settings', [MemberController::class, 'accountSettings']); // アカウント設定ページ
 Route::get('/mainmenu', [MemberController::class, 'mainmenu']); // メインメニュー
 Route::get('/thanks', [MemberController::class, 'thanks']); // サンクスページ
