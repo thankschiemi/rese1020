@@ -1,2 +1,4 @@
+/node_modules
+/myenv
+/vendor
 docker/mysql/data/*
-!.gitkeep
