@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Favorite;
+use Illuminate\Support\Facades\Auth;
 
 class Restaurant extends Model
 {
@@ -35,10 +35,15 @@ class Restaurant extends Model
     // お気に入り状態を取得するアクセサ
     public function getIsFavoriteAttribute()
     {
-        $user_id = 1; // 仮のユーザーIDでテスト
-        // 現在のレストランがユーザーのお気に入りに登録されているかを確認
-        return Favorite::where('member_id', $user_id)->where('restaurant_id', $this->id)->exists();
+        $user_id = Auth::id(); // ログイン中のユーザーIDを取得
+        if ($user_id) {
+            // 現在のレストランがユーザーのお気に入りに登録されているかを確認
+            return $this->favorites()->where('member_id', $user_id)->exists();
+        }
+        return false; // 未ログインの場合は常に false
     }
+
+    // お気に入り（favorites）とのリレーション
     public function favorites()
     {
         return $this->hasMany(Favorite::class, 'restaurant_id');

@@ -22,16 +22,24 @@ class MemberController extends Controller
             'password' => 'required|string',
         ]);
 
-        // ログイン試行
+        // 認証試行
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('main_menu');
+        }
+
+        // デバッグ用: ログイン失敗の理由を確認
+        if (!Member::where('email', $request->email)->exists()) {
+            return back()->withErrors([
+                'email' => 'メールアドレスが登録されていません。',
+            ]);
         }
 
         return back()->withErrors([
             'email' => 'ログイン情報が一致しませんでした。',
         ]);
     }
+
 
     public function register()
     {
@@ -67,12 +75,18 @@ class MemberController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('account_settings');
     }
 
     public function accountSettings()
     {
-        return view('account_settings');
+        if (Auth::check()) {
+            // ログイン済みのユーザー
+            return view('main_menu', ['user' => Auth::user()]);
+        } else {
+            // 未ログインのユーザー
+            return view('account_settings');
+        }
     }
 
     public function mainmenu()

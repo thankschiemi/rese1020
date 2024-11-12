@@ -9,12 +9,15 @@ use App\Models\Restaurant;
 use App\Models\Region;
 use App\Models\Genre;
 use App\Models\Favorite;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth'); // ログイン済みユーザーのみアクセス可能
+    }
+
     public function index(Request $request)
     {
         $regions = Region::all();
@@ -32,30 +35,22 @@ class ReservationController extends Controller
             $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        // レストランの重複をIDベースで排除
         $restaurants = $query->select('id', 'name', 'region_id', 'genre_id', 'image_url')->distinct()->get();
 
+        // 現在のログインユーザーのID
+        $user_id = Auth::id();
 
-
-        // ユーザーIDに基づいて各レストランがお気に入りかどうかを確認
-        $user_id = 1; // 仮のユーザーIDを使用
+        // 各レストランがお気に入りかどうかを判定
         foreach ($restaurants as $restaurant) {
             $restaurant->is_favorite = Favorite::where('member_id', $user_id)->where('restaurant_id', $restaurant->id)->exists();
         }
 
-
-
         return view('restaurant_all', compact('restaurants', 'regions', 'genres'));
     }
-
-
-
-
-
     public function detail($shop_id)
     {
         $restaurant = Restaurant::with(['region', 'genre'])->findOrFail($shop_id);
-        $user_id = 1; // 仮のユーザーIDを使用
+        $user_id = Auth::id(); // ログイン中のユーザーIDを取得
 
         // 最新の予約情報を取得
         $latest_reservation = Reservation::where('member_id', $user_id)
@@ -68,7 +63,7 @@ class ReservationController extends Controller
 
     public function store(StoreReservationRequest $request)
     {
-        $user_id = 1; // 仮のユーザーIDを使用
+        $user_id = Auth::id(); // ログイン中のユーザーIDを取得
 
         // 予約情報をデータベースに保存
         $reservation = Reservation::create([
@@ -82,6 +77,20 @@ class ReservationController extends Controller
         // 予約完了画面にリダイレクト
         return redirect()->route('reserve.done')->with('restaurant_id', $request->restaurant_id);
     }
+    public function destroy($id)
+    {
+        // 削除対象の予約を取得
+        $reservation = Reservation::findOrFail($id);
+
+        // ログインユーザーの予約かどうかを確認
+        if ($reservation->member_id === Auth::id()) {
+            $reservation->delete(); // 削除実行
+            return redirect()->back()->with('message', '予約を削除しました。');
+        }
+
+        return redirect()->back()->with('error', 'この予約を削除する権限がありません。');
+    }
+
 
 
     public function done()

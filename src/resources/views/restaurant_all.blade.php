@@ -53,10 +53,15 @@
             <div class="restaurant_buttons">
                 <a href="{{ route('restaurants.detail', $restaurant->id) }}" class="restaurant_button">詳しくみる</a>
 
+                @if (Auth::check())
                 <form action="{{ route('favorites.store', ['restaurant_id' => $restaurant->id]) }}" method="POST">
                     @csrf
                     <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}">❤️</button>
                 </form>
+                @else
+                <a href="{{ route('account-settings') }}" class="restaurant_favorite-button">❤️</a>
+                @endif
+
             </div>
         </div>
     </article>

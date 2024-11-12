@@ -10,7 +10,7 @@ class FavoriteController extends Controller
 {
     public function store(Request $request, $restaurant_id)
     {
-        $user_id = 1; // 現在のユーザーIDを仮に設定
+        $user_id = Auth::id(); // 現在ログインしているユーザーのIDを取得
 
         // 既にいいねされているかを確認
         $favorite = Favorite::where('member_id', $user_id)
@@ -30,5 +30,10 @@ class FavoriteController extends Controller
 
         // ページをリロードして「いいね」状態を反映
         return redirect()->back();
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth'); // ログイン済みユーザーのみアクセス可能
     }
 }

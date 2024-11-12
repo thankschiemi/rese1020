@@ -11,7 +11,7 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\HomeController;
 
 // ホームページ
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧
 
 // 認証関連のルート
 Auth::routes();
@@ -37,9 +37,24 @@ Route::post('/email/resend', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
 
-// アカウント設定・メインメニュー
-Route::get('/account-settings', [MemberController::class, 'accountSettings'])->middleware('auth'); // アカウント設定
-Route::get('/mainmenu', [MemberController::class, 'mainmenu'])->middleware('auth'); // メインメニュー
+// ホーム画面（ログイン状態によってリダイレクト先を変更）
+Route::get('/home', function () {
+    return Auth::check() ? redirect('/main_menu') : redirect('/account-settings');
+})->name('home');
+
+
+
+// メインメニュー（ログイン状態専用）
+Route::get('/main_menu', [MemberController::class, 'mainmenu'])->middleware('auth');
+
+// アカウント設定（未ログイン状態専用）
+Route::get('/account-settings', [MemberController::class, 'accountSettings'])->name('account-settings');
+
+// ログアウト処理
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/account-settings'); // ログアウト後に未ログイン用画面へ
+})->name('logout');
 
 // サンクスページ
 Route::get('/thanks', [MemberController::class, 'thanks']);
@@ -47,13 +62,21 @@ Route::get('/thanks', [MemberController::class, 'thanks']);
 // マイページ関連
 Route::get('/mypage', [MyPageController::class, 'index'])->middleware('auth'); // マイページ
 
+
+
 // 飲食店関連のルート
-Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧
-Route::get('/detail/{shop_id}', [ReservationController::class, 'detail'])->name('restaurants.detail'); // 飲食店詳細
+Route::get('/detail/{shop_id}', [ReservationController::class, 'detail'])
+    ->middleware('auth') // authミドルウェアを適用
+    ->name('restaurants.detail');
 Route::get('/done', [ReservationController::class, 'done'])->name('reserve.done'); // 予約完了ページ
-Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store'); // 予約処理
-Route::get('/reserve', [ReservationController::class, 'index'])->name('reserve.index'); // 予約一覧
-Route::get('/restaurant/{restaurant_id}', [ReservationController::class, 'show'])->name('restaurants.show'); // 飲食店詳細表示
+
+
+// 予約処理（新規作成）
+Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store');
+
+// 予約削除処理
+Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name('reserve.destroy');
+
 
 // お気に入り登録
 Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store'); // お気に入り登録

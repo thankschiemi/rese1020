@@ -19,7 +19,7 @@
     <header class="header">
         <div class="header__inner">
             <!-- アイコンとテキストをリンク化 -->
-            <a href="{{ route('restaurants.index') }}" class="icon">
+            <a href="{{ route('home') }}" class="icon">
                 <div class="icon__line icon__line--medium"></div>
                 <div class="icon__line icon__line--long"></div>
                 <div class="icon__line icon__line--short"></div>

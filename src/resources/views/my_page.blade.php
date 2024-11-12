@@ -22,9 +22,11 @@
                     </div>
                     <h3 class="reservation__card-title">予約{{ $loop->iteration }}</h3>
                 </div>
-                <button class="reservation__close-button">
-                    <div class="close-icon"></div>
-                </button>
+                <form method="POST" action="{{ route('reserve.destroy', $reservation->id) }}" class="reservation__close-button">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="close-icon"></button>
+                </form>
                 <ul class="reservation-card__details">
                     <li class="reservation-card__detail">
                         <span class="detail-label">Shop</span>
@@ -51,7 +53,7 @@
 
         <!-- 右カラム：お気に入り店舗 -->
         <section class="mypage__favorites">
-            <p class="mypage__user-name">ゲストさん</p>
+            <p class="mypage__user-name">{{ $user->name }}さん</p>
             <h2 class="mypage__section-title">お気に入り店舗</h2>
             <div class="favorites__list">
                 @forelse ($favorites as $favorite)
