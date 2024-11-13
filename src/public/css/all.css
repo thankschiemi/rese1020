@@ -1,0 +1,259 @@
+/* ヘッダー全体のスタイル */
+.header {
+    background-color: #F5F5F5;
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* メニューアイコンのスタイル */
+.icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6px;
+    background-color: #005DFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+/* アイコンをリンクとして設定 */
+.icon a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.icon__line {
+    height: 1px;
+    background-color: white;
+}
+
+.icon__line--short {
+    width: 5px;
+}
+
+.icon__line--medium {
+    width: 10px;
+}
+
+.icon__line--long {
+    width: 25px;
+}
+
+/* "Rese"テキストのスタイル */
+.header__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #005DFF;
+    text-decoration: none;
+}
+
+/* フィルターフォームの調整 */
+.header_filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+    padding: 12px 20px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    margin-left: 50px;
+    /* 左に20px移動 */
+}
+
+.filter-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.filter_area,
+.filter_genre {
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-right: 1px solid #ccc;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 100px;
+    /* 幅を固定 */
+    padding-right: 30px;
+    /* 右側に30pxの余裕を追加 */
+}
+
+/* カスタムドロップダウンアイコン */
+.dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #ccc;
+    /* アイコン色を灰色に設定 */
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* 検索ボックスのスタイル */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    background-color: white;
+    width: 350px;
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    background: url('/image/magnifying-glass-icon.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.7;
+    /* 薄い灰色 */
+}
+
+.filter_search {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    /* 調整 */
+    padding: 4px 10px;
+    background-color: transparent;
+    color: black;
+    /* テキストを黒に変更 */
+}
+
+.filter_search::placeholder {
+    color: #aaa;
+    /* プレースホルダーの色を薄い灰色に設定 */
+    opacity: 1;
+    /* プレースホルダーの透明度を調整 */
+}
+/* ログインフォームを中央に配置するためのコンテナ */
+.login__container {
+    display: flex;
+    justify-content: center;
+    /* 水平方向に中央揃え */
+    align-items: center;
+    /* 垂直方向に中央揃え */
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    width: 100%;
+    /* 画面幅全体を使用して中央配置を維持 */
+    padding-top: 50px;
+    /* 上部の余白 */
+}
+
+/* ログインフォームのスタイル */
+.login__form {
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    margin-top: -500px;
+    border-radius: 8px;
+    /* すべての角を丸く */
+    padding: 0;
+}
+
+/* フォームタイトルのスタイル */
+.login__form-title {
+    background-color: #005DFF;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px 30px;
+    margin: 0;
+    text-align: left;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* フォームグループのスタイル */
+.login__form-group {
+    display: flex;
+    align-items: center;
+    /* アイコンとラベルを縦に中央揃え */
+    padding: 10px 0;
+    padding-left: 35px;
+    /* 左の余白 */
+    gap: 10px;
+    /* アイコンとテキストの間の余白 */
+    width: 100%;
+}
+
+/* ラベルのスタイル */
+.login__label {
+    font-size: 20px;
+    color: #666;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+/* アイコンのスタイル */
+.login__icon {
+    width: 30px;
+    height: 30px;
+    color: #666;
+}
+
+/* 入力フィールドのスタイル */
+.login__input {
+    width: 350px;
+    border: none;
+    border-bottom: 2px solid #888;
+    outline: none;
+    font-size: 20px;
+    padding: 8px;
+    background-color: transparent;
+    color: black;
+    transition: border-color 0.3s;
+    margin-top: 5px;
+}
+
+.login__input:focus {
+    border-bottom: 1.8px solid #005DFF;
+}
+
+/* ボタンのスタイル */
+.login__button {
+    padding: 5px 20px;
+    background-color: #005DFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin: 20px 30px;
+}
+
+.login__button:hover {
+    background-color: #004BB5;
+}
