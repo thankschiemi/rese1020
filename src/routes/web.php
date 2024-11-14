@@ -14,7 +14,8 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧
 
 // 認証関連のルート
-Auth::routes();
+Auth::routes(['verify' => true]);
+
 
 // ユーザー関連のルート
 Route::get('/login', [MemberController::class, 'login'])->name('login'); // ログインページ

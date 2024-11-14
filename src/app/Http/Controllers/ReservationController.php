@@ -15,8 +15,10 @@ class ReservationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth'); // ログイン済みユーザーのみアクセス可能
+        // ログイン済みユーザーのみアクセス可能なメソッドを指定
+        $this->middleware('auth')->except(['index', 'detail']);
     }
+
 
     public function index(Request $request)
     {
