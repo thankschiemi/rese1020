@@ -16,58 +16,47 @@ class MemberController extends Controller
 
     public function authenticate(Request $request)
     {
-        // バリデーション
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // 認証試行
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('main_menu');
         }
 
-        // デバッグ用: ログイン失敗の理由を確認
-        if (!Member::where('email', $request->email)->exists()) {
-            return back()->withErrors([
-                'email' => 'メールアドレスが登録されていません。',
-            ]);
-        }
-
         return back()->withErrors([
-            'email' => 'ログイン情報が一致しませんでした。',
+            'email' => 'メールアドレスまたはパスワードが一致しません。',
         ]);
     }
 
-
     public function register()
     {
-        return view('auth.register'); // 登録フォームのビュー
+        return view('auth.register');
     }
 
     public function store(Request $request)
     {
-        // バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:members',
             'password' => 'required|string|min:8',
         ]);
 
-        // データ保存
         $member = Member::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password), // パスワードをハッシュ化
+            'password' => Hash::make($request->password),
         ]);
 
-        // メール認証リンクを送信
-        $member->sendEmailVerificationNotification();
 
-        return redirect()->route('verification.notice')->with('status', '登録が完了しました。メールを確認してください。');
+        // 自動ログイン
+        Auth::login($member);
+
+        // メール認証画面へリダイレクト
+        return redirect()->route('verification.notice');
     }
-
 
     public function logout(Request $request)
     {
@@ -75,18 +64,12 @@ class MemberController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('account_settings');
+        return redirect()->route('login');
     }
 
     public function accountSettings()
     {
-        if (Auth::check()) {
-            // ログイン済みのユーザー
-            return view('main_menu', ['user' => Auth::user()]);
-        } else {
-            // 未ログインのユーザー
-            return view('account_settings');
-        }
+        return view(Auth::check() ? 'main_menu' : 'account_settings', ['user' => Auth::user()]);
     }
 
     public function mainmenu()
