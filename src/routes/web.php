@@ -25,31 +25,40 @@ Route::post('/register', [MemberController::class, 'store'])->name('register.sto
 
 // メール認証関連
 Route::get('/email/verify', function () {
-    return view('auth.verify-email'); // メール確認ビュー
+    return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/home'); // 認証後のリダイレクト先
+    return redirect('/thanks');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/resend', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', 'Verification link sent!');
+    return back()->with('resent', true);
 })->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+
+
+
+Route::post('/auto-login', function (Request $request) {
+    $user = Auth::user(); // 現在ログイン中のユーザーを取得
+
+    // ログイン状態を維持してメインメニューへ
+    return redirect('/main_menu');
+})->middleware('auth')->name('auto-login');
 
 // ホーム画面（ログイン状態によってリダイレクト先を変更）
 Route::get('/home', function () {
     return Auth::check() ? redirect('/main_menu') : redirect('/account-settings');
 })->name('home');
 
-
-
-// メインメニュー（ログイン状態専用）
-Route::get('/main_menu', [MemberController::class, 'mainmenu'])->middleware('auth');
+// メインメニュー（ログイン状態専用 + メール認証必須）
+Route::get('/main_menu', [MemberController::class, 'mainmenu'])->middleware(['auth', 'verified']);
 
 // アカウント設定（未ログイン状態専用）
 Route::get('/account-settings', [MemberController::class, 'accountSettings'])->name('account-settings');
+
+
 
 // ログアウト処理
 Route::post('/logout', function () {
@@ -58,7 +67,7 @@ Route::post('/logout', function () {
 })->name('logout');
 
 // サンクスページ
-Route::get('/thanks', [MemberController::class, 'thanks']);
+Route::get('/thanks', [MemberController::class, 'thanks'])->name('thanks');
 
 // マイページ関連
 Route::get('/mypage', [MyPageController::class, 'index'])->middleware('auth'); // マイページ

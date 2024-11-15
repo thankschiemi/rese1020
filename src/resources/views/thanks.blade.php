@@ -9,7 +9,10 @@
 <main class="thanks__content">
     <div class="thanks__message-box">
         <p class="thanks__message">会員登録ありがとうございます</p>
-        <button class="thanks__button">ログインする</button>
+        <form method="POST" action="{{ route('auto-login') }}">
+            @csrf
+            <button type="submit" class="thanks__button">ログインする</button>
+
     </div>
 </main>
 

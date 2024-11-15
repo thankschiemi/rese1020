@@ -34,7 +34,7 @@
     margin: 0;
     line-height: 1.5;
     /* 行間を広くする */
-    margin-bottom: 20px;
+    margin-bottom: 45px;
         /* ボタンとの余白を調整 */
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -44,15 +44,14 @@
     background-color: #005DFF;
     color: #fff;
     border: none;
-    padding: 6px 15px;
+    padding: 10px 15px;
     /* ボタンの内側の余白を増やす */
     font-size: 12px;
     /* ボタンのフォントサイズを大きく */
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 15px;
-    /* ボタンとメッセージの間の余白を増やす */
     transition: background-color 0.3s;
+
 }
 
 .thanks__button:hover {
