@@ -8,7 +8,9 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MyPageController;
-use App\Http\Controllers\HomeController;
+use App\Mail\NotificationMail;
+use Illuminate\Support\Facades\Mail;
+
 
 // ホームページ
 Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧
@@ -90,3 +92,13 @@ Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name(
 
 // お気に入り登録
 Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store'); // お気に入り登録
+
+
+// テストメール
+Route::get('/test-mail-simple', function () {
+    Mail::raw('これはテストメールです。', function ($message) {
+        $message->to('example@example.com')->subject('テストメール');
+    });
+
+    return 'テストメールを送信しました！';
+});
