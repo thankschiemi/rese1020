@@ -20,9 +20,6 @@ class NotificationMail extends Mailable
     public function build()
     {
         return $this->view('emails.notification')
-            ->with([
-                'title' => $this->messageContent['title'],
-                'message' => $this->messageContent['message'],
-            ]);
+            ->subject('Riseからのお知らせ');
     }
 }

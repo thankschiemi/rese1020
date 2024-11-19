@@ -8,7 +8,10 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MyPageController;
-use App\Http\Controllers\HomeController;
+use App\Mail\NotificationMail;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\EmailController;
+
 
 // ホームページ
 Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧
@@ -90,3 +93,21 @@ Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name(
 
 // お気に入り登録
 Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store'); // お気に入り登録
+
+// メール送信のルート
+Route::get('/admin/emails/create', [\App\Http\Controllers\Admin\EmailController::class, 'create'])->name('admin.emails.create');
+Route::post('/admin/emails/send', [\App\Http\Controllers\Admin\EmailController::class, 'send'])->name('admin.emails.send');
+
+
+
+// テストメール確認用
+Route::get('/test-mail', function () {
+    $messageContent = [
+        'title' => 'テスト通知',
+        'message' => 'Riseからのお知らせメールです。'
+    ];
+
+    Mail::to('example@example.com')->send(new NotificationMail($messageContent));
+
+    return 'テストメールが送信されました！';
+});
