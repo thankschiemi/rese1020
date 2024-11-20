@@ -105,6 +105,9 @@ Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->na
 //予約情報を更新するルート
 Route::put('/reservation/{id}', [ReservationController::class, 'update'])->name('reserve.update');
 
+Route::get('/reservation/{id}/qr', [ReservationController::class, 'generateQR'])->name('reservations.qr');
+
+
 //評価作成や編集に必要なルート
 Route::get('/reviews/create/{reservation_id}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
