@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             MemberSeeder::class,
             ReservationSeeder::class,
             FavoriteSeeder::class,
+            ReviewsTableSeeder::class,
         ]);
     }
 }

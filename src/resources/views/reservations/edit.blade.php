@@ -15,7 +15,7 @@
         <label for="number_of_people">人数:</label>
         <input type="number" id="number_of_people" name="number_of_people" value="{{ $reservation->number_of_people }}">
 
-        <button type="submit">更新する</button>
+        <button type="submit">変更する</button>
     </form>
 </main>
 

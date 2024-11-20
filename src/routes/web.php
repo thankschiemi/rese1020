@@ -99,11 +99,15 @@ Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])-
 Route::get('/admin/emails/create', [\App\Http\Controllers\Admin\EmailController::class, 'create'])->name('admin.emails.create');
 Route::post('/admin/emails/send', [\App\Http\Controllers\Admin\EmailController::class, 'send'])->name('admin.emails.send');
 
-// 予約編集画面のルート
+// 予約編集画面を表示
 Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reserve.edit');
 
-//予約情報を更新するルート
+// 予約情報を更新
 Route::put('/reservation/{id}', [ReservationController::class, 'update'])->name('reserve.update');
+
+// QRコード生成用ルート
+Route::get('/reservation/{id}/qr', [ReservationController::class, 'generateQR'])->name('reservations.qr');
+
 
 //評価作成や編集に必要なルート
 Route::get('/reviews/create/{reservation_id}', [ReviewController::class, 'create'])->name('reviews.create');
@@ -114,8 +118,7 @@ Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('r
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 
 
-//QRコード生成ルート
-Route::get('/reservations/{id}/qr', [ReservationController::class, 'generateQR'])->name('reservations.qr');
+
 
 
 // テストメール確認用

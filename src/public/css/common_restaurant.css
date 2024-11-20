@@ -77,36 +77,30 @@
 }
 
 .restaurant_favorite-button {
-    font-size: 55px;
-    /* ハートの大きさ */
-    background: none;
-    border: none;
-    color: #ddd;
-    /* デフォルトの薄い灰色 */
-    cursor: pointer;
-    line-height: 1;
-    /* 縦の余白を削減 */
-    padding: 0;
-    /* パディングを削除して位置調整 */
-    transition: color 0.2s;
-    margin-left: auto;
-    /* 右端に寄せる */
-    text-decoration: none;
+    font-size: 30px; /* ハートのサイズ */
+    background: none; /* 背景を削除 */
+    border: none; /* ボーダーを削除 */
+    color: #ddd; /* 初期状態の色（薄いグレー） */
+    cursor: pointer; /* クリックできるポインタに変更 */
+    padding: 0; /* パディングを削除 */
+    line-height: 1; /* 縦方向の余白を削除 */
+    transition: color 0.2s; /* 色の変化にアニメーションを追加 */
 }
 
 .restaurant_favorite-button.active {
-    color: red;
-    /* お気に入り状態の色 */
-    text-decoration: none;
+    color: red; /* お気に入り状態の色（赤） */
 }
-/* Hover時のスタイル（任意） */
+
+/* ホバー時の効果 */
 .restaurant_favorite-button:hover {
-    color: #ff5a5a;
-    transform: scale(1.3);
-    text-decoration: none;
+    color: #ff5a5a; /* ホバー時の明るい赤 */
+    transform: none; /* 拡大や艶効果を削除 */
+    box-shadow: none; /* 影を完全に削除 */
 }
-.restaurant_favorite-button,
+
+/* リンク状態でも装飾を完全に削除 */
 .restaurant_favorite-button:link,
 .restaurant_favorite-button:visited {
-    text-decoration: none !important;
+    text-decoration: none;
+    box-shadow: none;
 }

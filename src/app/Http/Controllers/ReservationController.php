@@ -132,8 +132,16 @@ class ReservationController extends Controller
     public function generateQR($id)
     {
         $reservation = Reservation::findOrFail($id);
-        $qrData = "予約情報: \n店舗: {$reservation->restaurant->name}\n日時: {$reservation->reservation_date} {$reservation->reservation_time}\n人数: {$reservation->number_of_people}人";
 
-        return response(QrCode::size(200)->generate($qrData))->header('Content-Type', 'image/svg+xml');
+        $qrData = "予約情報:\n"
+            . "店舗名: {$reservation->restaurant->name}\n"
+            . "日時: {$reservation->reservation_date} {$reservation->reservation_time}\n"
+            . "人数: {$reservation->number_of_people}人";
+
+        return response(
+            QrCode::encoding('UTF-8') // エンコーディングを UTF-8 に設定
+                ->size(200)
+                ->generate($qrData)
+        )->header('Content-Type', 'image/svg+xml');
     }
 }

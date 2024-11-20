@@ -3,6 +3,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/common_restaurant.css') }}">
 <link rel="stylesheet" href="{{ asset('css/my_page.css') }}">
+
+
 @endsection
 
 @section('content')
@@ -44,13 +46,13 @@
                 </ul>
                 <!-- ボタンの追加 -->
                 <div class="reservation-card__buttons">
-                    <a href="{{ route('reserve.edit', $reservation->id) }}" class="reservation-card__button reservation-card__button--change">予約の変更</a>
+                    <a href="{{ route('reserve.edit', $reservation->id) }}" class="reservation-card__button reservation-card__button--change">変更</a>
                     <button type="button" class="reservation-card__button reservation-card__button--refresh" onclick="location.reload();">更新</button>
                     <a href="{{ route('reviews.create', $reservation->id) }}" class="reservation-card__button reservation-card__button--rate">評価</a>
 
                     <a href="{{ route('reservations.qr', $reservation->id) }}"
                         class="reservation-card__button reservation-card__button--qr"
-                        data-tooltip="この予約のQRコードを表示します">QRコード</a>
+                        data-tooltip="この予約のQRコードを表示します">QR</a>
 
                 </div>
 

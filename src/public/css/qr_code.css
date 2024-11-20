@@ -1,0 +1,33 @@
+.qr-code-page {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.qr-code-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.qr-code-container {
+    margin-top: 20px;
+}
+
+.back-to-mypage {
+    margin-top: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

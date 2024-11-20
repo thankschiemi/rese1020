@@ -187,3 +187,127 @@ body {
 .favorites__list {
     flex-grow: 1;
 }
+
+
+
+
+/* ボタン全体のレイアウト */
+.reservation-card__buttons {
+    display: flex;
+    gap: 8px;
+    /* ボタン間の間隔を少し狭める */
+    justify-content: center;
+    /* ボタンを中央揃え */
+    flex-wrap: nowrap;
+    /* 折り返しを無効化 */
+}
+
+/* ボタンの基本デザイン */
+.reservation-card__button {
+    flex: 0 1 auto;
+    /* 幅を自動調整 */
+    min-width: 80px;
+    /* ボタンの最小幅をさらに小さく */
+    max-width: 100px;
+    /* ボタンの最大幅を少し狭く */
+    height: 35px;
+    /* 高さを少し低く */
+    line-height: 35px;
+    /* テキストを中央揃え */
+    text-align: center;
+    background-color: #007BFF;
+    /* 初期背景色 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    /* フォントサイズを少し小さく */
+    text-decoration: none;
+    /* 下線を削除 */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    /* ポインタ表示 */
+}
+
+/* ホバー時のデザイン */
+.reservation-card__button:hover {
+    background-color: #004BBB;
+    /* ホバー時の背景色 */
+    color: #E8E8E8;
+    /* 明るい文字色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* ホバー時の影効果 */
+}
+
+/* QRコードボタンの特別スタイル */
+.reservation-card__button--qr {
+    background-color: #28a745;
+    /* 緑色 */
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    /* 下線を削除 */
+}
+
+.reservation-card__button--qr:hover {
+    background-color: #388E3C;
+    /* ホバー時の緑色を濃く */
+}
+/* ボタンごとの色分け */
+.reservation-card__button--change {
+    background-color: #007BFF;
+    /* 落ち着いた青 */
+    color: white;
+}
+
+.reservation-card__button--refresh {
+    background-color: #6CA6CD;
+    /* 同じ青色 */
+    color: white;
+}
+
+.reservation-card__button--rate {
+    background-color: #FFB6C1;
+    /* 淡いピンク */
+    color: black;
+    font-weight: bold;
+}
+
+.reservation-card__button--qr {
+    background-color: #90EE90;
+    /* 薄い緑 */
+    color: black;
+    font-weight: bold;
+}
+.reservation-card__button--rate:hover {
+    background-color: #FF8CB2;
+    /* 濃いピンク */
+}
+
+.reservation-card__button--qr:hover {
+    background-color: #76D476;
+    /* 濃い緑 */
+}
+
+/* ホバー時の効果 */
+.reservation-card__button:hover {
+    filter: brightness(0.9);
+    /* 少し暗くなる効果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* ホバー時の影 */
+    transition: all 0.3s ease;
+}
+
+/* レスポンシブ対応（小さい画面用） */
+@media (max-width: 768px) {
+    .reservation-card__buttons {
+        flex-direction: column;
+        /* ボタンを縦に並べる */
+        gap: 10px;
+    }
+
+    .reservation-card__button {
+        width: 100%;
+        /* ボタン幅を画面いっぱいに */
+    }
+}

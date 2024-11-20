@@ -12,24 +12,8 @@ class Review extends Model
     protected $fillable = [
         'reservation_id',
         'restaurant_id',
-        'user_id',
+        'member_id',
         'rating',
         'comment',
     ];
-
-    // リレーション
-    public function reservation()
-    {
-        return $this->belongsTo(Reservation::class);
-    }
-
-    public function restaurant()
-    {
-        return $this->belongsTo(Restaurant::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
