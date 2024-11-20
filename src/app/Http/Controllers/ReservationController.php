@@ -10,6 +10,7 @@ use App\Models\Region;
 use App\Models\Genre;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
 {
@@ -102,5 +103,37 @@ class ReservationController extends Controller
 
         // リダイレクト後に戻るためのリンクを設定
         return view('reservation_done', compact('restaurant_id'));
+    }
+
+    public function edit($id)
+    {
+        // 指定された予約情報を取得
+        $reservation = Reservation::findOrFail($id);
+
+        // 編集画面を表示
+        return view('reservations.edit', compact('reservation'));
+    }
+    public function update(Request $request, $id)
+    {
+        // 入力値のバリデーション
+        $validated = $request->validate([
+            'reservation_date' => 'required|date',
+            'reservation_time' => 'required|date_format:H:i',
+            'number_of_people' => 'required|integer|min:1',
+        ]);
+
+        // 予約情報の更新
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update($validated);
+
+        // マイページにリダイレクト
+        return redirect()->route('mypage')->with('success', '予約情報が更新されました。');
+    }
+    public function generateQR($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $qrData = "予約情報: \n店舗: {$reservation->restaurant->name}\n日時: {$reservation->reservation_date} {$reservation->reservation_time}\n人数: {$reservation->number_of_people}人";
+
+        return response(QrCode::size(200)->generate($qrData))->header('Content-Type', 'image/svg+xml');
     }
 }
