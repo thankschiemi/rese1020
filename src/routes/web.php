@@ -105,7 +105,9 @@ Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->na
 //予約情報を更新するルート
 Route::put('/reservation/{id}', [ReservationController::class, 'update'])->name('reserve.update');
 
-Route::get('/reservation/{id}/qr', [ReservationController::class, 'generateQR'])->name('reservations.qr');
+//QRコード生成ルート
+Route::get('/reservations/{id}/qr', [ReservationController::class, 'generateQR'])->name('reservations.qr');
+
 
 
 //評価作成や編集に必要なルート
@@ -115,20 +117,3 @@ Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store
 
 Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
-
-
-//QRコード生成ルート
-Route::get('/reservations/{id}/qr', [ReservationController::class, 'generateQR'])->name('reservations.qr');
-
-
-// テストメール確認用
-Route::get('/test-mail', function () {
-    $messageContent = [
-        'title' => 'テスト通知',
-        'message' => 'Riseからのお知らせメールです。'
-    ];
-
-    Mail::to('example@example.com')->send(new NotificationMail($messageContent));
-
-    return 'テストメールが送信されました！';
-});

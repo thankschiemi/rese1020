@@ -42,17 +42,24 @@
                         <span class="detail-value">{{ $reservation->number_of_people }}人</span>
                     </li>
                 </ul>
+
+
                 <!-- ボタンの追加 -->
                 <div class="reservation-card__buttons">
                     <a href="{{ route('reserve.edit', $reservation->id) }}" class="reservation-card__button reservation-card__button--change">予約の変更</a>
                     <button type="button" class="reservation-card__button reservation-card__button--refresh" onclick="location.reload();">更新</button>
                     <a href="{{ route('reviews.create', $reservation->id) }}" class="reservation-card__button reservation-card__button--rate">評価</a>
-
-                    <a href="{{ route('reservations.qr', $reservation->id) }}"
-                        class="reservation-card__button reservation-card__button--qr"
-                        data-tooltip="この予約のQRコードを表示します">QRコード</a>
-
                 </div>
+                <!-- QRコード表示 -->
+                <div class="qr-code-wrapper">
+                    <div class="qr-code">
+                        {!! QrCode::encoding('UTF-8')->size(100)->generate($reservation->qrData) !!}
+                    </div>
+                    <p class="qr-instruction">このQRコードを店舗スタッフに提示してください</p>
+                </div>
+
+
+
 
             </div>
             @empty

@@ -258,34 +258,24 @@ body {
 }
 
 .reservation-card__button--refresh {
-    background-color: #6CA6CD;
+    background-color: #007BFF;
     /* 同じ青色 */
     color: white;
 }
 
 .reservation-card__button--rate {
-    background-color: #FFB6C1;
+    background-color: #f7d0d5;
     /* 淡いピンク */
     color: black;
     font-weight: bold;
 }
 
-.reservation-card__button--qr {
-    background-color: #90EE90;
-    /* 薄い緑 */
-    color: black;
-    font-weight: bold;
-}
 
 .reservation-card__button--rate:hover {
     background-color: #FF8CB2;
     /* 濃いピンク */
 }
 
-.reservation-card__button--qr:hover {
-    background-color: #76D476;
-    /* 濃い緑 */
-}
 
 /* ホバー時の効果 */
 .reservation-card__button:hover {
@@ -308,4 +298,37 @@ body {
         width: 100%;
         /* ボタン幅を画面いっぱいに */
     }
+}
+
+.qr-code-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* 中央揃え */
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.qr-code svg {
+    width: 100px;
+    /* QRコードの幅 */
+    height: 100px;
+    /* QRコードの高さ */
+    max-width: 100%;
+    /* 親要素に収まるように調整 */
+    max-height: 100%;
+}
+
+.qr-instruction {
+    margin-top: 20px;
+    /* QRコード下の余白 */
+    font-size: 14px;
+    /* 説明文のフォントサイズ */
+    color: #fff;
+    /* 文字色を白に */
+    text-align: center;
+    /* 中央揃え */
+    line-height: 1.5;
+    /* 行間を調整 */
 }
