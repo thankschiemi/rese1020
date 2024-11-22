@@ -114,13 +114,11 @@ body {
 
 .review__rating {
     font-size: 16px;
-    color: #FFD700;
-    /* ゴールド色 */
+    color: #FFD700; /* ゴールド色 */
 }
 
 .review__rating .empty-star {
-    color: #CCC;
-    /* 空の星用の淡い色 */
+    color: #CCC; /* 空の星用の淡い色 */
 }
 
 .review__comment {
@@ -135,23 +133,63 @@ body {
     color: #888;
 }
 
+/* ページネーション */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+}
+
+.pagination-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #005DFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pagination-item.active {
+    background-color: #005DFF;
+    color: #fff;
+    font-weight: bold;
+}
+
+.pagination-item:hover {
+    background-color: #005DFF;
+    color: #fff;
+}
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-    .review__pagination {
-        gap: 5px;
-        /* 小さい画面では余白を減らす */
+    .review__create {
+        padding: 15px;
     }
 
-    .review__pagination a,
-    .review__pagination span {
-        padding: 6px 8px;
-        /* 小さい画面用に余白を縮小 */
-        min-width: 30px;
-        /* ボタン幅を縮小 */
-        height: 30px;
-        /* ボタン高さを縮小 */
-        font-size: 12px;
-        /* 文字サイズを調整 */
+    .review__title {
+        font-size: 20px;
+    }
+
+    .pagination {
+        gap: 5px; /* ページ番号間の余白を減少 */
+    }
+
+    .pagination-item {
+        padding: 6px 8px; /* コンパクトなボタンデザイン */
+        font-size: 12px; /* フォントサイズを小さく */
     }
 }

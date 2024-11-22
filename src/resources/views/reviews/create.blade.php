@@ -40,19 +40,24 @@
         @else
         @foreach($reviews as $review)
         <div class="review__item">
-            <p class="review__rating">評価: {!! str_repeat('★', $review->rating) !!}{!! str_repeat('☆', 5 - $review->rating) !!} ({{ $review->rating }} / 5)</p>
+            <!-- 評価を逆順に解釈して★を出力 -->
+            <p class="review__rating">
+                評価:
+                {!! str_repeat('★', 6 - $review->rating) !!}{!! str_repeat('☆', $review->rating - 1) !!}
+            </p>
             <p class="review__comment">コメント: {{ $review->comment }}</p>
             <p class="review__date">投稿日: {{ $review->created_at->format('Y-m-d') }}</p>
         </div>
         @endforeach
 
-        <div class="review__pagination">
-            {{ $reviews->links() }}
+        <!-- ページネーション -->
+        <div class="pagination-container">
+            {{ $reviews->links('vendor.pagination.default') }}
         </div>
-
-
         @endif
     </section>
+
+
 </main>
 
 @endsection
