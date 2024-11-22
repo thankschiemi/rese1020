@@ -98,16 +98,16 @@
     <section class="reservation-summary__container">
         <div class="reservation-summary">
             <p class="reservation-summary__text">
-                <strong>Shop:</strong> {{ $restaurant->name }}
+                <strong>Shop</strong> {{ $restaurant->name }}
             </p>
             <p class="reservation-summary__text">
-                <strong>Date:</strong> {{ $latest_reservation ? $latest_reservation->reservation_date : 'N/A' }}
+                <strong>Date</strong> {{ $latest_reservation ? $latest_reservation->reservation_date : 'N/A' }}
             </p>
             <p class="reservation-summary__text">
-                <strong>Time:</strong> {{ $latest_reservation ? $latest_reservation->reservation_time : 'N/A' }}
+                <strong>Time</strong> {{ $latest_reservation ? $latest_reservation->reservation_time : 'N/A' }}
             </p>
             <p class="reservation-summary__text">
-                <strong>Number:</strong> {{ $latest_reservation ? $latest_reservation->number_of_people : 'N/A' }}人
+                <strong>Number</strong> {{ $latest_reservation ? $latest_reservation->number_of_people : 'N/A' }}人
             </p>
         </div>
     </section>

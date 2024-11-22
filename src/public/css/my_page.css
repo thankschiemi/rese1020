@@ -334,7 +334,8 @@ body {
 }
 .alert {
     padding: 10px 15px;
-    margin-bottom: 20px;
+    margin: 10px auto;
+    /* 自動で中央揃え */
     border: 1px solid transparent;
     border-radius: 4px;
     font-size: 14px;
@@ -342,4 +343,8 @@ body {
     background-color: #d4edda;
     border-color: #c3e6cb;
     text-align: center;
+    max-width: 400px;
+    /* 横幅を最大400pxに制限 */
+    width: 100%;
+    /* レスポンシブ対応 */
 }

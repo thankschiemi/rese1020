@@ -1,0 +1,100 @@
+/* 全体の背景色 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+    /* 背景色を #F5F5F5 に設定 */
+    margin: 0;
+    padding: 0;
+}
+
+/* メインコンテナ */
+.reservation-edit {
+    background-color: #005DFF;
+    /* フォームの背景色 */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 50px auto;
+    /* 上下に余白を追加 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Block Element */
+.reservation-edit__title {
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reservation-edit__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reservation-edit__form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-edit__label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.reservation-edit__input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    /* 枠線をフォーム全体のテーマ色に統一 */
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* フォーカス時の効果 */
+.reservation-edit__input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
+    outline: none;
+}
+
+/* Block Element Modifier */
+.reservation-edit__button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    /* ボタン幅をフォーム全体に広げる */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reservation-edit__button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+    /* ホバー時に軽く拡大 */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .reservation-edit {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .reservation-edit__title {
+        font-size: 20px;
+    }
+
+    .reservation-edit__button {
+        font-size: 14px;
+    }
+}
