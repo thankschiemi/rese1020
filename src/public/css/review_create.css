@@ -2,51 +2,51 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #F5F5F5;
-    /* 背景色を #F5F5F5 に設定 */
     margin: 0;
     padding: 0;
 }
 
 /* メインコンテナ */
-.review-create {
+.review {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+/* 評価作成セクション */
+.review__create {
     background-color: #005DFF;
-    /* 背景色は青 */
     padding: 20px;
     border-radius: 10px;
-    max-width: 500px;
-    margin: 50px auto;
-    /* 上下に余白を追加 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Block Element */
-.review-create__title {
+.review__title {
     font-size: 24px;
-    color: #ffffff;
+    color: #FFFFFF;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.review-create__form {
+.review__form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.review-create__form-group {
+.review__form-group {
     display: flex;
     flex-direction: column;
 }
 
-.review-create__label {
+.review__label {
     font-size: 14px;
     font-weight: bold;
-    color: #ffffff;
+    color: #FFFFFF;
     margin-bottom: 5px;
 }
 
-.review-create__select,
-.review-create__textarea {
+.review__select,
+.review__textarea {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #007bff;
@@ -57,45 +57,101 @@ body {
 }
 
 /* フォーカス時の効果 */
-.review-create__select:focus,
-.review-create__textarea:focus {
+.review__select:focus,
+.review__textarea:focus {
     border-color: #0056b3;
     box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
     outline: none;
 }
 
-/* Block Element Modifier */
-.review-create__button {
+.review__button {
     background-color: #007bff;
-    color: #fff;
+    color: #FFFFFF;
     font-size: 16px;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    /* ボタン幅をフォーム全体に広げる */
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.review-create__button:hover {
+.review__button:hover {
     background-color: #0056b3;
     transform: scale(1.02);
-    /* ホバー時に軽く拡大 */
 }
+
+/* 評価一覧セクション */
+.review__list {
+    margin-top: 30px;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review__list-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.review__no-data {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.review__item {
+    border-bottom: 1px solid #DDD;
+    padding: 10px 0;
+}
+
+.review__item:last-child {
+    border-bottom: none;
+}
+
+.review__rating {
+    font-size: 16px;
+    color: #FFD700;
+    /* ゴールド色 */
+}
+
+.review__rating .empty-star {
+    color: #CCC;
+    /* 空の星用の淡い色 */
+}
+
+.review__comment {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.review__date {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #888;
+}
+
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-    .review-create {
-        margin: 20px;
-        padding: 15px;
+    .review__pagination {
+        gap: 5px;
+        /* 小さい画面では余白を減らす */
     }
 
-    .review-create__title {
-        font-size: 20px;
-    }
-
-    .review-create__button {
-        font-size: 14px;
+    .review__pagination a,
+    .review__pagination span {
+        padding: 6px 8px;
+        /* 小さい画面用に余白を縮小 */
+        min-width: 30px;
+        /* ボタン幅を縮小 */
+        height: 30px;
+        /* ボタン高さを縮小 */
+        font-size: 12px;
+        /* 文字サイズを調整 */
     }
 }
