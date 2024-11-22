@@ -9,13 +9,20 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\RestaurantController;
 use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\EmailController;
 
 
-// ホームページ
-Route::get('/', [ReservationController::class, 'index'])->name('restaurants.index'); // 飲食店一覧
+// ホームページ: 飲食店一覧
+Route::get('/', [RestaurantController::class, 'index'])->name('restaurants.index');
+
+// 飲食店の詳細ページ
+Route::get('/detail/{shop_id}', [RestaurantController::class, 'detail'])
+    ->middleware('auth') // authミドルウェアを適用
+    ->name('restaurants.detail');
+
 
 // 認証関連のルート
 Auth::routes(['verify' => true]);
@@ -73,15 +80,9 @@ Route::post('/logout', function () {
 // サンクスページ
 Route::get('/thanks', [MemberController::class, 'thanks'])->name('thanks');
 
-// マイページ関連
-Route::get('/mypage', [MyPageController::class, 'index'])->middleware('auth'); // マイページ
+Route::get('/mypage', [MyPageController::class, 'index'])->middleware('auth')->name('mypage');
 
 
-
-// 飲食店関連のルート
-Route::get('/detail/{shop_id}', [ReservationController::class, 'detail'])
-    ->middleware('auth') // authミドルウェアを適用
-    ->name('restaurants.detail');
 Route::get('/done', [ReservationController::class, 'done'])->name('reserve.done'); // 予約完了ページ
 
 

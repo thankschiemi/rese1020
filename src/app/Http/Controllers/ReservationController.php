@@ -10,7 +10,8 @@ use App\Models\Region;
 use App\Models\Genre;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Log;
+
 
 class ReservationController extends Controller
 {
@@ -18,50 +19,6 @@ class ReservationController extends Controller
     {
         // ログイン済みユーザーのみアクセス可能なメソッドを指定
         $this->middleware('auth')->except(['index', 'detail']);
-    }
-
-
-    public function index(Request $request)
-    {
-        $regions = Region::all();
-        $genres = Genre::all();
-
-        $query = Restaurant::query();
-
-        if ($request->filled('region_id')) {
-            $query->where('region_id', $request->region_id);
-        }
-        if ($request->filled('genre_id')) {
-            $query->where('genre_id', $request->genre_id);
-        }
-        if ($request->filled('keyword')) {
-            $query->where('name', 'LIKE', "%{$request->keyword}%");
-        }
-
-        $restaurants = $query->select('id', 'name', 'region_id', 'genre_id', 'image_url')->distinct()->get();
-
-        // 現在のログインユーザーのID
-        $user_id = Auth::id();
-
-        // 各レストランがお気に入りかどうかを判定
-        foreach ($restaurants as $restaurant) {
-            $restaurant->is_favorite = Favorite::where('member_id', $user_id)->where('restaurant_id', $restaurant->id)->exists();
-        }
-
-        return view('restaurant_all', compact('restaurants', 'regions', 'genres'));
-    }
-    public function detail($shop_id)
-    {
-        $restaurant = Restaurant::with(['region', 'genre'])->findOrFail($shop_id);
-        $user_id = Auth::id(); // ログイン中のユーザーIDを取得
-
-        // 最新の予約情報を取得
-        $latest_reservation = Reservation::where('member_id', $user_id)
-            ->where('restaurant_id', $shop_id)
-            ->latest()
-            ->first();
-
-        return view('restaurant_detail', compact('restaurant', 'latest_reservation'));
     }
 
     public function store(StoreReservationRequest $request)
@@ -113,31 +70,30 @@ class ReservationController extends Controller
         // 編集画面を表示
         return view('reservations.edit', compact('reservation'));
     }
+
+
     public function update(Request $request, $id)
     {
-        // 入力値のバリデーション
-        $validated = $request->validate([
-            'reservation_date' => 'required|date',
-            'reservation_time' => 'required|date_format:H:i',
-            'number_of_people' => 'required|integer|min:1',
+        // 秒が含まれていない場合に補完
+        $request->merge([
+            'reservation_time' => $request->reservation_time . ':00',
         ]);
+        // バリデーション
+        try {
+            $validated = $request->validate([
+                'reservation_date' => 'required|date',
+                'reservation_time' => 'required|date_format:H:i:s', // 秒を含む形式でチェック
+                'number_of_people' => 'required|integer|min:1',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
 
-        // 予約情報の更新
+            return back()->withErrors($e->errors());
+        }
+        // 予約情報取得
         $reservation = Reservation::findOrFail($id);
-        $reservation->update($validated);
-
-        // マイページにリダイレクト
+        // 更新
+        $reservation->fill($validated)->save();
+        // リダイレクト
         return redirect()->route('mypage')->with('success', '予約情報が更新されました。');
-    }
-    public function generateQR($id)
-    {
-        $reservation = Reservation::findOrFail($id);
-        $qrData = "予約情報: \n店舗: {$reservation->restaurant->name}\n日時: {$reservation->reservation_date} {$reservation->reservation_time}\n人数: {$reservation->number_of_people}人";
-
-        return response(
-            QrCode::encoding('UTF-8') // エンコーディングを UTF-8 に設定
-                ->size(200)
-                ->generate($qrData)
-        )->header('Content-Type', 'image/svg+xml');
     }
 }

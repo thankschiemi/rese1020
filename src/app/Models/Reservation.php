@@ -19,6 +19,7 @@ class Reservation extends Model
         'reservation_time',
         'number_of_people',
     ];
+    public $timestamps = true;
 
     // 会員（ユーザー）とのリレーション
     public function member()

@@ -8,9 +8,16 @@
 @section('content')
 <main class="mypage">
     <div class="mypage__content">
+
         <!-- 左カラム：予約情報 -->
         <section class="mypage__reservations">
             <h2 class="mypage__status-title">予約状況</h2>
+            <!-- フラッシュメッセージ表示 -->
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             @forelse ($reservations as $reservation)
             <div class="reservation-card">
                 <div class="reservation__card-header">
