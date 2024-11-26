@@ -17,9 +17,7 @@ class StoreReservationRequest extends FormRequest
         return [
             'date' => 'required|date|after_or_equal:today',
             'time' => 'required|date_format:H:i',
-            'number' => 'required|integer|min:1',
-            'restaurant_id' => 'required|exists:restaurants,id',
-            'member_id' => 'required|exists:members,id',
+            'number' => 'required|integer|min:1|max:10',
         ];
     }
 
@@ -27,10 +25,10 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             'date.required' => '日付を選択してください。',
-            'date.after_or_equal' => '予約日には、今日以降の日付を選択してください。',
+            'date.date' => '有効な日付を入力してください。',
+            'date.after_or_equal' => '過去の日付を選択することはできません。',
             'time.required' => '時間を選択してください。',
             'number.required' => '人数を選択してください。',
-            'number.min' => '最低人数は1人です。',
         ];
     }
 }

@@ -27,7 +27,7 @@
         <h2 class="reservation-form__title">予約</h2>
 
         <!-- フォーム -->
-        <form action="{{ route('reserve.store') }}" method="POST" class="reservation-form__form">
+        <form action="{{ route('reserve.store') }}" method="POST" class="reservation-form__form" novalidate>
             @csrf
             <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
             <input type="hidden" name="member_id" value="1">
@@ -37,9 +37,9 @@
                 <label for="date" class="reservation-form__label"></label>
                 <input type="date" id="date" name="date"
                     value="{{ old('date') }}"
-                    class="reservation-form__input reservation-form__input--date" required>
+                    class="reservation-form__input reservation-form__input--date @error('date') is-invalid @enderror" required>
                 @error('date')
-                <div class="error-message">{{ $message }}</div>
+                <div class="reservation-form__error-message">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -64,7 +64,7 @@
                     <option value="21:00" {{ old('time') == '21:00' ? 'selected' : '' }}>21:00</option>
                 </select>
                 @error('time')
-                <div class="error-message">{{ $message }}</div>
+                <div class="reservation-form__error-message">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -73,6 +73,7 @@
                 <label for="number" class="reservation-form__label"></label>
                 <select id="number" name="number"
                     class="reservation-form__select reservation-form__select--people" required>
+                    <option value="" disabled {{ old('number') ? '' : 'selected' }}>人数を選択</option>
                     <option value="1" {{ old('number') == 1 ? 'selected' : '' }}>1人</option>
                     <option value="2" {{ old('number') == 2 ? 'selected' : '' }}>2人</option>
                     <option value="3" {{ old('number') == 3 ? 'selected' : '' }}>3人</option>
@@ -85,7 +86,7 @@
                     <option value="10" {{ old('number') == 10 ? 'selected' : '' }}>10人以上</option>
                 </select>
                 @error('number')
-                <div class="error-message">{{ $message }}</div>
+                <div class="reservation-form__error-message">{{ $message }}</div>
                 @enderror
             </div>
 

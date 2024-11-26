@@ -42,7 +42,8 @@
                     </li>
                     <li class="reservation-card__detail">
                         <span class="detail-label">Time</span>
-                        <span class="detail-value">{{ $reservation->reservation_time }}</span>
+                        <span class="detail-value">{{ date('H:i', strtotime($reservation->reservation_time)) }}</span>
+
                     </li>
                     <li class="reservation-card__detail">
                         <span class="detail-label">Number</span>

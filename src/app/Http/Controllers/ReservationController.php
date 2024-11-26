@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
 use App\Models\Restaurant;
 use App\Models\Region;
@@ -37,6 +38,7 @@ class ReservationController extends Controller
         // 予約完了画面にリダイレクト
         return redirect()->route('reserve.done')->with('restaurant_id', $request->restaurant_id);
     }
+
     public function destroy($id)
     {
         // 削除対象の予約を取得
@@ -72,28 +74,18 @@ class ReservationController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(UpdateReservationRequest $request, $id)
     {
-        // 秒が含まれていない場合に補完
-        $request->merge([
-            'reservation_time' => $request->reservation_time . ':00',
-        ]);
-        // バリデーション
-        try {
-            $validated = $request->validate([
-                'reservation_date' => 'required|date',
-                'reservation_time' => 'required|date_format:H:i:s', // 秒を含む形式でチェック
-                'number_of_people' => 'required|integer|min:1',
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        // バリデーション済みデータの取得
+        $validated = $request->validated();
 
-            return back()->withErrors($e->errors());
-        }
         // 予約情報取得
         $reservation = Reservation::findOrFail($id);
+
         // 更新
         $reservation->fill($validated)->save();
+
         // リダイレクト
-        return redirect()->route('mypage')->with('success', '予約情報が更新されました。');
+        return redirect()->route('mypage')->with('success', '予約情報が変更されました。');
     }
 }

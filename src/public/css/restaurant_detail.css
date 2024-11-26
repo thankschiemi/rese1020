@@ -178,6 +178,31 @@ body {
 .reservation-form__button--submit:hover {
     background-color: #001a66;
 }
+/* 入力フィールドのエラー状態 */
+.is-invalid {
+    border: 2px solid #ff4d4f;
+    /* 赤いボーダー */
+}
+
+/* エラーメッセージのスタイル */
+.reservation-form__error-message {
+    color: #ff4d4f;
+    /* 赤文字で目立たせる */
+    font-size: 14px;
+    /* 適度なサイズ */
+    margin-top: 5px;
+    /* フィールドとの間に余白 */
+    position: absolute;
+    /* 入力フィールドの直下に固定 */
+    bottom: 0px;
+    /* 入力欄の下に配置 */
+    left: 30px;
+    /* 左揃え */
+    width: 100%;
+    /* 親幅に合わせる */
+    font-weight: bold;
+    /* 強調 */
+}
 
 /* タブレット・スマートフォン用のレスポンシブデザイン */
 @media (max-width: 768px) {

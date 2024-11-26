@@ -83,6 +83,18 @@ body {
     /* ホバー時に軽く拡大 */
 }
 
+
+/* エラーメッセージのスタイル */
+.reservation-edit__error-message {
+    color: #ff4d4f;
+    /* 赤文字 */
+    font-size: 14px;
+    /* 適度なサイズ */
+    margin-top: 5px;
+    /* フィールドとの余白 */
+    font-weight: bold;
+    /* 強調 */
+}
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .reservation-edit {
