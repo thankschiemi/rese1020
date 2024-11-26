@@ -50,6 +50,7 @@
     gap: 10px;
     /* アイコンとテキストの間の余白 */
     width: 100%;
+    position: relative;
 }
 
 /* ラベルのスタイル */
@@ -100,4 +101,27 @@
 
 .register__button:hover {
     background-color: #004BB5;
+}
+/* エラーメッセージのスタイル */
+.error {
+    color: #ff4d4f;
+    /* 赤い文字で目立たせる */
+    font-size: 14px;
+    /* 入力欄に合う小さめのフォントサイズ */
+    position: absolute;
+    /* 入力欄の下に固定 */
+    left: 80px;
+    /* メッセージを少し右に移動 */
+    bottom: -20px;
+    /* 入力欄の下にスペースを確保 */
+    font-weight: bold;
+    text-align: left;
+}
+
+/* エラーが発生した入力フィールドのスタイル */
+.register__input.is-invalid {
+    border-bottom: 2px solid #ff4d4f;
+    /* 赤いボーダーで強調 */
+    background-color: transparent;
+    /* 背景色は透明に */
 }

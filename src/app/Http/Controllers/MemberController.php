@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
+use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -14,12 +16,9 @@ class MemberController extends Controller
         return view('auth.login');
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -36,20 +35,15 @@ class MemberController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:members',
-            'password' => 'required|string|min:8',
-        ]);
+        $data = $request->validated();
 
         $member = Member::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
-
 
         // 自動ログイン
         Auth::login($member);
