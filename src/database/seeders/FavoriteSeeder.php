@@ -4,19 +4,22 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Favorite;
+use App\Models\Member;
+use App\Models\Restaurant;
 
 class FavoriteSeeder extends Seeder
 {
     public function run()
     {
-        Favorite::create([
-            'member_id' => 1,
-            'restaurant_id' => 1,
-        ]);
+        // 存在するユーザーと店舗を対象にする
+        $member = Member::first();
+        $restaurant = Restaurant::first();
 
-        Favorite::create([
-            'member_id' => 2,
-            'restaurant_id' => 2,
-        ]);
+        if ($member && $restaurant) {
+            Favorite::create([
+                'member_id' => $member->id,
+                'restaurant_id' => $restaurant->id,
+            ]);
+        }
     }
 }

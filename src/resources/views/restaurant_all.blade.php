@@ -56,13 +56,13 @@
                 @if (Auth::check())
                 <form action="{{ route('favorites.store', ['restaurant_id' => $restaurant->id]) }}" method="POST">
                     @csrf
-                    <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}">❤️</button>
+                    <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}">❤</button>
                 </form>
                 @else
                 <a href="{{ route('account-settings') }}" class="restaurant_favorite-button">❤️</a>
                 @endif
-
             </div>
+
         </div>
     </article>
     @empty

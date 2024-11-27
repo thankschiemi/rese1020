@@ -92,7 +92,7 @@
                             <a href="{{ route('restaurants.detail', $favorite->restaurant->id) }}" class="restaurant_button">詳しくみる</a>
                             <form action="{{ route('favorites.store', ['restaurant_id' => $favorite->restaurant->id]) }}" method="POST">
                                 @csrf
-                                <button class="restaurant_favorite-button {{ $favorite->restaurant->is_favorite ? 'active' : '' }}">❤️</button>
+                                <button class="restaurant_favorite-button {{ $favorite->restaurant->is_favorite ? 'active' : '' }}">❤</button>
                             </form>
                         </div>
                     </div>

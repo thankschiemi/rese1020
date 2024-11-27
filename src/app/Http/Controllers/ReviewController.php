@@ -35,7 +35,7 @@ class ReviewController extends Controller
         // データを保存
         Review::create($validated);
 
-        return redirect()->route('mypage')->with('success', '評価を送信しました！マイページの評価ボタンをクリックすると、作成した評価を確認できます。');
+        return redirect()->route('mypage')->with('success', '評価を送信しました！下記の評価ボタンをクリックすると、作成した評価を確認できます。');
     }
 
     public function edit(Review $review)

@@ -81,32 +81,22 @@
     /* ハートの大きさ */
     background: none;
     border: none;
-    color: #ddd;
+    color: #ccc;
     /* デフォルトの薄い灰色 */
     cursor: pointer;
-    line-height: 1;
-    /* 縦の余白を削減 */
+    transition: color 0.2s, transform 0.2s;
     padding: 0;
-    /* パディングを削除して位置調整 */
-    transition: color 0.2s;
-    margin-left: auto;
-    /* 右端に寄せる */
-    text-decoration: none;
 }
 
 .restaurant_favorite-button.active {
     color: red;
-    /* お気に入り状態の色 */
-    text-decoration: none;
+    /* お気に入り状態の赤色 */
 }
-/* Hover時のスタイル（任意） */
+
 .restaurant_favorite-button:hover {
-    color: #ff5a5a;
-    transform: scale(1.3);
-    text-decoration: none;
+    transform: scale(1.2);
+    /* ホバー時に少し拡大 */
+    color: #ff6666;
+    /* ホバー時の明るい赤 */
 }
-.restaurant_favorite-button,
-.restaurant_favorite-button:link,
-.restaurant_favorite-button:visited {
-    text-decoration: none !important;
-}
+
