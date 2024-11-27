@@ -62,6 +62,7 @@
                     <option value="19:00" {{ old('time') == '19:00' ? 'selected' : '' }}>19:00</option>
                     <option value="20:00" {{ old('time') == '20:00' ? 'selected' : '' }}>20:00</option>
                     <option value="21:00" {{ old('time') == '21:00' ? 'selected' : '' }}>21:00</option>
+                    <option value="22:00" {{ old('time') == '22:00' ? 'selected' : '' }}>22:00</option>
                 </select>
                 @error('time')
                 <div class="reservation-form__error-message">{{ $message }}</div>
