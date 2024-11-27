@@ -40,14 +40,11 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             'date.required' => '日付を選択してください。',
-            'date.date' => '有効な日付を入力してください。',
             'date.after_or_equal' => '過去の日付を選択することはできません。',
             'time.required' => '時間を選択してください。',
-            'time.date_format' => '有効な時間を入力してください。',
             'number.required' => '人数を選択してください。',
             'number.integer' => '人数は数値で入力してください。',
-            'number.min' => '人数は1人以上で入力してください。',
-            'number.max' => '人数は10人以下で入力してください。',
+
         ];
     }
 }
