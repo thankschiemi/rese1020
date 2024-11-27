@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateReviewRequest;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Review;
@@ -23,21 +24,12 @@ class ReviewController extends Controller
         return view('reviews.create', compact('reservation', 'reviews'));
     }
 
-    public function store(Request $request)
+    public function store(CreateReviewRequest $request)
     {
-        try {
-            // バリデーション
-            $validated = $request->validate([
-                'reservation_id' => 'required|exists:reservations,id',
-                'restaurant_id' => 'required|exists:restaurants,id',
-                'rating' => 'required|integer|min:1|max:5',
-                'comment' => 'nullable|string|max:1000',
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return back()->withErrors($e->errors());
-        }
+        // バリデーション済みのデータを取得
+        $validated = $request->validated();
 
-        // member_idを追加
+        // member_id を追加
         $validated['member_id'] = Auth::id();
 
         // データを保存
@@ -49,17 +41,5 @@ class ReviewController extends Controller
     public function edit(Review $review)
     {
         return view('reviews.edit', compact('review'));
-    }
-
-    public function update(Request $request, Review $review)
-    {
-        $validated = $request->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string|max:1000',
-        ]);
-
-        $review->update($validated);
-
-        return redirect()->route('mypage')->with('success', '評価を更新しました！');
     }
 }

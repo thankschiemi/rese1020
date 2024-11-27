@@ -117,4 +117,3 @@ Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store
 
 
 Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
-Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');

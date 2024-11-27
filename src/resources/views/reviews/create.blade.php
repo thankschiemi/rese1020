@@ -13,20 +13,29 @@
             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
             <input type="hidden" name="restaurant_id" value="{{ $reservation->restaurant->id }}">
 
+            <!-- 評価 -->
             <div class="review__form-group">
                 <label for="rating" class="review__label">評価 (1～5)</label>
-                <select id="rating" name="rating" class="review__select" required>
-                    <option value="1">1 - 非常に良い</option>
-                    <option value="2">2 - 良い</option>
-                    <option value="3">3 - 普通</option>
-                    <option value="4">4 - 悪い</option>
-                    <option value="5">5 - 非常に悪い</option>
+                <select id="rating" name="rating" class="review__select @error('rating') is-invalid @enderror">
+                    <option value="" disabled selected>評価を選択</option>
+                    <option value="1" {{ old('rating') == 1 ? 'selected' : '' }}>1 - 非常に良い</option>
+                    <option value="2" {{ old('rating') == 2 ? 'selected' : '' }}>2 - 良い</option>
+                    <option value="3" {{ old('rating') == 3 ? 'selected' : '' }}>3 - 普通</option>
+                    <option value="4" {{ old('rating') == 4 ? 'selected' : '' }}>4 - 悪い</option>
+                    <option value="5" {{ old('rating') == 5 ? 'selected' : '' }}>5 - 非常に悪い</option>
                 </select>
+                @error('rating')
+                <div class="review__error-message">{{ $message }}</div>
+                @enderror
             </div>
 
+            <!-- コメント -->
             <div class="review__form-group">
                 <label for="comment" class="review__label">コメント</label>
-                <textarea id="comment" name="comment" rows="4" class="review__textarea" placeholder="店舗へのコメントを記入してください"></textarea>
+                <textarea id="comment" name="comment" rows="4" class="review__textarea @error('comment') is-invalid @enderror" placeholder="店舗へのコメントを記入してください">{{ old('comment') }}</textarea>
+                @error('comment')
+                <div class="review__error-message">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="review__button">送信</button>
@@ -40,7 +49,6 @@
         @else
         @foreach($reviews as $review)
         <div class="review__item">
-            <!-- 評価を逆順に解釈して★を出力 -->
             <p class="review__rating">
                 評価:
                 {!! str_repeat('★', 6 - $review->rating) !!}{!! str_repeat('☆', $review->rating - 1) !!}
@@ -56,8 +64,5 @@
         </div>
         @endif
     </section>
-
-
 </main>
-
 @endsection
