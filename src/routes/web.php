@@ -10,6 +10,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AdminController;
 use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\EmailController;
@@ -117,3 +118,15 @@ Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store
 
 
 Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+
+// 管理者専用のルートグループを作成
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    // 管理者ダッシュボード
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // 店舗管理ページ
+    Route::get('/stores', [AdminController::class, 'manageStores'])->name('admin.stores.index');
+
+    // 通知管理ページ
+    Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications.index');
+});
