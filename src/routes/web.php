@@ -11,6 +11,7 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OwnerController;
 use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\EmailController;
@@ -119,14 +120,25 @@ Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store
 
 Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
 
-// 管理者専用のルートグループを作成
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    // 管理者ダッシュボード
-    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
-    // 店舗管理ページ
-    Route::get('/stores', [AdminController::class, 'manageStores'])->name('admin.stores.index');
+// 管理者専用のルート
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard'); // 管理者ダッシュボード
+    Route::get('/stores', [AdminController::class, 'manageStores'])->name('admin.stores.index'); // 店舗管理
+    Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications.index'); // 通知管理
+    Route::post('/stores', [AdminController::class, 'store'])->name('admin.stores.store'); // 店舗代表者作成
+});
 
-    // 通知管理ページ
-    Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications.index');
+// 店舗代表者専用のルート
+Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
+    Route::get('/', [OwnerController::class, 'dashboard'])->name('owner.dashboard'); // 店舗代表者ダッシュボード
+    Route::get('/stores/edit', [OwnerController::class, 'editStore'])->name('owner.stores.edit'); // 店舗情報編集
+    Route::get('/reservations', [OwnerController::class, 'manageReservations'])->name('owner.reservations.index'); // 予約管理
+    Route::post('/stores/update', [OwnerController::class, 'updateStore'])->name('owner.stores.update'); // 店舗情報更新
+});
+
+// 一般利用者のルート（既存機能に変更なし）
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage'); // マイページの表示
+    Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store'); // 予約作成
 });
