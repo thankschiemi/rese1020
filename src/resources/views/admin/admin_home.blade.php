@@ -11,7 +11,6 @@
         <ul>
             <li><a href="{{ route('admin.stores.index') }}">店舗管理</a></li>
             <li><a href="{{ route('admin.notifications.index') }}">通知管理</a></li>
-            <li><a href="{{ route('admin.users.index') }}">ユーザー管理</a></li>
         </ul>
     </section>
 </main>

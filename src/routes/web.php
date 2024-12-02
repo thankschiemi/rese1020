@@ -122,15 +122,15 @@ Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('r
 
 
 // 管理者専用のルート
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard'); // 管理者ダッシュボード
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.admin_home'); // 管理者ダッシュボード
     Route::get('/stores', [AdminController::class, 'manageStores'])->name('admin.stores.index'); // 店舗管理
     Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications.index'); // 通知管理
     Route::post('/stores', [AdminController::class, 'store'])->name('admin.stores.store'); // 店舗代表者作成
 });
 
 // 店舗代表者専用のルート
-Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
+Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
     Route::get('/', [OwnerController::class, 'dashboard'])->name('owner.dashboard'); // 店舗代表者ダッシュボード
     Route::get('/stores/edit', [OwnerController::class, 'editStore'])->name('owner.stores.edit'); // 店舗情報編集
     Route::get('/reservations', [OwnerController::class, 'manageReservations'])->name('owner.reservations.index'); // 予約管理
@@ -138,7 +138,7 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
 });
 
 // 一般利用者のルート（既存機能に変更なし）
-Route::middleware(['auth', 'role:user'])->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage'); // マイページの表示
     Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store'); // 予約作成
 });
