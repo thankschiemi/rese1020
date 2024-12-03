@@ -18,21 +18,20 @@ class OwnerController extends Controller
 
     public function editStore()
     {
-        $store = Auth::user()->store;
+        $store = Auth::user()->store; // ログイン中ユーザーの店舗情報を取得
 
         if (!$store) {
-            return redirect()->back()->with('error', '店舗情報が見つかりません。');
+            $store = null; // 新規作成の場合
         }
 
-        $regions = Region::all(); // 地域データ
-        $genres = Genre::all(); // ジャンルデータ
+        $regions = Region::all();
+        $genres = Genre::all();
 
         return view('owner.edit_store', compact('store', 'regions', 'genres'));
     }
 
-    public function store(Request $request)
+    public function storeStore(Request $request)
     {
-        // バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
             'region_id' => 'required|exists:regions,id',
@@ -41,18 +40,28 @@ class OwnerController extends Controller
             'image_url' => 'nullable|url',
         ]);
 
-        // 新しい店舗情報を作成
-        Restaurant::create([
-            'name' => $request->name,
-            'region_id' => $request->region_id,
-            'genre_id' => $request->genre_id,
-            'description' => $request->description,
-            'image_url' => $request->image_url,
-            'member_id' => Auth::id(), // ログイン中の店舗代表者のIDをセット
+        $store = new Restaurant();
+        $store->fill($request->all());
+        $store->member_id = Auth::id(); // ログイン中のユーザーを関連付け
+        $store->save();
+
+        return redirect()->route('owner.store_edit')->with('success', '店舗情報を作成しました！');
+    }
+
+    public function updateStore(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'region_id' => 'required|exists:regions,id',
+            'genre_id' => 'required|exists:genres,id',
+            'description' => 'nullable|string',
+            'image_url' => 'nullable|url',
         ]);
 
-        // 作成完了後のリダイレクト
-        return redirect()->route('owner.edit_store')->with(['success' => '店舗情報を作成しました！']);
+        $store = Restaurant::findOrFail($id);
+        $store->update($request->all());
+
+        return redirect()->route('owner.store_edit')->with('success', '店舗情報を更新しました！');
     }
     public function manageReservations()
     {
