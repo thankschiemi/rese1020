@@ -30,8 +30,9 @@ class OwnerController extends Controller
         return view('owner.edit_store', compact('store', 'regions', 'genres'));
     }
 
-    public function updateStore(Request $request, $id)
+    public function store(Request $request)
     {
+        // バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
             'region_id' => 'required|exists:regions,id',
@@ -40,10 +41,18 @@ class OwnerController extends Controller
             'image_url' => 'nullable|url',
         ]);
 
-        $store = Restaurant::findOrFail($id);
-        $store->update($request->all());
+        // 新しい店舗情報を作成
+        Restaurant::create([
+            'name' => $request->name,
+            'region_id' => $request->region_id,
+            'genre_id' => $request->genre_id,
+            'description' => $request->description,
+            'image_url' => $request->image_url,
+            'member_id' => Auth::id(), // ログイン中の店舗代表者のIDをセット
+        ]);
 
-        return redirect()->route('owner.edit_store')->with('success', '店舗情報を更新しました。');
+        // 作成完了後のリダイレクト
+        return redirect()->route('owner.edit_store')->with(['success' => '店舗情報を作成しました！']);
     }
     public function manageReservations()
     {

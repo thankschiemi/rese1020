@@ -30,6 +30,6 @@ class Member extends Authenticatable implements MustVerifyEmail
     }
     public function store()
     {
-        return $this->hasOne(Restaurant::class);
+        return $this->hasOne(Restaurant::class, 'member_id');
     }
 }

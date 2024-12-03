@@ -18,6 +18,7 @@ class Restaurant extends Model
         'genre_id',
         'description',
         'image_url',
+        'member_id',
     ];
 
     // 地域（region）とのリレーション
@@ -54,6 +55,6 @@ class Restaurant extends Model
     }
     public function member()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'member_id');
     }
 }

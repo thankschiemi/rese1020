@@ -1,0 +1,134 @@
+/* 全体の背景色 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 0;
+}
+
+/* メインコンテナ */
+.edit-store {
+    background-color: #005DFF;
+    /* フォームの背景色 */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 50px auto;
+    /* 上下に余白を追加 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトル */
+.edit-store__title {
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* フォーム */
+.edit-store form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-store label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.edit-store input[type="text"],
+.edit-store textarea,
+.edit-store select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #007bff;
+    /* 枠線をフォーム全体のテーマ色に統一 */
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* フォーカス時の効果 */
+.edit-store input[type="text"]:focus,
+.edit-store textarea:focus,
+.edit-store select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
+    outline: none;
+}
+
+/* ボタン */
+.edit-store button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    /* ボタン幅をフォーム全体に広げる */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-store button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+    /* ホバー時に軽く拡大 */
+}
+
+/* エラーメッセージのスタイル */
+.edit-store .error-message {
+    color: #ff4d4f;
+    /* 赤文字 */
+    font-size: 14px;
+    /* 適度なサイズ */
+    margin-top: 5px;
+    /* フィールドとの余白 */
+    font-weight: bold;
+    /* 強調 */
+}
+.alert-success {
+    animation: fadeOut 3s ease-in-out 3s forwards;
+    /* 3秒後に3秒かけてフェードアウト */
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* フェードアウトのアニメーション */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .edit-store {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .edit-store__title {
+        font-size: 20px;
+    }
+
+    .edit-store button {
+        font-size: 14px;
+    }
+}

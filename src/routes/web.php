@@ -138,6 +138,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
     Route::get('/', [OwnerController::class, 'dashboard'])->name('owner.dashboard'); // 店舗代表者ダッシュボード
     Route::get('/stores/edit', [OwnerController::class, 'editStore'])->name('owner.edit_store');
+    Route::post('/owner/stores', [OwnerController::class, 'store'])->name('owner.store_store');
 
     Route::put('/stores/{id}', [OwnerController::class, 'updateStore'])->name('owner.stores.update');
     Route::get('/reservations', [OwnerController::class, 'manageReservations'])->name('owner.reservations.index'); // 予約管理
