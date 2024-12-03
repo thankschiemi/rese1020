@@ -1,0 +1,57 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* 上に配置 */
+    min-height: 100vh;
+    background-color: #F5F5F5;
+    padding-top: 50px;
+    /* 上の余白を調整 */
+}
+
+.dashboard__title {
+    font-size: 24px;
+    color: #005DFF;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dashboard__menu {
+    text-align: center;
+}
+
+.dashboard__menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard__menu li {
+    margin: 10px 0;
+}
+
+.dashboard__menu a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.dashboard__menu a:hover {
+    color: #0056b3;
+}
+.dashboard__title {
+    font-size: 32px;
+    /* メインタイトルを少し大きく */
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.dashboard__subtitle {
+    font-size: 18px;
+    /* サブタイトルを小さくして補足感を強調 */
+    color: #666;
+    margin-top: 5px;
+    /* タイトルとの間隔を調整 */
+}

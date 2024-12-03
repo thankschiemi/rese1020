@@ -1,4 +1,5 @@
-@extends('layouts.admin_layout')
+@extends('layouts.rese_layout')
+
 
 @section('content')
 <div class="manage-stores">

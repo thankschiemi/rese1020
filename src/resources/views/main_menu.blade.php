@@ -21,6 +21,20 @@
             <li class="menu__item">
                 <a href="{{ url('/mypage') }}" class="menu__link">Mypage</a> <!-- アカウント設定へのリンク -->
             </li>
+            {{-- 管理者用リンク --}}
+            @if(Auth::user()->role === 'admin')
+            <li class="menu__item">
+                <a href="{{ route('admin.dashboard') }}" class="menu__link">Admin Dashboard</a>
+            </li>
+            @endif
+
+            {{-- 店舗代表者用リンク --}}
+            @if(Auth::user()->role === 'owner')
+            <li class="menu__item">
+                <a href="{{ route('owner.dashboard') }}" class="menu__link">Owner Dashboard</a>
+            </li>
+            @endif
+
         </ul>
     </nav>
 </div>

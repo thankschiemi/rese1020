@@ -48,4 +48,12 @@ class Restaurant extends Model
     {
         return $this->hasMany(Favorite::class, 'restaurant_id');
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
 }

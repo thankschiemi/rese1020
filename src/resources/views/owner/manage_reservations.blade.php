@@ -1,4 +1,5 @@
-@extends('layouts.owner_layout')
+@extends('layouts.rese_layout')
+
 
 @section('content')
 <main>

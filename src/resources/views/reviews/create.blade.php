@@ -18,11 +18,11 @@
                 <label for="rating" class="review__label">評価 (1～5)</label>
                 <select id="rating" name="rating" class="review__select @error('rating') is-invalid @enderror">
                     <option value="" disabled selected>評価を選択</option>
-                    <option value="1" {{ old('rating') == 1 ? 'selected' : '' }}>1 - 非常に良い</option>
-                    <option value="2" {{ old('rating') == 2 ? 'selected' : '' }}>2 - 良い</option>
+                    <option value="1" {{ old('rating') == 1 ? 'selected' : '' }}>5 - 非常に良い</option>
+                    <option value="2" {{ old('rating') == 2 ? 'selected' : '' }}>4 - 良い</option>
                     <option value="3" {{ old('rating') == 3 ? 'selected' : '' }}>3 - 普通</option>
-                    <option value="4" {{ old('rating') == 4 ? 'selected' : '' }}>4 - 悪い</option>
-                    <option value="5" {{ old('rating') == 5 ? 'selected' : '' }}>5 - 非常に悪い</option>
+                    <option value="4" {{ old('rating') == 4 ? 'selected' : '' }}>2 - 悪い</option>
+                    <option value="5" {{ old('rating') == 5 ? 'selected' : '' }}>1 - 非常に悪い</option>
                 </select>
                 @error('rating')
                 <div class="review__error-message">{{ $message }}</div>

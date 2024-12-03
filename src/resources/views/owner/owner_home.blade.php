@@ -8,19 +8,20 @@
 @section('content')
 <main class="dashboard">
     <h1 class="dashboard__title">
-        Admin Dashboard
-        <span class="dashboard__subtitle">管理画面</span>
+        Owner Dashboard
+        <span class="dashboard__subtitle">店舗管理画面</span>
     </h1>
+
     <section class="dashboard__menu">
         <ul>
             <li>
-                <a href="{{ route('admin.stores.index') }}" class="dashboard__link">
-                    <i class="fas fa-store"></i> 店舗管理
+                <a href="{{ route('owner.edit_store') }}" class="dashboard__link">
+                    <i class="fas fa-store"></i> 店舗情報
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.notifications.index') }}" class="dashboard__link">
-                    <i class="fas fa-bell"></i> 通知管理
+                <a href="{{ route('owner.reservations.index') }}" class="dashboard__link">
+                    <i class="fas fa-calendar-alt"></i> 予約管理
                 </a>
             </li>
         </ul>
