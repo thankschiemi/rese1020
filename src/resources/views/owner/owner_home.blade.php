@@ -29,6 +29,11 @@
                     <i class="fas fa-calendar-alt"></i> 予約情報確認
                 </a>
             </li>
+            <li>
+                <a href="{{ route('owner.campaign') }}" class="dashboard__link">
+                    <i class="fas fa-envelope"></i> メール送信
+                </a>
+            </li>
         </ul>
     </section>
 </main>

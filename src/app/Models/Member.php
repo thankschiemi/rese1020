@@ -23,18 +23,21 @@ class Member extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
-
+    // お気に入りリレーション（例として保持）
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
-    /**
-     * ログイン中のユーザーに関連する店舗を取得
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+
+    // 店舗代表者に関連するレストランリレーション
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class, 'member_id');
+    }
+
+    // 予約情報リレーション
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'member_id');
     }
 }

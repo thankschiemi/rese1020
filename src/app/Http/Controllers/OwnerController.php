@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Restaurant;
 use App\Models\Region;
 use App\Models\Genre;
+use App\Mail\NotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 class OwnerController extends Controller
 {
@@ -116,5 +118,46 @@ class OwnerController extends Controller
         ]);
 
         return view('owner.manage_reservations', ['reservations' => $sortedReservations]);
+    }
+    public function showCampaignForm()
+    {
+        // キャンペーンフォームを表示する
+        return view('owner.campaign');
+    }
+
+    public function sendNotification(Request $request)
+    {
+        // 入力内容のバリデーション
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // ログイン中の店舗代表者を取得
+        $user = Auth::user();
+
+        // 店舗代表者に紐づく店舗が存在しない場合の処理
+        if (!$user || $user->restaurants->isEmpty()) {
+            return redirect()->back()->with('error', '店舗情報が見つかりません。');
+        }
+
+        // 店舗代表者が管理する店舗を利用した顧客を取得
+        $members = \App\Models\Member::whereHas('reservations', function ($query) use ($user) {
+            $query->whereIn('restaurant_id', $user->restaurants->pluck('id')); // 店舗代表者の店舗IDに限定
+        })->distinct('email')->get(); // 重複しないメールアドレスを取得
+
+        // メール送信処理
+        try {
+            foreach ($members as $member) {
+                Mail::to($member->email)
+                    ->send(new NotificationMail($request->subject, $request->message, $member));
+            }
+
+            // 成功メッセージをリダイレクト先で表示
+            return redirect()->route('owner.campaign')->with('success', 'お知らせメールを送信しました！');
+        } catch (\Exception $e) {
+            // メール送信失敗時の処理
+            return redirect()->route('owner.campaign')->with('error', 'メール送信に失敗しました: ' . $e->getMessage());
+        }
     }
 }

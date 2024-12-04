@@ -12,10 +12,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OwnerController;
-use App\Http\Controllers\StoreController;
-use App\Mail\NotificationMail;
-use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\EmailController;
+
+
 
 
 // ホームページ: 飲食店一覧
@@ -99,9 +97,7 @@ Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name(
 // お気に入り登録
 Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store'); // お気に入り登録
 
-// メール送信のルート
-Route::get('/admin/emails/create', [\App\Http\Controllers\Admin\EmailController::class, 'create'])->name('admin.emails.create');
-Route::post('/admin/emails/send', [\App\Http\Controllers\Admin\EmailController::class, 'send'])->name('admin.emails.send');
+
 
 // 予約編集画面のルート
 Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reserve.edit');
@@ -151,6 +147,9 @@ Route::prefix('owner')->middleware('auth')->group(function () {
 
     // 予約管理
     Route::get('/reservations', [OwnerController::class, 'manageReservations'])->name('owner.reservations.index');
+
+    Route::get('/owner/campaign', [OwnerController::class, 'showCampaignForm'])->name('owner.campaign');
+    Route::post('/owner/campaign', [OwnerController::class, 'sendNotification'])->name('owner.sendNotification');
 });
 
 
