@@ -1,0 +1,145 @@
+/* 全体の背景色 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+    /* 薄い灰色 */
+    margin: 0;
+    padding: 0;
+}
+
+/* メインコンテナ */
+.store-list {
+    background-color: #005DFF;
+    /* メイン背景色（青） */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 50px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトル */
+.store-list__title {
+    font-size: 24px;
+    color: #ffffff;
+    /* 白文字 */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* テーブル */
+.store-list__table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    /* 白背景 */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.store-list__table th,
+.store-list__table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.store-list__table th {
+    background-color: #007bff;
+    /* ヘッダーの青色 */
+    color: #ffffff;
+    /* 白文字 */
+    font-weight: bold;
+}
+
+.store-list__table td {
+    color: #333;
+    /* テキスト色 */
+}
+
+.store-list__table td a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.store-list__table td a:hover {
+    text-decoration: underline;
+}
+
+/* 空の状態のメッセージ */
+.store-list p {
+    color: #ffffff;
+    /* 白文字 */
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* 成功メッセージ */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeOut 6s ease-in-out forwards;
+    /* アニメーションの適用 */
+}
+
+/* フェードアウトのアニメーション */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+        /* 3秒間完全に表示 */
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* ボタン */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 10px;
+    /* ボタンテキストサイズ */
+    color: #fff;
+    background-color: #007bff;
+    /* 青色 */
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    /* ホバー時の濃い青色 */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .store-list {
+        padding: 15px;
+    }
+
+    .store-list__title {
+        font-size: 20px;
+    }
+
+    .store-list__table th,
+    .store-list__table td {
+        padding: 8px;
+    }
+}

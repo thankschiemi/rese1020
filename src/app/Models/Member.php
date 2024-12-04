@@ -28,8 +28,13 @@ class Member extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Favorite::class);
     }
-    public function store()
+    /**
+     * ログイン中のユーザーに関連する店舗を取得
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function restaurants()
     {
-        return $this->hasOne(Restaurant::class, 'member_id');
+        return $this->hasMany(Restaurant::class, 'member_id');
     }
 }

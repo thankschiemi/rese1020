@@ -136,12 +136,23 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 // 店舗代表者専用のルート
 Route::prefix('owner')->middleware('auth')->group(function () {
+    // ダッシュボード
     Route::get('/dashboard', [OwnerController::class, 'dashboard'])->name('owner.dashboard');
-    Route::get('/stores/edit', [OwnerController::class, 'editStore'])->name('owner.edit_store');
+
+    // 店舗情報
+    Route::get('/stores/edit/{id}', [OwnerController::class, 'editStore'])->name('owner.store_edit');
+
+    Route::put('/stores/update/{id}', [OwnerController::class, 'updateStore'])->name('owner.update_store');
+    Route::get('/stores', [OwnerController::class, 'listStores'])->name('owner.store_list');
+
+
+    Route::get('/stores/store', [OwnerController::class, 'createStore'])->name('owner.create_store');
     Route::post('/stores/store', [OwnerController::class, 'storeStore'])->name('owner.store_store');
-    Route::put('/stores/update/{id}', [OwnerController::class, 'updateStore'])->name('owner.store_update');
+
+    // 予約管理
     Route::get('/reservations', [OwnerController::class, 'manageReservations'])->name('owner.reservations.index');
 });
+
 
 
 // 一般利用者のルート（既存機能に変更なし）

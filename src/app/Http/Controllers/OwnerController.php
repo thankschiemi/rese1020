@@ -8,26 +8,29 @@ use App\Models\Restaurant;
 use App\Models\Region;
 use App\Models\Genre;
 
-
 class OwnerController extends Controller
 {
     public function dashboard()
     {
-        return view('owner.owner_home');
-    }
+        $user = Auth::user(); // ログイン中のユーザーを取得
 
-    public function editStore()
-    {
-        $store = Auth::user()->store; // ログイン中ユーザーの店舗情報を取得
-
-        if (!$store) {
-            $store = null; // 新規作成の場合
+        if (!$user) {
+            abort(403, 'ログインしてください。');
         }
 
+        // ログイン中のユーザーに関連する店舗を取得
+        $stores = $user->restaurants;
+
+        // ビューにデータを渡す
+        return view('owner.owner_home', compact('stores', 'user'));
+    }
+
+
+    public function createStore()
+    {
         $regions = Region::all();
         $genres = Genre::all();
-
-        return view('owner.edit_store', compact('store', 'regions', 'genres'));
+        return view('owner.create_store', compact('regions', 'genres'));
     }
 
     public function storeStore(Request $request)
@@ -42,10 +45,10 @@ class OwnerController extends Controller
 
         $store = new Restaurant();
         $store->fill($request->all());
-        $store->member_id = Auth::id(); // ログイン中のユーザーを関連付け
+        $store->member_id = Auth::id();
         $store->save();
 
-        return redirect()->route('owner.store_edit')->with('success', '店舗情報を作成しました！');
+        return redirect()->route('owner.store_list')->with('success', '店舗情報を作成しました！');
     }
 
     public function updateStore(Request $request, $id)
@@ -61,11 +64,57 @@ class OwnerController extends Controller
         $store = Restaurant::findOrFail($id);
         $store->update($request->all());
 
-        return redirect()->route('owner.store_edit')->with('success', '店舗情報を更新しました！');
+        return redirect()->route('owner.store_list')->with('success', '店舗情報を更新しました！');
     }
-    public function manageReservations()
+
+    public function editStore($id)
     {
-        $reservations = Auth::user()->store->reservations; // 関連予約情報の取得
-        return view('owner.manage_reservations', compact('reservations'));
+        $store = Restaurant::findOrFail($id); // ID で店舗情報を取得
+        $regions = Region::all();
+        $genres = Genre::all();
+
+        return view('owner.edit_store', compact('store', 'regions', 'genres'));
+    }
+
+
+
+    public function listStores()
+    {
+        $user = Auth::user(); // ログイン中のユーザー情報を取得
+        if (!$user) {
+            abort(403, 'ログインしてください。');
+        }
+
+        // ログイン中のユーザーに関連する店舗を取得
+        $stores = $user->restaurants; // `restaurants` はリレーション名
+
+        // ログイン中のユーザーに関連する店舗を取得し、更新日順にソート
+        $stores = $user->restaurants->sortByDesc('updated_at'); // updated_at の降順
+
+        return view('owner.store_list', compact('stores', 'user'));
+    }
+    public function manageReservations(Request $request)
+    {
+        $user = Auth::user();
+
+        // ログイン中のユーザーが所有する店舗を取得
+        $stores = $user->restaurants;
+
+        // 全ての店舗の予約を取得
+        $reservations = collect(); // コレクションを初期化
+        foreach ($stores as $store) {
+            $storeReservations = $store->reservations()
+                ->with(['restaurant', 'member']) // リレーションをロード
+                ->get(); // 個々の予約データを取得
+            $reservations = $reservations->concat($storeReservations); // コレクションを結合
+        }
+
+        // 全体の並び替え
+        $sortedReservations = $reservations->sortBy([
+            fn($a, $b) => strcmp($a['reservation_date'], $b['reservation_date']), // 日付順
+            fn($a, $b) => strcmp($a['reservation_time'], $b['reservation_time']), // 時間順
+        ]);
+
+        return view('owner.manage_reservations', ['reservations' => $sortedReservations]);
     }
 }

@@ -2,7 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome 読み込み -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Font Awesome 読み込み -->
 @endsection
 
 @section('content')
@@ -15,13 +15,18 @@
     <section class="dashboard__menu">
         <ul>
             <li>
-                <a href="{{ route('owner.edit_store') }}" class="dashboard__link">
-                    <i class="fas fa-store"></i> 店舗情報
+                <a href="{{ route('owner.create_store') }}" class="dashboard__link">
+                    <i class="fas fa-store"></i> 店舗情報作成
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('owner.store_list') }}" class="dashboard__link">
+                    <i class="fas fa-list"></i> 店舗一覧（編集可能）
                 </a>
             </li>
             <li>
                 <a href="{{ route('owner.reservations.index') }}" class="dashboard__link">
-                    <i class="fas fa-calendar-alt"></i> 予約管理
+                    <i class="fas fa-calendar-alt"></i> 予約情報確認
                 </a>
             </li>
         </ul>
