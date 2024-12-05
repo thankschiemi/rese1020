@@ -49,7 +49,7 @@ class AdminController extends Controller
             $user->notify(new AccountCreated($request->password));
 
             // 3. 成功時のリダイレクト
-            return redirect()->route('admin.users')->with('success', '店舗代表者を作成しました。');
+            return redirect()->route('admin.users')->with('success', '店舗代表者を作成しました。登録したメールアドレス宛に通知を送信しましたので、ご確認ください。');
         } catch (\Exception $e) {
             // エラー発生時の処理
             return redirect()->back()->withErrors(['error' => 'ユーザー作成中にエラーが発生しました。']);

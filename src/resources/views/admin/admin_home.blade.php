@@ -14,13 +14,8 @@
     <section class="dashboard__menu">
         <ul>
             <li>
-                <a href="{{ route('admin.stores.index') }}" class="dashboard__link">
-                    <i class="fas fa-store"></i> 店舗管理
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.notifications.index') }}" class="dashboard__link">
-                    <i class="fas fa-bell"></i> 通知管理
+                <a href="{{ route('admin.users') }}" class="dashboard__link">
+                    <i class="fas fa-users"></i> ユーザー管理
                 </a>
             </li>
         </ul>

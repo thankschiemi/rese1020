@@ -1,0 +1,196 @@
+/* 全体の背景とフォント設定 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* ロゴとヘッダーのスタイル */
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #005dff;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+/* メインコンテンツのマージン調整 */
+main {
+    padding-top: 80px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+.user-management__title {
+    position: relative;
+    z-index: 100;
+    background-color: #f5f5f5;
+    /* 背景色をページ全体の背景に合わせる */
+    padding: 20px;
+    display: inline-block;
+    /* タイトル部分のみに背景色を適用 */
+}
+
+/* カードスタイル */
+.user-management__card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* フォームスタイル */
+.user-management__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-management__form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.user-management__form-group input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.user-management__form-group input:focus {
+    border-bottom: 2px solid #005dff;
+}
+
+.user-management__button {
+    background-color: #005dff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: background-color 0.3s;
+}
+
+.user-management__button:hover {
+    background-color: #004bb5;
+}
+
+/* 成功メッセージのスタイル */
+.user-management__success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    animation: fadeOut 3s ease-in-out 3s forwards;
+    /* 3秒後にフェードアウト開始 */
+}
+
+/* フェードアウトのアニメーション */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* テーブルスタイル */
+.user-management__table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.user-management__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-management__table-header {
+    background-color: #005dff;
+    color: #fff;
+}
+
+.user-management__table-header-cell,
+.user-management__table-cell {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.user-management__table-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.user-management__select {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.user-management__back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 10px;
+    text-align: left;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+
+    .user-management__card {
+        padding: 15px;
+    }
+
+    .user-management__form-group input {
+        font-size: 14px;
+    }
+
+    .user-management__button {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
