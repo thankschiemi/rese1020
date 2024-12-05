@@ -13,6 +13,7 @@ class AddRoleToMembersTable extends Migration
         });
     }
 
+
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {

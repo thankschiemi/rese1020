@@ -122,9 +122,17 @@ Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('r
 // 管理者専用のルート
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard'); // 管理者ダッシュボード
+
+
     Route::get('/stores', [AdminController::class, 'manageStores'])->name('admin.stores.index'); // 店舗管理
     Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications.index'); // 通知管理
-    Route::post('/stores', [AdminController::class, 'store'])->name('admin.stores.store'); // 店舗代表者作成
+
+
+
+    Route::post('/users', [AdminController::class, 'store'])->name('admin.users.store');
+
+
+    // 店舗代表者作成
     Route::get('/users', [AdminController::class, 'manageUsers'])->name('admin.users'); // ユーザー管理
     Route::put('/users/{id}/role', [AdminController::class, 'updateRole'])->name('admin.users.updateRole'); // ユーザー権限更新
 });

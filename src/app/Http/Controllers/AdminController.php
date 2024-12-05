@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Member;
+use App\Notifications\AccountCreated;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class AdminController extends Controller
 {
@@ -26,10 +29,34 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        // 店舗代表者作成処理
-        // 仮に何か処理を行う場合
-        return redirect()->route('admin.stores.index')->with('status', '店舗代表者が作成されました。');
+        try {
+            // 1. バリデーション
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:members,email',
+                'password' => 'required|string|min:8',
+            ]);
+
+            // 2. 新規アカウント作成
+            $user = Member::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']),
+                'role' => 'owner',
+            ]);
+
+            // メール送信
+            $user->notify(new AccountCreated($request->password));
+
+            // 3. 成功時のリダイレクト
+            return redirect()->route('admin.users')->with('success', '店舗代表者を作成しました。');
+        } catch (\Exception $e) {
+            // エラー発生時の処理
+            return redirect()->back()->withErrors(['error' => 'ユーザー作成中にエラーが発生しました。']);
+        }
     }
+
+
 
     public function manageUsers()
     {
