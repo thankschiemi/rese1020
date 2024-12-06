@@ -23,7 +23,7 @@
 
         <div class="register__form-group">
             <label for="email" class="register__label">
-                <img src="{{ asset('image/mail-image-20241022.png') }}" alt="メールアイコン" class="register__icon">
+                <img src="{{ asset('image/mail-icon.png') }}" alt="メールアイコン" class="register__icon">
             </label>
             <input type="email" name="email" placeholder="Email" class="register__input" value="{{ old('email') }}">
             @error('email')

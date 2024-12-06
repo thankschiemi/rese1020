@@ -23,7 +23,8 @@
 
         <div class="notification__form-group">
             <label for="message" class="notification__label">内容:</label>
-            <textarea id="message" name="message" class="notification__textarea">{{ old('message') }}</textarea>
+            <textarea id="message" name="message" class="notification__textarea">{{ old('message', '') }}</textarea>
+
         </div>
 
         <button type="submit" class="notification__button">送信</button>

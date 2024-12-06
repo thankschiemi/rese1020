@@ -15,7 +15,7 @@
         <ul>
             <li>
                 <a href="{{ route('admin.users') }}" class="dashboard__link">
-                    <i class="fas fa-users"></i> ユーザー管理
+                    <i class="fas fa-users"></i> ユーザー管理画面（店舗代表者）
                 </a>
             </li>
         </ul>
