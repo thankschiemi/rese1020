@@ -14,9 +14,14 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')->hourly();
-    }
+{
+    // 毎朝8時にリマインダーを送信(本番用)
+    //$schedule->command('reminder:send')->dailyAt('08:00');
+    
+    // 毎分実行するテスト用のスケジュール
+    $schedule->command('reminder:send')->everyMinute();
+}
+
 
     /**
      * Register the commands for the application.

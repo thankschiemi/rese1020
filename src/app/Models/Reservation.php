@@ -24,7 +24,7 @@ class Reservation extends Model
     // 会員（ユーザー）とのリレーション
     public function member()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'member_id');
     }
 
     // レストランとのリレーション
