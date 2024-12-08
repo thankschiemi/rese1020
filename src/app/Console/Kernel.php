@@ -8,20 +8,24 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
+     * The Artisan commands provided by your application.
+     *
+     * @var array
+     */
+    protected $commands = [
+        \App\Console\Commands\SendReminder::class,
+    ];
+
+    /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
-{
-    // 毎朝8時にリマインダーを送信(本番用)
-    //$schedule->command('reminder:send')->dailyAt('08:00');
-    
-    // 毎分実行するテスト用のスケジュール
-    $schedule->command('reminder:send')->everyMinute();
-}
-
+    {
+        $schedule->command('reminder:send')->dailyAt('08:00');
+    }
 
     /**
      * Register the commands for the application.
@@ -30,7 +34,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
