@@ -1,64 +1,12 @@
 body {
     background-color: #F5F5F5;
-    padding: 20px 0;
-    overflow-x: hidden;
 }
-
-.header_filters {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-left: auto;
-}
-
-.header_inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.header_left {
-    display: flex;
-    align-items: center;
-}
-
-.filter {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-    /* 横幅が狭い時に折り返し可能にする */
-}
-
-.filter_area,
-.filter_genre,
-.filter_search {
-    padding: 8px;
-    font-size: 14px;
-}
-
-.filter_search {
-    width: 100%;
-    /* スマホでは全幅に */
-    max-width: 300px;
-    /* 最大幅を制限 */
-}
-
-/* コンテナ全体のスタイル */
-.restaurant__container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    padding-bottom: 30px;
-}
-
 .page_content {
     background-color: #F5F5F5;
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        /* カードのレスポンシブ対応 */
     gap: 20px;
     width: 100%;
     max-width: 1200px;
@@ -68,49 +16,12 @@ body {
     padding-bottom: 30px;
 }
 
-.page_content>div {
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-}
-
-.restaurant__image img {
-    width: 100%;
-    /* 幅いっぱい */
-    height: auto;
-    /* 縦横比を維持 */
-    max-height: 150px;
-    /* 最大高さを制限 */
-    object-fit: cover;
-    /* カード内に画像をフィットさせる */
-}
 
 @media (max-width: 768px) {
     .page_content {
         grid-template-columns: repeat(2, 1fr);
         /* 2列表示に変更 */
-        gap: 15px;
-        /* 間隔を調整 */
-        justify-content: center;
-        /* 中央揃え */
+        padding: 10px;
     }
-
-    .filter {
-        flex-direction: column;
-        /* 縦並びにする */
-        align-items: center;
-        /* 中央揃え */
-        margin-bottom: 20px;
-        /* 下部余白 */
-    }
-
-    .restaurant__image img {
-        max-height: 120px;
-        /* 画像サイズを調整 */
-    }
-        .page_content>.restaurant {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        }
 }
+

@@ -34,10 +34,12 @@
                 <div class="dropdown-icon">▼</div>
             </div>
         </div>
-        <div class="search-container">
-            <label for="keyword" class="sr-only">Search</label>
-            <img src="{{ asset('image/magnifying-glass-icon.png') }}" alt="Search Icon" class="search-icon">
-            <input type="search" id="keyword" name="keyword" class="filter_search" placeholder="Search ..." value="{{ request('keyword') }}">
+        <div class="filter-wrapper">
+            <div class="filter-select">
+                <label for="keyword" class="sr-only">Search</label>
+                <img src="{{ asset('image/magnifying-glass-icon.png') }}" alt="Search Icon" class="search-icon">
+                <input type="search" id="keyword" name="keyword" class="filter_search" placeholder="Search ..." value="{{ request('keyword') }}">
+            </div>
         </div>
     </form>
 </div>

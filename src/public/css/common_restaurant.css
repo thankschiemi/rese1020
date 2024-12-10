@@ -20,7 +20,6 @@
 
 .restaurant__details {
     padding: 10px;
-    display: flex;
     flex-direction: column;
     gap: 8px;
 }
@@ -99,4 +98,64 @@
     color: #ff6666;
     /* ホバー時の明るい赤 */
 }
+@media (max-width: 768px) {
+    .restaurant {
+        flex-direction: column;
+        /* カード内の要素を縦並びに */
+        border-radius: 8px;
+        /* 少し角を丸める */
+    }
 
+    .restaurant__image img {
+        height: 120px;
+        /* 画像の高さを縮小 */
+    }
+
+    .restaurant__details {
+        padding: 8px;
+        /* 余白を少し縮小 */
+        gap: 6px;
+        /* 要素間の間隔を縮小 */
+    }
+
+    .restaurant__name {
+        font-size: 16px;
+        /* 店舗名のフォントサイズを調整 */
+    }
+
+    .restaurant__tags {
+        font-size: 10px;
+        /* タグのフォントサイズを縮小 */
+    }
+
+        .restaurant_buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            /* ボタンとハート間の余白 */
+            padding: 0 10px;
+            /* ボタン周囲の余白 */
+            width: 100%;
+            /* コンテナ幅いっぱいにする */
+        }
+    
+        .restaurant_button {
+            font-size: 12px;
+            /* ボタンの文字サイズを縮小 */
+            padding: 6px 10px;
+            /* ボタンの内側の余白 */
+        }
+    
+        .restaurant_favorite-button {
+            font-size: 40px;
+            /* ハートのサイズを調整 */
+            margin-left: auto;
+            /* ボタンの右側に固定 */
+        }
+    
+        .restaurant__actions {
+            margin-top: 10px;
+            /* 上の要素との余白を調整 */
+        }
+}
