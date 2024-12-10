@@ -286,20 +286,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* レスポンシブ対応（小さい画面用） */
-@media (max-width: 768px) {
-    .reservation-card__buttons {
-        flex-direction: column;
-        /* ボタンを縦に並べる */
-        gap: 10px;
-    }
-
-    .reservation-card__button {
-        width: 100%;
-        /* ボタン幅を画面いっぱいに */
-    }
-}
-
 .qr-code-wrapper {
     display: flex;
     flex-direction: column;

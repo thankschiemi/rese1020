@@ -1,6 +1,5 @@
 .done__content {
     background-color: #F5F5F5;
-    margin: 0;
     font-family: 'Roboto', sans-serif;
     position: relative;
     height: 100vh;
@@ -53,4 +52,35 @@
 
 .back-button:hover {
     background-color: #0041CC;
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .done__message-box {
+        width: 70%;
+        /* タブレット用に横幅を縮小 */
+        max-width: 400px;
+        /* 必要に応じて最大幅を設定 */
+    }
+}
+
+@media (max-width: 768px) {
+    .done__message-box {
+        padding: 50px 10px;
+        /* モバイル用に余白を調整 */
+        width: 80%;
+        height: 200px;
+        /* 画面幅に合わせる */
+    }
+
+    .done__message {
+        font-size: 15px;
+        /* フォントを少し小さく */
+    }
+
+    .done__button {
+        font-size: 10px;
+        /* ボタンの文字サイズを調整 */
+        padding: 8px 15px;
+        /* ボタンのタッチ範囲を確保 */
+    }
 }
