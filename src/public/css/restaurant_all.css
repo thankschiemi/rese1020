@@ -1,22 +1,20 @@
 body {
     background-color: #F5F5F5;
-    /* ページ全体の背景色を #F5F5F5 にする */
-    margin: 0;
-    /* 余白をなくす */
+    padding: 20px 0;
+    overflow-x: hidden;
 }
+
 .header_filters {
     display: flex;
     gap: 10px;
     align-items: center;
     margin-left: auto;
-    /* フィルターフォームを右に寄せる */
 }
 
 .header_inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* アイコンとフィルターフォームを左右に配置 */
     width: 100%;
 }
 
@@ -29,6 +27,8 @@ body {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
+    /* 横幅が狭い時に折り返し可能にする */
 }
 
 .filter_area,
@@ -39,8 +39,12 @@ body {
 }
 
 .filter_search {
-    width: 200px;
+    width: 100%;
+    /* スマホでは全幅に */
+    max-width: 300px;
+    /* 最大幅を制限 */
 }
+
 /* コンテナ全体のスタイル */
 .restaurant__container {
     width: 100%;
@@ -55,55 +59,58 @@ body {
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 4列に設定 */
     gap: 20px;
-    /* カード間のスペース */
     width: 100%;
     max-width: 1200px;
-    /* 最大幅を設定 */
     margin: 0 auto;
+    justify-content: center;
     /* 中央揃え */
     padding-bottom: 30px;
 }
-/* レスポンシブデザイン */
-@media (max-width: 1024px) {
-    .page_content {
-        grid-template-columns: repeat(3, 1fr);
-        /* 3列に減らす */
-        gap: 15px;
-        /* カード間のスペースを縮小 */
-    }
+
+.page_content>div {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.restaurant__image img {
+    width: 100%;
+    /* 幅いっぱい */
+    height: auto;
+    /* 縦横比を維持 */
+    max-height: 150px;
+    /* 最大高さを制限 */
+    object-fit: cover;
+    /* カード内に画像をフィットさせる */
 }
 
 @media (max-width: 768px) {
     .page_content {
         grid-template-columns: repeat(2, 1fr);
-        /* 2列に減らす */
-        gap: 10px;
-        /* カード間のスペースをさらに縮小 */
+        /* 2列表示に変更 */
+        gap: 15px;
+        /* 間隔を調整 */
+        justify-content: center;
+        /* 中央揃え */
     }
 
     .filter {
         flex-direction: column;
-        /* フィルターフォームを縦に配置 */
-        align-items: flex-start;
-        /* 左揃えにする */
+        /* 縦並びにする */
+        align-items: center;
+        /* 中央揃え */
+        margin-bottom: 20px;
+        /* 下部余白 */
     }
 
-    .filter_search {
-        width: 100%;
-        /* 検索ボックスを画面幅いっぱいにする */
+    .restaurant__image img {
+        max-height: 120px;
+        /* 画像サイズを調整 */
     }
-}
-
-@media (max-width: 480px) {
-    .page_content {
-        grid-template-columns: 1fr;
-        /* 1列表示に変更 */
-    }
-
-    .filter {
-        gap: 5px;
-        /* スペースをさらに縮小 */
-    }
+        .page_content>.restaurant {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
 }
