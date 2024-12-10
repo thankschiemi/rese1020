@@ -16,20 +16,17 @@ body {
     background-color: #F5F5F5;
 }
 
-.mypage__reservations {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin-top: 65px;
-    max-width: 50%;
-
-}
-
+/* 予約エリアとお気に入りエリア */
+.mypage__reservations,
 .mypage__favorites {
     flex: 1;
     display: flex;
     flex-direction: column;
     max-width: 50%;
+}
+
+.mypage__reservations {
+    margin-top: 65px;
 }
 
 .mypage__user-name {
@@ -177,15 +174,13 @@ body {
 
 /* お気に入り店舗のレイアウト調整 */
 .favorites__list {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.reservation-card,
-.favorites__list {
-    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2列表示 */
+    gap: 10px;
+    /* カード間の間隔 */
+    width: 100%;
+    /* 親要素に合わせる */
 }
 /* ボタン全体のレイアウト */
 .reservation-card__buttons {
@@ -334,3 +329,123 @@ body {
     width: 100%;
     /* レスポンシブ対応 */
 }
+/* レスポンシブデザイン */
+@media screen and (max-width: 768px) {
+    .mypage__content {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 10px;
+    }
+
+    .mypage__reservations,
+    .mypage__favorites {
+        max-width: 100%;
+        margin-top: 0;
+    }
+
+    .mypage__status-title {
+        padding-left: 50px;
+        font-size: 30px;
+    }
+    .mypage__section-title {
+        padding-left: 10px;
+        font-size: 25px;
+        }
+    .reservation-card {
+        margin: 10px auto;
+        padding: 15px;
+        min-height: 220px;
+    }
+
+    .reservation-card__detail {
+        font-size: 10px;
+    }
+
+    .reservation-card__button {
+        min-width: 70px;
+        max-width: 90px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 10px;
+    }
+
+    .favorites__list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .qr-instruction {
+        font-size: 14px;
+    }
+
+    /* ボタンのタップ時のスタイル */
+    .reservation-card__button:active {
+        background-color: #003f7f;
+        /* タップ時に色を濃く */
+        transform: scale(0.98);
+        /* 少し縮小して押している感覚を出す */
+        transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    /* カードのタップ時のスタイル */
+    .reservation-card:active {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        /* タップ時の影 */
+        transform: scale(0.98);
+        /* 少し縮小 */
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .mypage__reservations {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .reservation-card {
+        margin: 0 auto;
+        max-width: 300px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .mypage__status-title {
+        grid-column: 1 / -1;
+        /* 全列を横断 */
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .mypage__favorites {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 768px;
+        margin: 0 auto;
+    }
+
+    .favorites__list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .restaurant {
+        margin: 0 auto;
+        max-width: 300px;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 375px) {
+    .favorites__list {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+

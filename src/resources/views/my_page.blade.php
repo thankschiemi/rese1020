@@ -76,7 +76,7 @@
         </section>
 
         <!-- 右カラム：お気に入り店舗 -->
-        <section class="mypage__favorites">
+        <section id="favorite-section" class="mypage__favorites">
             <p class="mypage__user-name">{{ $user->name }}さん</p>
             <h2 class="mypage__section-title">お気に入り店舗</h2>
             <div class="favorites__list">
@@ -92,8 +92,9 @@
                             <a href="{{ route('restaurants.detail', $favorite->restaurant->id) }}" class="restaurant_button">詳しくみる</a>
                             <form action="{{ route('favorites.store', ['restaurant_id' => $favorite->restaurant->id]) }}" method="POST">
                                 @csrf
-                                <button class="restaurant_favorite-button {{ $favorite->restaurant->is_favorite ? 'active' : '' }}">❤</button>
+                                <button type="submit" class="restaurant_favorite-button {{ $favorite->restaurant->is_favorite ? 'active' : '' }}">❤</button>
                             </form>
+
                         </div>
                     </div>
                 </article>
@@ -102,6 +103,8 @@
                 @endforelse
             </div>
         </section>
+
+
     </div>
 </main>
 @endsection
