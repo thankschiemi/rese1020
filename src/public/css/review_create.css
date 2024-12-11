@@ -179,22 +179,39 @@ body {
     font-size: 12px;
     margin-top: 5px;
 }
+.reservation-create__back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 10px;
+    text-align: left;
+}
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
+    .review {
+        padding: 10px;
+    }
+
     .review__create {
         padding: 15px;
     }
+
+
 
     .review__title {
         font-size: 20px;
     }
 
-    .pagination {
-        gap: 5px; /* ページ番号間の余白を減少 */
+    .review__rating {
+        font-size: 14px;
+        /* 星のサイズを小さく調整 */
     }
 
-    .pagination-item {
-        padding: 6px 8px; /* コンパクトなボタンデザイン */
-        font-size: 12px; /* フォントサイズを小さく */
+    .review__button {
+        font-size: 14px;
     }
 }

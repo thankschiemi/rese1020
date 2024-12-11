@@ -6,6 +6,7 @@
 
 @section('content')
 <main class="reservation-edit">
+    <a href="{{ route('mypage') }}" class="reservation-edit__back-btn">マイページに戻る</a>
     <h1 class="reservation-edit__title">予約編集</h1>
     <form class="reservation-edit__form" action="{{ route('reserve.update', $reservation->id) }}" method="POST">
         @csrf

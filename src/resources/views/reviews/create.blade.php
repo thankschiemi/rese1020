@@ -7,6 +7,7 @@
 @section('content')
 <main class="review">
     <section class="review__create">
+        <a href="{{ route('mypage') }}" class="reservation-create__back-btn">マイページに戻る</a>
         <h1 class="review__title">評価を作成</h1>
         <form method="POST" action="{{ route('reviews.store') }}" class="review__form">
             @csrf
