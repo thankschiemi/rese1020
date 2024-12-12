@@ -108,9 +108,10 @@ body {
     background-color: #0056b3;
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .store-list {
+        max-width: 90%;
+        margin: 20px auto;
         padding: 15px;
     }
 
@@ -118,8 +119,32 @@ body {
         font-size: 20px;
     }
 
+    .store-list__table {
+        font-size: 14px;
+    }
+
     .store-list__table th,
     .store-list__table td {
         padding: 8px;
+        text-align: center;
+        /* 小さな画面での配置を中央揃え */
+    }
+}
+
+@media (max-width: 480px) {
+    .store-list {
+        max-width: 95%;
+        padding: 10px;
+    }
+
+    .store-list__table th,
+    .store-list__table td {
+        padding: 5px;
+        font-size: 12px;
+        /* より小さなフォントサイズで調整 */
+    }
+
+    .store-list__title {
+        font-size: 18px;
     }
 }

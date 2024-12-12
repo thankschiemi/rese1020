@@ -136,8 +136,11 @@ body {
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .create-store {
-        margin: 20px;
+        margin: 20px auto;
+        /* 左右中央寄せ */
         padding: 15px;
+        width: auto;
+        /* サイズを自動調整 */
     }
 
     .create-store__title {
@@ -146,5 +149,23 @@ body {
 
     .create-store button {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .create-store {
+        margin: 10px auto;
+        /* 小さいデバイス向けの調整 */
+        padding: 10px;
+        max-width: 90%;
+        /* デバイス幅に収める */
+    }
+
+    .create-store__title {
+        font-size: 18px;
+    }
+
+    .create-store button {
+        font-size: 12px;
     }
 }

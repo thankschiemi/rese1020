@@ -114,7 +114,12 @@ main {
     animation: fadeOut 3s ease-in-out 3s forwards;
     /* 3秒後にフェードアウト開始 */
 }
-
+.user-management__table-container {
+    overflow-x: auto;
+    /* 横スクロールを有効にする */
+    -webkit-overflow-scrolling: touch;
+    /* スムーズなスクロールをサポート */
+}
 /* フェードアウトのアニメーション */
 @keyframes fadeOut {
     from {
@@ -193,4 +198,27 @@ main {
         padding: 8px 15px;
         font-size: 12px;
     }
+}
+@media (max-width: 480px) {
+        .user-management__subtitle {
+            font-size: 16px;
+        }
+    
+        .user-management__description {
+            font-size: 12px;
+        }
+    
+        .user-management__table-header-cell,
+        .user-management__table-cell {
+            font-size: 11px;
+            /* テーブル内の文字サイズを小さく */
+            padding: 3px;
+        }
+    
+        .user-management__select,
+        .user-management__button {
+            font-size: 10px;
+            padding: 4px 8px;
+        }
+
 }

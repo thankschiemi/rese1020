@@ -118,3 +118,42 @@ body {
     background-color: #003f88;
     transform: scale(1.05);
 }
+@media (max-width: 768px) {
+    .notification {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .notification__title {
+        font-size: 20px;
+    }
+
+    .notification__description {
+        font-size: 12px;
+    }
+
+    .notification__button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+@media (max-width: 480px) {
+    .notification {
+        padding: 15px;
+        max-width: 95%;
+        margin: 10px auto;
+    }
+
+    .notification__title {
+        font-size: 18px;
+    }
+
+    .notification__description {
+        font-size: 10px;
+    }
+
+    .notification__button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}

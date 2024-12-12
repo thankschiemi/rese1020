@@ -131,15 +131,55 @@ body {
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .store-list {
-        padding: 15px;
+        padding: 10px;
+        max-width: 90%;
+        margin: 20px auto;
     }
 
     .store-list__title {
-        font-size: 20px;
+        font-size: 18px;
+        /* タイトルの文字サイズを調整 */
     }
 
     .store-list__table th,
     .store-list__table td {
+        font-size: 14px;
+        /* テーブル内の文字サイズを調整 */
+        padding: 6px;
+        /* セルのパディングを減らす */
+    }
+}
+
+@media (max-width: 480px) {
+    .store-list {
         padding: 8px;
+        max-width: 95%;
+        /* 画面幅に応じて幅を縮小 */
+        margin: 10px auto;
+    }
+
+    .store-list__title {
+        font-size: 16px;
+        /* タイトルをさらに小さく */
+    }
+    
+    .store-list p {
+        font-size: 10px;
+        /* タイトルをさらに小さく */
+    }
+
+    .store-list__table th,
+    .store-list__table td {
+        font-size: 12px;
+        /* フォントサイズをより小さく */
+        padding: 4px;
+        /* パディングをさらに減らす */
+    }
+
+    .btn {
+        font-size: 10px;
+        /* ボタンのフォントサイズを調整 */
+        padding: 6px 10px;
+        /* ボタンのパディングを調整 */
     }
 }
