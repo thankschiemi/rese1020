@@ -207,6 +207,7 @@ body {
 /* タブレット・スマートフォン用のレスポンシブデザイン */
 @media (max-width: 768px) {
     .shop-page__content {
+        display: flex;
         flex-direction: column;
         align-items: center;
         /* 子要素を中央揃え */
@@ -223,26 +224,29 @@ body {
         /* 固定配置を解除 */
         width: 100%;
         /* 画面幅に合わせる */
-        height: auto;
         margin-top: 20px;
-    }
+        margin-bottom: 50px;
 
-    .reservation-form__input--date,
+    }
+        .reservation-form__input--date{
+            width: 50%;
+            margin-bottom: 10px;
+        }
+
     .reservation-form__select--time,
     .reservation-form__select--people {
         width: 100%;
         margin-bottom: 10px;
     }
 
-    .reservation-summary__container {
-        margin: 20px auto;
-        /* 中央に配置 */
-        width: 100%;
-    }
+.reservation-summary__container {
+    margin: -500px auto 20px auto;
+    /* 上に大きく持ち上げて、下部に少し余白を追加 */
+    width: 90%;
+}
 
     .reservation-form__button--submit {
         width: 100%;
-        margin-top: 10px;
     }
 
     .reservation-summary {
