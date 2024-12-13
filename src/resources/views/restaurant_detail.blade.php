@@ -14,7 +14,7 @@
             <h2 class="shop-info__name">{{ $restaurant->name }}</h2>
         </div>
         <div class="shop-info__image">
-            <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}の画像">
+            <img src="{{ asset($restaurant->image_url) }}" alt="{{ $restaurant->name }}の画像">
         </div>
         <p class="shop-info__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>
         <p class="shop-info__description">

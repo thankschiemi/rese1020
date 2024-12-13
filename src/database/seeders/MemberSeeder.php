@@ -15,13 +15,19 @@ class MemberSeeder extends Seeder
                 'name' => 'Test User 1',
                 'email' => 'test1@example.com',
                 'password' => bcrypt('password123'),
-                'role' => 'user', // 明示的に role を指定
+                'role' => 'user', // 通常ユーザー
             ],
             [
                 'name' => 'Test Admin',
                 'email' => 'admin@example.com',
                 'password' => bcrypt('adminpassword'),
-                'role' => 'admin', // 明示的に role を指定
+                'role' => 'admin', // 管理者
+            ],
+            [
+                'name' => 'Test Owner',
+                'email' => 'owner@example.com',
+                'password' => bcrypt('ownerpassword'),
+                'role' => 'owner', // 店舗代表者
             ],
         ];
 

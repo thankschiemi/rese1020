@@ -37,7 +37,7 @@
         <div class="filter-wrapper">
             <div class="filter-select">
                 <label for="keyword" class="sr-only">Search</label>
-                <img src="{{ asset('image/magnifying-glass-icon.png') }}" alt="Search Icon" class="search-icon">
+                <img src="{{ asset('images/magnifying-glass-icon.png') }}" alt="Search Icon" class="search-icon">
                 <input type="search" id="keyword" name="keyword" class="filter_search" placeholder="Search ..." value="{{ request('keyword') }}">
             </div>
         </div>
@@ -49,7 +49,7 @@
 <div class="page_content">
     @forelse ($restaurants as $restaurant)
     <article class="restaurant">
-        <img src="{{ $restaurant->image_url }}" alt="店舗画像" class="restaurant__image">
+        <img src="{{ asset($restaurant->image_url) }}" alt="店舗画像" class="restaurant__image">
         <div class="restaurant__details">
             <h2 class="restaurant__name">{{ $restaurant->name }}</h2>
             <p class="restaurant__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>

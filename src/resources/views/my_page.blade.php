@@ -83,7 +83,9 @@
                 @forelse ($favorites as $favorite)
                 <article class="restaurant">
                     <div class="restaurant__image">
-                        <img src="{{ $favorite->restaurant->image_url }}" alt="店舗画像" class="login_icon">
+                        <img src="{{ asset($reservation->restaurant->image_url) }}" alt="店舗画像">
+
+
                     </div>
                     <div class="restaurant__details">
                         <h2 class="restaurant__name">{{ $favorite->restaurant->name }}</h2>

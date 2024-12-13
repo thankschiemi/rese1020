@@ -16,10 +16,16 @@ class FavoriteSeeder extends Seeder
         $restaurant = Restaurant::first();
 
         if ($member && $restaurant) {
-            Favorite::create([
-                'member_id' => $member->id,
-                'restaurant_id' => $restaurant->id,
-            ]);
+            $exists = Favorite::where('member_id', $member->id)
+                ->where('restaurant_id', $restaurant->id)
+                ->exists();
+
+            if (!$exists) {
+                Favorite::create([
+                    'member_id' => $member->id,
+                    'restaurant_id' => $restaurant->id,
+                ]);
+            }
         }
     }
 }

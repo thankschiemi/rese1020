@@ -13,7 +13,7 @@
     @endif
 
 
-    <form method="POST" action="{{ route('owner.store_store') }}">
+    <form method="POST" action="{{ route('owner.store') }}">
         @csrf
         <label for="name">店舗名</label>
         <input type="text" name="name" value="{{ old('name') }}" required>
@@ -35,8 +35,8 @@
         <label for="description">店舗概要</label>
         <textarea name="description">{{ old('description') }}</textarea>
 
-        <label for="image_url">画像URL</label>
-        <input type="text" name="image_url" value="{{ old('image_url') }}">
+        <label for="image">店舗画像:</label>
+        <input type="file" name="image" id="image">
 
         <button type="submit">作成</button>
     </form>

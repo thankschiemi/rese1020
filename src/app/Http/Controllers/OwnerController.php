@@ -43,16 +43,23 @@ class OwnerController extends Controller
             'region_id' => 'required|exists:regions,id',
             'genre_id' => 'required|exists:genres,id',
             'description' => 'nullable|string',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $store = new Restaurant();
-        $store->fill($request->all());
+        $store->fill($request->except('image'));
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $store->image_url = $imagePath;
+        }
+
         $store->member_id = Auth::id();
         $store->save();
 
         return redirect()->route('owner.store_list')->with('success', '店舗情報を作成しました！');
     }
+
 
     public function updateStore(Request $request, $id)
     {

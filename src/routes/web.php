@@ -138,26 +138,27 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 });
 
 
-// 店舗代表者専用のルート
 Route::prefix('owner')->middleware('auth')->group(function () {
     // ダッシュボード
     Route::get('/dashboard', [OwnerController::class, 'dashboard'])->name('owner.dashboard');
 
-    // 店舗情報
-    Route::get('/stores/edit/{id}', [OwnerController::class, 'editStore'])->name('owner.store_edit');
-
-    Route::put('/stores/update/{id}', [OwnerController::class, 'updateStore'])->name('owner.update_store');
+    // 店舗一覧表示
     Route::get('/stores', [OwnerController::class, 'listStores'])->name('owner.store_list');
 
+    // 店舗作成
+    Route::get('/stores/create', [OwnerController::class, 'createStore'])->name('owner.create_store');
+    Route::post('/stores', [OwnerController::class, 'storeStore'])->name('owner.store');
 
-    Route::get('/stores/store', [OwnerController::class, 'createStore'])->name('owner.create_store');
-    Route::post('/stores/store', [OwnerController::class, 'storeStore'])->name('owner.store_store');
+    // 店舗編集
+    Route::get('/stores/edit/{id}', [OwnerController::class, 'editStore'])->name('owner.store_edit');
+    Route::put('/stores/update/{id}', [OwnerController::class, 'updateStore'])->name('owner.update_store');
 
     // 予約管理
     Route::get('/reservations', [OwnerController::class, 'manageReservations'])->name('owner.reservations.index');
 
-    Route::get('/owner/campaign', [OwnerController::class, 'showCampaignForm'])->name('owner.campaign');
-    Route::post('/owner/campaign', [OwnerController::class, 'sendNotification'])->name('owner.sendNotification');
+    // キャンペーン
+    Route::get('/campaign', [OwnerController::class, 'showCampaignForm'])->name('owner.campaign');
+    Route::post('/campaign', [OwnerController::class, 'sendNotification'])->name('owner.sendNotification');
 });
 
 
