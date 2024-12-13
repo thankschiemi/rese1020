@@ -12,6 +12,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -168,3 +169,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage'); // マイページの表示
     Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store'); // 予約作成
 });
+
+//Stripeの決済機能
+Route::get('/stripe', function () {
+    return view('stripe.index');
+});
+Route::post('/process-payment', [PaymentController::class, 'processPayment']);

@@ -6,11 +6,11 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReminderMail;
 use App\Models\Reservation;
-use Illuminate\Support\Facades\Log;
 
-class SendReminder extends Command
+class SendReminderEmails extends Command
+
 {
-    protected $signature = 'reminder:send';
+    protected $signature = 'reminder:send-emails';
     protected $description = '予約当日のリマインダーメールを送信する';
 
     public function handle()
@@ -28,10 +28,6 @@ class SendReminder extends Command
                 $this->info("リマインダー送信成功: {$reservation->member->email}");
             } catch (\Exception $e) {
                 $this->error("リマインダー送信失敗: {$reservation->member->email}");
-                Log::error('リマインダー送信エラー:', [
-                    'reservation_id' => $reservation->id,
-                    'error' => $e->getMessage(),
-                ]);
             }
         }
 

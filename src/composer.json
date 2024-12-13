@@ -11,7 +11,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "stripe/stripe-php": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
