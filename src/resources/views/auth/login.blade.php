@@ -13,7 +13,7 @@
 
         <div class="login__form-group">
             <label for="email" class="login__label">
-                <img src="{{ asset('image/mail-icon.png') }}" alt="メールアイコン" class="login__icon">
+                <img src="{{ asset('images/mail-icon.png') }}" alt="メールアイコン" class="login__icon">
             </label>
             <input type="email" id="email" name="email" placeholder="Email"
                 class="login__input @error('email') is-invalid @enderror"
@@ -25,7 +25,7 @@
 
         <div class="login__form-group">
             <label for="password" class="login__label">
-                <img src="{{ asset('image/key-image-20241022.png') }}" alt="パスワードアイコン" class="login__icon">
+                <img src="{{ asset('images/key-image-20241022.png') }}" alt="パスワードアイコン" class="login__icon">
             </label>
             <input type="password" id="password" name="password" placeholder="Password"
                 class="login__input @error('password') is-invalid @enderror">

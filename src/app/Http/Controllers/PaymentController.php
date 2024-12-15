@@ -13,15 +13,20 @@ class PaymentController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
-            $paymentIntent = PaymentIntent::create([
-                'amount' => 1000, // 金額（例: 1000円 = 1000セント）
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount' => 1000, // 金額
                 'currency' => 'jpy',
                 'payment_method' => $request->payment_method_id,
-                'confirmation_method' => 'manual',
-                'confirm' => true,
+                'automatic_payment_methods' => [
+                    'enabled' => true,
+                    'allow_redirects' => 'never', // リダイレクトを無効にする
+                ],
             ]);
 
-            return response()->json(['success' => true, 'payment_intent' => $paymentIntent]);
+
+
+
+            return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }

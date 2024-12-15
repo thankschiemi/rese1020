@@ -175,3 +175,7 @@ Route::get('/stripe', function () {
     return view('stripe.index');
 });
 Route::post('/process-payment', [PaymentController::class, 'processPayment']);
+
+Route::get('/payment-success', function () {
+    return view('payment_success'); // 適切なビューを指定
+})->name('payment.success');
