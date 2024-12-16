@@ -84,10 +84,6 @@ Route::get('/thanks', [MemberController::class, 'thanks'])->name('thanks');
 
 Route::get('/mypage', [MyPageController::class, 'index'])->middleware('auth')->name('mypage');
 
-
-Route::get('/done', [ReservationController::class, 'done'])->name('reserve.done'); // 予約完了ページ
-
-
 // 予約処理（新規作成）
 Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store');
 
@@ -170,12 +166,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reserve', [ReservationController::class, 'store'])->name('reserve.store'); // 予約作成
 });
 
-//Stripeの決済機能
-Route::get('/stripe', function () {
-    return view('stripe.index');
-});
-Route::post('/process-payment', [PaymentController::class, 'processPayment']);
 
+// 予約完了ページ
+Route::get('/done', [ReservationController::class, 'done'])->name('reserve.done');
+
+// 決済画面
+Route::get('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
+// 決済処理
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+// 決済成功画面
 Route::get('/payment-success', function () {
-    return view('payment_success'); // 適切なビューを指定
+    return view('payment_success'); // ビューを返す
 })->name('payment.success');

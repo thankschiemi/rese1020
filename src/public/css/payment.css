@@ -1,0 +1,111 @@
+.payment__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* 上部に寄せる */
+    align-items: center;
+    height: 100vh;
+    /* 画面の高さを占める */
+    background-color: #f5f5f5;
+    /* 背景色（必要なら調整） */
+    font-family: 'Roboto', sans-serif;
+}
+
+.payment__message-box {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    /* フォームの幅を調整 */
+    margin-top: 50px;
+    /* 上部に余白を追加 */
+}
+
+.payment__message {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.payment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.payment-list li {
+    margin-bottom: 15px;
+    /* 各入力欄の間に余白を追加 */
+}
+
+.payment-list label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.stripe-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.stripe-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #005DFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.stripe-button:hover {
+    background-color: #0041CC;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .payment__content {
+        padding: 20px 10px;
+        /* 外側の余白を縮小 */
+    }
+
+    .payment__message-box {
+        padding: 20px;
+        /* 内側の余白を縮小 */
+        box-shadow: none;
+        /* 影をなくす */
+    }
+
+    .payment__message {
+        font-size: 18px;
+        /* フォントサイズを少し小さく */
+    }
+
+    .payment-list li {
+        margin-bottom: 15px;
+        /* 間隔を縮小 */
+    }
+
+    .stripe-input {
+        height: 35px;
+        /* 高さを小さく */
+        font-size: 14px;
+    }
+
+    .stripe-button {
+        font-size: 14px;
+    }
+}
