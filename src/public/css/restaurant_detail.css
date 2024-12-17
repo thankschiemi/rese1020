@@ -51,10 +51,22 @@ body {
     object-fit: contain;
 }
 
-.shop-info__image img {
+.restaurant__image {
     width: 100%;
     height: auto;
     object-fit: cover;
+}
+.default-image {
+    width: 200px;
+    /* デフォルト画像の幅を指定 */
+    height: 200px;
+    /* デフォルト画像の高さを指定 */
+    object-fit: contain;
+    /* アスペクト比を崩さず枠内に収める */
+    margin: 0 auto;
+    /* 中央寄せ */
+    display: block;
+    /* 余分な余白を削除 */
 }
 
 .shop-info__description {

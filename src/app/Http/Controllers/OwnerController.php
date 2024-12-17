@@ -9,6 +9,9 @@ use App\Models\Region;
 use App\Models\Genre;
 use App\Mail\NotificationMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\OwnerStoreRequest;
+use App\Http\Requests\OwnerUpdateStoreRequest;
+use App\Http\Requests\OwnerNotificationRequest;
 use Illuminate\Support\Facades\Log;
 
 class OwnerController extends Controller
@@ -36,16 +39,8 @@ class OwnerController extends Controller
         return view('owner.create_store', compact('regions', 'genres'));
     }
 
-    public function storeStore(Request $request)
+    public function storeStore(OwnerStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'region_id' => 'required|exists:regions,id',
-            'genre_id' => 'required|exists:genres,id',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
         $store = new Restaurant();
         $store->fill($request->except('image'));
 
@@ -61,16 +56,8 @@ class OwnerController extends Controller
     }
 
 
-    public function updateStore(Request $request, $id)
+    public function updateStore(OwnerUpdateStoreRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'region_id' => 'required|exists:regions,id',
-            'genre_id' => 'required|exists:genres,id',
-            'description' => 'nullable|string',
-            'image_url' => 'nullable|url',
-        ]);
-
         $store = Restaurant::findOrFail($id);
         $store->update($request->all());
 
@@ -133,14 +120,8 @@ class OwnerController extends Controller
         return view('owner.campaign');
     }
 
-    public function sendNotification(Request $request)
+    public function sendNotification(OwnerNotificationRequest $request)
     {
-        // 入力内容のバリデーション
-        $validated = $request->validate([
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string|max:1000',
-        ]);
-
         // ログイン中のユーザー（店舗代表者）を取得
         $user = Auth::user();
 

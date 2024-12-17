@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PaymentRequest;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 
@@ -15,24 +15,20 @@ class PaymentController extends Controller
     }
 
     // 決済処理
-    public function processPayment(Request $request)
+    public function processPayment(PaymentRequest $request)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
-                'amount' => 1000, // 金額 (例: 1000 = 10ドル)
+                'amount' => 1000, // 金額
                 'currency' => 'jpy',
-                'automatic_payment_methods' => [
-                    'enabled' => true,
-                    'allow_redirects' => 'never', // リダイレクトを許可しない設定
-                ],
+                'automatic_payment_methods' => ['enabled' => true],
             ]);
 
-
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true, 'client_secret' => $paymentIntent->client_secret]);
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 400);
         }
     }
 }

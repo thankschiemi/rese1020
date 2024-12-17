@@ -58,7 +58,12 @@ body {
     margin-bottom: 20px;
     text-align: center;
 }
-
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 2px;
+    font-weight: bold;
+}
 /* フェードアウトのアニメーション */
 @keyframes fadeOut {
     from {

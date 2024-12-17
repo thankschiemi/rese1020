@@ -14,17 +14,22 @@
     <p class="notification__success">{{ session('success') }}</p>
     @endif
 
-    <form method="POST" action="{{ route('owner.sendNotification') }}" class="notification__form">
+    <form method="POST" action="{{ route('owner.sendNotification') }}" class="notification__form" novalidate>
         @csrf
         <div class="notification__form-group">
             <label for="subject" class="notification__label">件名:</label>
             <input type="text" id="subject" name="subject" class="notification__input" value="{{ old('subject') }}">
+            @error('subject')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="notification__form-group">
             <label for="message" class="notification__label">内容:</label>
             <textarea id="message" name="message" class="notification__textarea">{{ old('message', '') }}</textarea>
-
+            @error('message')
+            <div class="error-message">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="notification__button">送信</button>

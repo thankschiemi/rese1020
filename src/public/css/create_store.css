@@ -38,6 +38,11 @@ body {
     animation: fadeOut 3s ease-in-out 3s forwards;
     /* 3秒後に3秒かけてフェードアウト */
 }
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 2px;
+}
 
 /* フェードアウトのアニメーション */
 @keyframes fadeOut {

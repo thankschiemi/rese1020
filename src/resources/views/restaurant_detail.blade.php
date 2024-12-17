@@ -13,14 +13,25 @@
             <a href="{{ url()->previous() }}" class="shop-info__back-button">◀</a>
             <h2 class="shop-info__name">{{ $restaurant->name }}</h2>
         </div>
+
         <div class="shop-info__image">
-            <img src="{{ asset($restaurant->image_url) }}" alt="{{ $restaurant->name }}の画像">
+            @if (!empty($restaurant->image_url) && file_exists(public_path('storage/' . $restaurant->image_url)))
+            <!-- 画像が存在する場合 -->
+            <img src="{{ asset('storage/' . $restaurant->image_url) }}" alt="{{ $restaurant->name }}の画像" class="restaurant__image">
+            @else
+            <!-- デフォルト画像を表示 -->
+            <img src="{{ asset('images/default-image.png') }}" alt="デフォルト画像" class="default-image">
+            @endif
         </div>
-        <p class="shop-info__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>
+
+        <p class="shop-info__tags">
+            #{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}
+        </p>
         <p class="shop-info__description">
             {{ $restaurant->description }}
         </p>
     </section>
+
 
     <!-- 予約フォーム -->
     <section class="reservation-form">

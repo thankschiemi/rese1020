@@ -12,22 +12,34 @@
 
         <!-- 決済フォーム -->
         <form id="payment-form" class="payment-form">
-            <ul class="payment-list">
+            <ul class="payment-list" novalidate>
                 <li>
                     <label for="card-holder-name">カード名義人</label>
                     <input id="card-holder-name" type="text" class="stripe-input" placeholder="名義人の名前">
+                    @error('card_name')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </li>
                 <li>
                     <label for="card-number">カード番号</label>
                     <div id="card-number" class="stripe-input"></div>
+                    @error('card_number')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </li>
                 <li>
                     <label for="card-expiry">有効期限</label>
                     <div id="card-expiry" class="stripe-input"></div>
+                    @error('expiry_date')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </li>
                 <li>
                     <label for="card-cvc">セキュリティコード</label>
                     <div id="card-cvc" class="stripe-input"></div>
+                    @error('cvc')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </li>
             </ul>
             <button id="submit-button" class="stripe-button">決済する</button>
@@ -42,11 +54,9 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Stripe初期化
         const stripe = Stripe("{{ env('STRIPE_KEY') }}");
         const elements = stripe.elements();
 
-        // 各入力フィールド
         const cardNumber = elements.create('cardNumber');
         cardNumber.mount('#card-number');
 
@@ -65,6 +75,7 @@
 
             const cardHolderName = document.getElementById('card-holder-name').value;
 
+            // Stripeでカード情報のバリデーションを行う
             const {
                 error,
                 paymentMethod
@@ -72,16 +83,24 @@
                 type: 'card',
                 card: cardNumber,
                 billing_details: {
-                    name: cardHolderName, // 名義人の名前を追加
+                    name: cardHolderName,
                 },
             });
 
             if (error) {
-                alert("エラー: " + error.message);
+                // バリデーションエラーメッセージを表示
+                const errorElement = document.createElement('div');
+                errorElement.classList.add('error-message');
+                errorElement.textContent = error.message;
+
+                // フォームの最下部にエラーメッセージを表示
+                form.appendChild(errorElement);
+
                 submitButton.disabled = false;
             } else {
                 console.log("PaymentMethod成功: ", paymentMethod.id);
-                // サーバーへ送信する処理
+
+                // サーバーにPaymentMethod IDを送信
                 const response = await fetch('/process-payment', {
                     method: 'POST',
                     headers: {
@@ -89,7 +108,7 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     },
                     body: JSON.stringify({
-                        payment_method_id: paymentMethod.id
+                        payment_method_id: paymentMethod.id,
                     })
                 });
 
@@ -103,7 +122,6 @@
                 }
             }
         });
-
     });
 </script>
 @endsection

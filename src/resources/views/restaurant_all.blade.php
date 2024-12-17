@@ -49,7 +49,12 @@
 <div class="page_content">
     @forelse ($restaurants as $restaurant)
     <article class="restaurant">
-        <img src="{{ asset($restaurant->image_url) }}" alt="店舗画像" class="restaurant__image">
+        @if ($restaurant->image_url)
+        <img src="{{ asset('storage/' . $restaurant->image_url) }}" alt="店舗画像">
+        @else
+        <img src="{{ asset('images/default-image.png') }}" alt="デフォルト画像" class="default-image">
+        @endif
+
         <div class="restaurant__details">
             <h2 class="restaurant__name">{{ $restaurant->name }}</h2>
             <p class="restaurant__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>
