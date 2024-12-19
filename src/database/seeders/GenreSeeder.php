@@ -28,8 +28,6 @@ class GenreSeeder extends Seeder
             ['name' => 'ラーメン'],
         ];
 
-        foreach ($genres as $genre) {
-            Genre::create($genre);
-        }
+        Genre::insert($genres);
     }
 }

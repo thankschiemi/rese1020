@@ -9,34 +9,30 @@ class MemberSeeder extends Seeder
 {
     public function run()
     {
-        // 定義されたユーザーを挿入
-        $members = [
-            [
-                'name' => 'Test User 1',
-                'email' => 'test1@example.com',
-                'password' => bcrypt('password123'),
-                'role' => 'user', // 通常ユーザー
-            ],
+        // 管理者、オーナー、一般ユーザーを固定で作成
+        Member::firstOrCreate(
+            ['email' => 'admin@example.com'], // ユニークキーでチェック
             [
                 'name' => 'Test Admin',
-                'email' => 'admin@example.com',
                 'password' => bcrypt('adminpassword'),
-                'role' => 'admin', // 管理者
-            ],
+                'role' => 'admin',
+                'email_verified_at' => now(),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+            ]
+        );
+
+        Member::firstOrCreate(
+            ['email' => 'owner@example.com'],
             [
                 'name' => 'Test Owner',
-                'email' => 'owner@example.com',
                 'password' => bcrypt('ownerpassword'),
-                'role' => 'owner', // 店舗代表者
-            ],
-        ];
+                'role' => 'owner',
+                'email_verified_at' => now(),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+            ]
+        );
 
-        foreach ($members as $member) {
-            // 重複を避けるため、存在しない場合のみ挿入
-            Member::firstOrCreate(
-                ['email' => $member['email']], // メールで重複チェック
-                $member
-            );
-        }
+        // ランダムな一般ユーザーを作成
+        Member::factory()->count(10)->create();
     }
 }

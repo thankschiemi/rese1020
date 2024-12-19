@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    protected $table = 'regions';
+    use HasFactory; // HasFactoryを追加（オプション）
+
     protected $fillable = ['name'];
+
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class, 'region_id');
+    }
 }

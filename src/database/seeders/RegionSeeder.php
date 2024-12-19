@@ -25,9 +25,6 @@ class RegionSeeder extends Seeder
             ['name' => '大阪府'],
             ['name' => '福岡県'],
         ];
-
-        foreach ($regions as $region) {
-            Region::create($region);
-        }
+        Region::insert($regions);
     }
 }
