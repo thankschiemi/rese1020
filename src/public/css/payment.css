@@ -74,6 +74,11 @@
 .stripe-button:hover {
     background-color: #0041CC;
 }
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
 /* レスポンシブデザイン */
 @media (max-width: 768px) {

@@ -54,16 +54,20 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Stripe公開キーを使用してインスタンスを1度だけ作成
         const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+
+        // Elementsの初期化 (重複しないよう注意)
         const elements = stripe.elements();
 
+        // カード情報の入力フィールドを作成 (1回のみ)
         const cardNumber = elements.create('cardNumber');
-        cardNumber.mount('#card-number');
-
         const cardExpiry = elements.create('cardExpiry');
-        cardExpiry.mount('#card-expiry');
-
         const cardCvc = elements.create('cardCvc');
+
+        // マウントする (重複しないように)
+        cardNumber.mount('#card-number');
+        cardExpiry.mount('#card-expiry');
         cardCvc.mount('#card-cvc');
 
         const form = document.getElementById('payment-form');
@@ -73,9 +77,17 @@
             event.preventDefault();
             submitButton.disabled = true;
 
+            // カード名義人を取得
             const cardHolderName = document.getElementById('card-holder-name').value;
 
-            // Stripeでカード情報のバリデーションを行う
+            // 名義人が空の場合のバリデーション
+            if (!cardHolderName.trim()) {
+                alert("名義人を入力してください。");
+                submitButton.disabled = false;
+                return;
+            }
+
+            // PaymentMethod作成
             const {
                 error,
                 paymentMethod
@@ -83,24 +95,19 @@
                 type: 'card',
                 card: cardNumber,
                 billing_details: {
-                    name: cardHolderName,
+                    name: cardHolderName
                 },
             });
 
+            // エラーハンドリング
             if (error) {
-                // バリデーションエラーメッセージを表示
-                const errorElement = document.createElement('div');
-                errorElement.classList.add('error-message');
-                errorElement.textContent = error.message;
-
-                // フォームの最下部にエラーメッセージを表示
-                form.appendChild(errorElement);
-
+                console.error(error.message);
+                alert("エラー: " + error.message);
                 submitButton.disabled = false;
             } else {
                 console.log("PaymentMethod成功: ", paymentMethod.id);
 
-                // サーバーにPaymentMethod IDを送信
+                // サーバーにデータ送信
                 const response = await fetch('/process-payment', {
                     method: 'POST',
                     headers: {
@@ -108,13 +115,14 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     },
                     body: JSON.stringify({
-                        payment_method_id: paymentMethod.id,
+                        payment_method_id: paymentMethod.id
                     })
                 });
 
                 const result = await response.json();
 
                 if (result.success) {
+                    alert("決済が成功しました！");
                     window.location.href = "/payment-success";
                 } else {
                     alert("決済に失敗しました: " + result.error);
@@ -122,6 +130,7 @@
                 }
             }
         });
+
     });
 </script>
 @endsection
