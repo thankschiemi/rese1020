@@ -14,25 +14,34 @@
     @if (session('success'))
     <p class="user-management__success">{{ session('success') }}</p>
     @endif
-    <form method="POST" action="{{ route('admin.users.store') }}" class="user-management__form">
+    <form method="POST" action="{{ route('admin.users.store') }}" class="user-management__form" novalidate>
         @csrf
         <div class="user-management__form-group">
             <span class="user-management__icon">
                 <i class="fas fa-user"></i>
             </span>
             <input type="text" id="name" name="name" class="user-management__input" placeholder="名前" required>
+            @error('name')
+            <p class="user-management__error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="user-management__form-group">
             <span class="user-management__icon">
                 <i class="fas fa-envelope"></i>
             </span>
             <input type="email" id="email" name="email" class="user-management__input" placeholder="メールアドレス" required>
+            @error('email')
+            <p class="user-management__error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="user-management__form-group">
             <span class="user-management__icon">
                 <i class="fas fa-lock"></i>
             </span>
             <input type="password" id="password" name="password" class="user-management__input" placeholder="パスワード" required>
+            @error('password')
+            <p class="user-management__error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="user-management__form-group">
             <span class="user-management__icon">

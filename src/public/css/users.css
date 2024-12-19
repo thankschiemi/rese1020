@@ -63,7 +63,7 @@ main {
 .user-management__form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
 }
 
 .user-management__form-group {
@@ -120,6 +120,15 @@ main {
     -webkit-overflow-scrolling: touch;
     /* スムーズなスクロールをサポート */
 }
+/* エラーメッセージのスタイル */
+.user-management__error {
+    color: #ff4d4f;
+    font-size: 12px;
+    position: absolute;
+    bottom: -30px;
+        margin-top: 5px;
+        font-weight: bold;
+    }
 /* フェードアウトのアニメーション */
 @keyframes fadeOut {
     from {

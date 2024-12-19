@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use App\Notifications\AccountCreated;
+use App\Http\Requests\AdminCreateMemberRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-
 
 class AdminController extends Controller
 {
@@ -27,15 +26,10 @@ class AdminController extends Controller
         return view('admin.notifications');
     }
 
-    public function store(Request $request)
+    public function store(AdminCreateMemberRequest $request)
     {
         try {
-            // 1. バリデーション
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:members,email',
-                'password' => 'required|string|min:8',
-            ]);
+            $validated = $request->validated();
 
             // 2. 新規アカウント作成
             $user = Member::create([
@@ -67,9 +61,13 @@ class AdminController extends Controller
     // 権限を更新
     public function updateRole(Request $request, $id)
     {
-        $request->validate([
-            'role' => 'required|in:user,owner,admin', // roleのバリデーション
-        ]);
+        // リクエストの値を取得
+        $role = $request->input('role');
+
+        // 権限が正しい値かチェック
+        if (!in_array($role, ['user', 'owner', 'admin'], true)) {
+            return redirect()->route('admin.users')->withErrors(['role' => '無効な権限が指定されました。']);
+        }
 
         $user = Member::findOrFail($id); // 指定したユーザーを取得
         $user->role = $request->role; // roleを更新
