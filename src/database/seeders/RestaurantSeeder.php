@@ -153,15 +153,8 @@ class RestaurantSeeder extends Seeder
                 'image_url' => 'images/sushi-image.jpg'
             ],
         ];
-        // オーナーリストを取得（Memberテーブルのroleがownerのユーザー）
-        $owners = Member::where('role', 'owner')->get();
-
-        // オーナーごとにレストランを割り当てる
-        foreach ($owners as $owner) {
-            foreach ($restaurants as $restaurant) {
-                // 各レストランにオーナーを割り当て
-                Restaurant::create(array_merge($restaurant, ['member_id' => $owner->id]));
-            }
+        foreach ($restaurants as $restaurant) {
+            Restaurant::create($restaurant);
         }
     }
 }
