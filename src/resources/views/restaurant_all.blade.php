@@ -66,7 +66,7 @@
                     <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}" aria-label="お気に入り追加">❤</button>
                 </form>
                 @else
-                <a href="{{ route('account-settings') }}" class="restaurant_favorite-button" aria-label="ログインページへのリンク">❤️</a>
+                <a href="{{ route('account-settings') }}" class="restaurant_favorite-button" aria-label="ログインページへのリンク">❤</a>
                 @endif
             </div>
         </div>

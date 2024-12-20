@@ -61,15 +61,37 @@ class MemberController extends Controller
         return redirect()->route('login');
     }
 
-    public function accountSettings()
+    public function accountSettings(Request $request)
     {
-        return view(Auth::check() ? 'main_menu' : 'account_settings', ['user' => Auth::user()]);
+        // 直前のURLを取得
+        $previousUrl = $request->headers->get('referer') ?? route('restaurants.index');
+
+        return view(Auth::check() ? 'main_menu' : 'account_settings', [
+            'user' => Auth::user(),
+            'previousUrl' => $previousUrl,
+        ]);
     }
 
-    public function mainmenu()
+    public function mainmenu(Request $request)
     {
-        return view('main_menu');
+        // ログイン状態の確認
+        if (!Auth::check()) {
+            // セッションにエラーメッセージを保存
+            return redirect()->route('account-settings')->with('error', 'ログインが必要です。');
+        }
+
+        // 直前のURLを取得
+        $previousUrl = $request->headers->get('referer') ?? route('restaurants.index');
+
+        return view('main_menu', [
+            'user' => Auth::user(),
+            'previousUrl' => $previousUrl,
+        ]);
     }
+
+
+
+
 
     public function thanks()
     {

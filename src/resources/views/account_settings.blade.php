@@ -6,6 +6,10 @@
 
 @section('content')
 
+@if(session('error'))
+<p class="alert alert-danger">{{ session('error') }}</p>
+@endif
+
 <div class="menu">
     <nav class="menu__nav">
         <ul class="menu__list">

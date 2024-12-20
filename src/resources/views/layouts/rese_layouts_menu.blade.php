@@ -17,9 +17,12 @@
     <header class="header">
         <!-- ✖アイコン -->
         <div class="icon">
-            <div class="icon__line icon__line--cross"></div>
-            <div class="icon__line icon__line--cross"></div>
+            <a href="{{ $previousUrl ?? route('restaurants.index') }}" class="icon__link">
+                <div class="icon__line icon__line--cross"></div>
+                <div class="icon__line icon__line--cross"></div>
+            </a>
         </div>
+
     </header>
 
     <main>

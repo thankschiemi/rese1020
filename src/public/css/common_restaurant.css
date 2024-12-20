@@ -86,7 +86,7 @@
 }
 
 .restaurant_favorite-button {
-    font-size: 55px;
+    font-size: 60px;
     /* ハートの大きさ */
     background: none;
     border: none;
@@ -95,6 +95,7 @@
     cursor: pointer;
     transition: color 0.2s, transform 0.2s;
     padding: 0;
+    text-decoration: none;
 }
 
 .restaurant_favorite-button.active {

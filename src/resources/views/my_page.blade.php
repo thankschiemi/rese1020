@@ -22,7 +22,7 @@
             <div class="reservation-card">
                 <div class="reservation__card-header">
                     <div class="reservation__icon">
-                        <img src="{{ asset('image/clock-image-20241022.png') }}" alt="時計アイコン">
+                        <img src="{{ asset('images/clock-image-20241022.png') }}" alt="時計アイコン">
                     </div>
                     <h3 class="reservation__card-title">予約{{ $loop->iteration }}</h3>
                 </div>

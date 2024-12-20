@@ -26,7 +26,7 @@
                 <div class="icon__line icon__line--long"></div>
                 <div class="icon__line icon__line--short"></div>
             </a>
-            <a href="{{ route('restaurants.index') }}" class="header__title">Rese</a>
+            <a href="{{ route('home') }}" class="header__title">Rese</a>
 
             @yield('header_filters')
         </div>

@@ -19,19 +19,28 @@
     width: 40px;
     height: 40px;
     background-color: #005DFF;
-    /* 青い背景 */
     border-radius: 8px;
-    /* 角を丸くする */
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    /* 影を追加 */
     cursor: pointer;
+    position: relative;
+    /* ✖を配置する基準 */
 }
 
-/* Element: icon line (✖の線) */
+/* ✖ボタン全体のリンク */
+.icon__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    /* テキストの装飾を消す */
+}
+
+/* ✖の線 */
 .icon__line {
     position: absolute;
     width: 24px;
@@ -46,4 +55,11 @@
 
 .icon__line--cross:nth-child(2) {
     transform: rotate(-45deg);
+}
+.alert.alert-danger {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    /* 必ず表示する */
 }
