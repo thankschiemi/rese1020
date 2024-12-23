@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Favorite;
+
 use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
@@ -12,9 +13,12 @@ class FavoriteController extends Controller
     {
         $user_id = Auth::id();
 
+        // お気に入りの確認と処理
         $favorite = Favorite::where('member_id', $user_id)
             ->where('restaurant_id', $restaurant_id)
             ->first();
+
+        $isFavorite = false;
 
         if ($favorite) {
             $favorite->delete();
@@ -23,13 +27,13 @@ class FavoriteController extends Controller
                 'member_id' => $user_id,
                 'restaurant_id' => $restaurant_id,
             ]);
+            $isFavorite = true;
         }
 
-        // リダイレクト時に特定のセクションに戻す
-        return redirect()->back()->withFragment('favorite-section');
-
-        return redirect()->back()->with('message', 'お気に入りを更新しました！')->withFragment('favorite-section');
+        // JSONレスポンスを返す
+        return response()->json(['isFavorite' => $isFavorite]);
     }
+
 
 
     public function __construct()

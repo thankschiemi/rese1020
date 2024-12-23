@@ -76,17 +76,17 @@
         </section>
 
         <!-- 右カラム：お気に入り店舗 -->
-        <section id="favorite-section" class="mypage__favorites">
+        <section id="mypage-favorite-section" class="mypage__favorites">
             <p class="mypage__user-name">{{ $user->name }}さん</p>
             <h2 class="mypage__section-title">お気に入り店舗</h2>
             <div class="favorites__list">
                 @forelse ($favorites as $favorite)
-                <article class="restaurant">
+                <article class="restaurant" data-restaurant-id="{{ $favorite->restaurant->id }}">
                     <div class="restaurant__image">
                         @if ($favorite->restaurant->image_url)
                         <img src="{{ asset('storage/' . $favorite->restaurant->image_url) }}" alt="店舗画像" class="restaurant__image">
                         @else
-                        <img src=" {{ asset('images/default-image.png') }}" alt="デフォルト画像" class="default-image">
+                        <img src="{{ asset('images/default-image.png') }}" alt="デフォルト画像" class="default-image">
                         @endif
                     </div>
                     <div class="restaurant__details">
@@ -94,11 +94,7 @@
                         <p class="restaurant__tags">#{{ $favorite->restaurant->region->name }} #{{ $favorite->restaurant->genre->name }}</p>
                         <div class="restaurant_buttons">
                             <a href="{{ route('restaurants.detail', $favorite->restaurant->id) }}" class="restaurant_button">詳しくみる</a>
-                            <form action="{{ route('favorites.store', ['restaurant_id' => $favorite->restaurant->id]) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="restaurant_favorite-button {{ $favorite->restaurant->is_favorite ? 'active' : '' }}">❤</button>
-                            </form>
-
+                            <button class="restaurant_favorite-button {{ $favorite->restaurant->is_favorite ? 'active' : '' }}">❤</button>
                         </div>
                     </div>
                 </article>
@@ -108,7 +104,43 @@
             </div>
         </section>
 
-
     </div>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.restaurant_favorite-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const restaurantId = this.closest('.restaurant').dataset.restaurantId;
+
+                fetch(`/favorites/${restaurantId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // JSONレスポンスを取得
+                    })
+                    .then(data => {
+                        if (data.isFavorite) {
+                            this.classList.add('active');
+                        } else {
+                            this.classList.remove('active');
+                            // いいねを取り消した場合、その店舗をリストから削除
+                            this.closest('.restaurant').remove();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    });
+</script>
+
+
 @endsection

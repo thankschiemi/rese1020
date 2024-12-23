@@ -16,7 +16,10 @@ body {
     padding-bottom: 30px;
 }
 
-
+#favorite-section {
+    scroll-margin-top: 100px;
+    /* 固定ヘッダーがある場合に余白を確保 */
+}
 @media (max-width: 768px) {
     .page_content {
         grid-template-columns: repeat(2, 1fr);

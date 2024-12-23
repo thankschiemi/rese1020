@@ -329,6 +329,10 @@ body {
     width: 100%;
     /* レスポンシブ対応 */
 }
+#favorite-section {
+    scroll-margin-top: 100px;
+    /* 固定ヘッダーがある場合に余白を確保 */
+}
 /* レスポンシブデザイン */
 @media screen and (max-width: 768px) {
     .mypage__content {

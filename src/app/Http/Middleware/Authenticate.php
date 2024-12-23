@@ -18,4 +18,12 @@ class Authenticate extends Middleware
             return '/account-settings';
         }
     }
+    protected function unauthenticated($request, array $guards)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+
+        return redirect()->guest(route('login'));
+    }
 }

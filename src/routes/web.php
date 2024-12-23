@@ -92,7 +92,7 @@ Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name(
 
 
 // お気に入り登録
-Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store'); // お気に入り登録
+Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store');
 
 
 
