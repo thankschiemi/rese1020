@@ -17,9 +17,16 @@
                 {{ session('success') }}
             </div>
             @endif
+
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
             <h2 class="mypage__status-title">予約状況</h2>
             @forelse ($reservations as $reservation)
-            <div class="reservation-card">
+            <div class="reservation-card" data-reservation-id="{{ $reservation->id }}">
                 <div class="reservation__card-header">
                     <div class="reservation__icon">
                         <img src="{{ asset('images/clock-image-20241022.png') }}" alt="時計アイコン">
@@ -43,32 +50,23 @@
                     <li class="reservation-card__detail">
                         <span class="detail-label">Time</span>
                         <span class="detail-value">{{ date('H:i', strtotime($reservation->reservation_time)) }}</span>
-
                     </li>
                     <li class="reservation-card__detail">
                         <span class="detail-label">Number</span>
                         <span class="detail-value">{{ $reservation->number_of_people }}人</span>
                     </li>
                 </ul>
-
-
-                <!-- ボタンの追加 -->
                 <div class="reservation-card__buttons">
                     <a href="{{ route('reserve.edit', $reservation->id) }}" class="reservation-card__button reservation-card__button--change">予約の変更</a>
                     <button type="button" class="reservation-card__button reservation-card__button--refresh" onclick="location.reload();">更新</button>
                     <a href="{{ route('reviews.create', $reservation->id) }}" class="reservation-card__button reservation-card__button--rate">評価</a>
                 </div>
-                <!-- QRコード表示 -->
                 <div class="qr-code-wrapper">
                     <div class="qr-code">
                         {!! QrCode::encoding('UTF-8')->size(100)->generate($reservation->qrData) !!}
                     </div>
                     <p class="qr-instruction">このQRコードを店舗スタッフに提示してください</p>
                 </div>
-
-
-
-
             </div>
             @empty
             <p class="no_results">予約情報がありません。</p>
@@ -106,41 +104,38 @@
 
     </div>
 </main>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.restaurant_favorite-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const restaurantId = this.closest('.restaurant').dataset.restaurantId;
 
-                fetch(`/favorites/${restaurantId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json(); // JSONレスポンスを取得
-                    })
-                    .then(data => {
-                        if (data.isFavorite) {
-                            this.classList.add('active');
-                        } else {
-                            this.classList.remove('active');
-                            // いいねを取り消した場合、その店舗をリストから削除
-                            this.closest('.restaurant').remove();
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            });
+<script>
+    document.querySelectorAll('.restaurant_favorite-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const restaurantId = this.closest('.restaurant').dataset.restaurantId;
+
+            fetch(`/favorites/${restaurantId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.isFavorite) {
+                        this.classList.add('active');
+                    } else {
+                        this.classList.remove('active');
+                        this.closest('.restaurant').remove();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     });
 </script>
-
 
 @endsection

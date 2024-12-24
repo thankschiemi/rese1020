@@ -34,19 +34,34 @@ class ReservationController extends Controller
         return redirect()->route('reserve.done')->with('restaurant_id', $request->restaurant_id);
     }
 
-    public function destroy($id)
+    public function destroy($reservation_id)
     {
-        // 削除対象の予約を取得
-        $reservation = Reservation::findOrFail($id);
+        $reservation = Reservation::find($reservation_id);
 
-        // ログインユーザーの予約かどうかを確認
-        if ($reservation->member_id === Auth::id()) {
-            $reservation->delete(); // 削除実行
-            return redirect()->back()->with('message', '予約を削除しました。');
+        if ($reservation) {
+            $reservationDetails = [
+                'restaurant_name' => $reservation->restaurant->name,
+                'reservation_date' => $reservation->reservation_date,
+                'reservation_time' => $reservation->reservation_time,
+            ];
+
+            $reservation->delete();
+
+            // 予約キャンセル後にリダイレクト
+            return redirect()->route('mypage')->with('success', sprintf(
+                '「%s」の予約（%s %s）が正常にキャンセルされました。',
+                $reservationDetails['restaurant_name'],
+                $reservationDetails['reservation_date'],
+                date('H:i', strtotime($reservationDetails['reservation_time']))
+            ));
         }
 
-        return redirect()->back()->with('error', 'この予約を削除する権限がありません。');
+        // キャンセル対象が見つからない場合
+        return redirect()->route('mypage')->with('error', 'キャンセルする予約が見つかりませんでした。');
     }
+
+
+
 
 
 
