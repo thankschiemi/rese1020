@@ -92,9 +92,9 @@ Route::delete('/reserve/{id}', [ReservationController::class, 'destroy'])->name(
 
 
 // お気に入り登録
-Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])->name('favorites.store');
-
-
+Route::post('/favorites/{restaurant_id}', [FavoriteController::class, 'store'])
+    ->middleware('auth') // 未ログイン時にリダイレクトされるようにauthミドルウェアを適用
+    ->name('favorites.store');
 
 // 予約編集画面のルート
 Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reserve.edit');

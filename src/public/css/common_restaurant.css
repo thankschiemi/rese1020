@@ -14,8 +14,14 @@
 
 .restaurant__image {
     width: 100%;
-    height: 150px;
-    object-fit: cover;
+        height: 150px;
+        /* デフォルト高さ */
+        max-height: 150px;
+        /* 高さを超えないようにする */
+        object-fit: cover;
+        /* 画像が変形しないように */
+        border-radius: 5px;
+        /* 画像の角を丸める */
 }
 .default-image {
     display: block;

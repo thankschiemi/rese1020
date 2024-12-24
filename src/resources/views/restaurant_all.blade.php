@@ -1,9 +1,8 @@
 @extends('layouts.rese_layout')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/restaurant_all.css') }}?v={{ time() }}">
-<link rel="stylesheet" href="{{ asset('css/common_restaurant.css') }}?v={{ time() }}">
-<link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ time() }}">
+<link rel="stylesheet" href="{{ asset('css/restaurant_all.css') }}">
+<link rel="stylesheet" href="{{ asset('css/common_restaurant.css') }}">
 
 @endsection
 
@@ -63,9 +62,12 @@
             <p class="restaurant__tags">#{{ $restaurant->region->name }} #{{ $restaurant->genre->name }}</p>
             <div class="restaurant_buttons">
                 <a href="{{ route('restaurants.detail', $restaurant->id) }}" class="restaurant_button" aria-label="詳しくみるボタン">詳しくみる</a>
-                <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}" aria-label="お気に入り追加">
+                <button class="restaurant_favorite-button {{ $restaurant->is_favorite ? 'active' : '' }}"
+                    aria-label="お気に入り追加"
+                    data-authenticated="{{ Auth::check() ? 'true' : 'false' }}">
                     ❤
                 </button>
+
             </div>
         </div>
     </article>
@@ -78,6 +80,15 @@
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.restaurant_favorite-button').forEach(button => {
             button.addEventListener('click', function() {
+                const isAuthenticated = this.getAttribute('data-authenticated') === 'true';
+
+                if (!isAuthenticated) {
+                    // ログインが必要な場合のポップアップ
+                    alert('この機能を使用するにはログインが必要です。');
+                    return;
+                }
+
+                // ログイン済みの場合、いいね処理を実行
                 const restaurantId = this.closest('.restaurant').dataset.restaurantId;
 
                 fetch(`/favorites/${restaurantId}`, {
@@ -87,13 +98,7 @@
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         }
                     })
-                    .then(response => {
-                        if (!response.ok) {
-                            console.error('HTTP Error:', response.status, response.statusText);
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
                         if (data.isFavorite) {
                             this.classList.add('active');

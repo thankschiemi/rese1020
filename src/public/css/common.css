@@ -117,7 +117,7 @@
     position: relative;
     width: 100px;
     /* 幅を固定 */
-    padding-right: 30px;
+    padding-right: 10px;
     /* 右側に30pxの余裕を追加 */
 }
 

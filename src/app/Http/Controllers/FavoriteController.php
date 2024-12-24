@@ -2,37 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Favorite;
 
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+
 
 class FavoriteController extends Controller
 {
-    public function store(Request $request, $restaurant_id)
+    public function store($restaurant_id)
     {
-        $user_id = Auth::id();
+        $user = Auth::user();
 
-        // お気に入りの確認と処理
-        $favorite = Favorite::where('member_id', $user_id)
+        if (!$user) {
+            return redirect()->route('account-settings');
+        }
+
+        // お気に入り登録または削除の処理
+        $favorite = Favorite::where('member_id', $user->id)
             ->where('restaurant_id', $restaurant_id)
             ->first();
 
-        $isFavorite = false;
-
         if ($favorite) {
             $favorite->delete();
+            return response()->json(['isFavorite' => false]);
         } else {
             Favorite::create([
-                'member_id' => $user_id,
+                'member_id' => $user->id,
                 'restaurant_id' => $restaurant_id,
             ]);
-            $isFavorite = true;
+            return response()->json(['isFavorite' => true]);
         }
-
-        // JSONレスポンスを返す
-        return response()->json(['isFavorite' => $isFavorite]);
     }
+
 
 
 

@@ -70,9 +70,14 @@ class AdminController extends Controller
         }
 
         $user = Member::findOrFail($id); // 指定したユーザーを取得
+
+        $oldRole = $user->role; // 変更前の権限を記録
         $user->role = $request->role; // roleを更新
         $user->save(); // 保存
 
-        return redirect()->route('admin.users')->with('success', '権限を更新しました。');
+        $adminName = auth()->user()->name; // ログイン中の管理者の名前を取得
+        $message = "{$adminName} がユーザー {$user->name} の権限を「{$oldRole}」から「{$role}」に更新しました。";
+
+        return redirect()->route('admin.users')->with('success', $message);
     }
 }
