@@ -43,4 +43,21 @@ class Member extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Reservation::class, 'member_id');
     }
+
+    // 必要なメソッドを追加（MustVerifyEmailインターフェース用）
+    public function hasVerifiedEmail()
+    {
+        return !is_null($this->email_verified_at);
+    }
+
+    public function markEmailAsVerified()
+    {
+        $this->email_verified_at = now();
+        return $this->save();
+    }
+
+    public function getEmailForVerification()
+    {
+        return $this->email;
+    }
 }

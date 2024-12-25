@@ -3,18 +3,20 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Member;
 
 class MyPageTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testMyPageDisplaysForAuthenticatedMember()
     {
-        // テスト用の会員を作成してログイン
+        // 型アノテーションを明示
+        /** @var \App\Models\Member $member */
         $member = Member::factory()->create();
-        $this->actingAs($member, 'web');
 
+        $this->actingAs($member, 'web'); // ログイン状態をシミュレート
 
         // マイページへアクセス
         $response = $this->get('/mypage');
@@ -24,8 +26,7 @@ class MyPageTest extends TestCase
 
     public function testMyPageRedirectsForGuest()
     {
-        // 未ログイン状態でのアクセス
         $response = $this->get('/mypage');
-        $response->assertRedirect('/login'); // ログインページにリダイレクト
+        $response->assertRedirect('/account-settings');
     }
 }

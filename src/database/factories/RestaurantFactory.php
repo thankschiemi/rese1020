@@ -14,8 +14,8 @@ class RestaurantFactory extends Factory
             'name' => $this->faker->company,
             'region_id' => $this->faker->numberBetween(1, 5),
             'genre_id' => $this->faker->numberBetween(1, 5),
-            'address' => $this->faker->address,
-            'opening_hours' => '10:00-22:00',
+            'description' => $this->faker->paragraph,
+            'image_url' => $this->faker->imageUrl(640, 480, 'food'),
             'member_id' => null,
         ];
     }
