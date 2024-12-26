@@ -14,8 +14,8 @@ class ReservationFactory extends Factory
     public function definition()
     {
         return [
-            'member_id' => Member::inRandomOrder()->first()->id,
-            'restaurant_id' => Restaurant::inRandomOrder()->first()->id,
+            'member_id' => null,
+            'restaurant_id' => null, // factory呼ばない！
             'reservation_date' => $this->faker->dateTimeBetween('now', '+30 days')->format('Y-m-d'),
             'reservation_time' => $this->faker->time('H:i:s'),
             'number_of_people' => $this->faker->numberBetween(1, 6),

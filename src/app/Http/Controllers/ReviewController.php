@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateReviewRequest;
-use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
