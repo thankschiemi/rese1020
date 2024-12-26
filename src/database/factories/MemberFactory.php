@@ -17,8 +17,21 @@ class MemberFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt('password123'),
-            'role' => $this->faker->randomElement(['user', 'admin', 'owner']),
+            'role' => 'member',
             'remember_token' => Str::random(10),
         ];
+    }
+    public function admin()
+    {
+        return $this->state([
+            'role' => 'admin',
+        ]);
+    }
+
+    public function owner()
+    {
+        return $this->state([
+            'role' => 'owner',
+        ]);
     }
 }

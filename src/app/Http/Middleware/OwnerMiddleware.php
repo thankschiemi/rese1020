@@ -9,12 +9,11 @@ class OwnerMiddleware
 {
     public function handle($request, Closure $next)
     {
-        // ユーザーがログインしており、かつ role が "owner" の場合のみ続行
         if (Auth::check() && Auth::user()->role === 'owner') {
-            return $next($request);
+            return $next($request); // オーナーの場合は次の処理に進む
         }
 
-        // アクセス権がない場合は 403 エラーを返す
-        abort(403, 'このページにはアクセスできません。');
+        // 認証済みの場合は403エラー、未認証の場合は/account-settingsにリダイレクト
+        return Auth::check() ? abort(403) : redirect('/account-settings');
     }
 }

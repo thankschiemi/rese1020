@@ -31,12 +31,11 @@ class PaymentController extends Controller
                 'success' => true,
                 'client_secret' => $paymentIntent->client_secret,
             ]);
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-
+        } catch (\Exception $e) { // 汎用的な例外キャッチ
             return response()->json([
                 'success' => false,
                 'error' => '決済処理中にエラーが発生しました。',
-            ]);
+            ], 200); // ステータスコードを 200 に設定
         }
     }
 }

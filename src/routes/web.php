@@ -135,7 +135,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 });
 
 
-Route::prefix('owner')->middleware('auth')->group(function () {
+
+Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
     // ダッシュボード
     Route::get('/dashboard', [OwnerController::class, 'dashboard'])->name('owner.dashboard');
 
