@@ -55,7 +55,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Stripe公開キーを使用してインスタンスを1度だけ作成
-        const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+        const stripe = Stripe("{{ config('app.stripe_key') }}");
 
         // Elementsの初期化 (重複しないよう注意)
         const elements = stripe.elements();

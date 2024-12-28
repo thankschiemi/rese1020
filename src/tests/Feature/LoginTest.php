@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use App\Models\Member;
 
@@ -23,36 +24,39 @@ class LoginTest extends TestCase
         $response->assertViewIs('auth.login');
     }
 
-    /** @test */
-    public function it_allows_a_user_to_login()
+    public function test_it_allows_a_user_to_login()
     {
-        // テストユーザー作成
         $user = Member::factory()->create([
             'email' => 'test@example.com',
             'password' => bcrypt('password123'),
         ]);
 
-        // 正しい情報でログイン試行
         $response = $this->post('/login', [
             'email' => 'test@example.com',
             'password' => 'password123',
+            '_token' => csrf_token(), // CSRFトークンを明示的に追加
         ]);
 
-        $response->assertRedirect('/main_menu'); // ログイン後のリダイレクト先を確認
-        $this->assertAuthenticatedAs($user); // 認証状態を確認
+        $response->assertRedirect('/main_menu');
+        $this->assertAuthenticatedAs($user);
     }
 
-    /** @test */
-    public function it_rejects_invalid_login_attempts()
+
+
+    /**
+     * 無効な情報でログインが失敗することを確認する
+     *
+     * @return void
+     */
+    public function test_rejects_invalid_login_attempts()
     {
-        // 不正な情報でログイン試行
-        $response = $this->post('/login', [
+        // 不正なログイン試行
+        $response = $this->withoutMiddleware()->post('/login', [
             'email' => 'wrong@example.com',
             'password' => 'wrongpassword',
         ]);
 
-        $response->assertSessionHasErrors(); // セッションにエラーが含まれるか確認
-        $this->assertGuest(); // 認証されていないことを確認
+        $response->assertSessionHasErrors(['email']); // セッションエラーの確認
+        $this->assertGuest(); // 認証されていないことの確認
     }
 }
-

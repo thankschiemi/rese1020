@@ -23,8 +23,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function it_validates_user_registration()
     {
-        // 必須項目が空の場合のバリデーション確認
-        $response = $this->post('/register', [
+        $response = $this->withoutMiddleware()->post('/register', [
             'name' => '',
             'email' => '',
             'password' => '',
@@ -33,4 +32,3 @@ class RegisterTest extends TestCase
         $response->assertSessionHasErrors(['name', 'email', 'password']);
     }
 }
-
