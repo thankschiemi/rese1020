@@ -11,8 +11,8 @@
 <div class="user-management__card user-management__card--form">
     <a href="{{ route('admin.dashboard') }}" class="user-management__back-btn">ダッシュボードに戻る</a>
     <h2 class="user-management__subtitle">店舗代表者の新規作成</h2>
-    @if (session('success'))
-    <p class="user-management__success">{{ session('success') }}</p>
+    @if (session('success_create'))
+    <p class="user-management__success">{{ session('success_create') }}</p>
     @endif
 
     <form method="POST" action="{{ route('admin.users.store') }}" class="user-management__form" novalidate>
@@ -58,6 +58,9 @@
 <div class="user-management__card user-management__card--table">
 
     <h2 class="user-management__subtitle">登録済みユーザーの権限変更</h2>
+    @if (session('success_update'))
+    <p class="user-management__success">{{ session('success_update') }}</p>
+    @endif
 
     <p class="user-management__description">登録済みのユーザーの権限を変更できます。</p>
 

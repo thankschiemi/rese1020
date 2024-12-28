@@ -43,7 +43,7 @@ class AdminController extends Controller
             $user->notify(new AccountCreated($request->password));
 
             // 3. 成功時のリダイレクト
-            return redirect()->route('admin.users')->with('success', '店舗代表者を作成しました。登録したメールアドレス宛に通知を送信しましたので、ご確認ください。');
+            return redirect()->route('admin.users')->with('success_create', '店舗代表者を作成しました。登録したメールアドレス宛に通知を送信しましたので、ご確認ください。');
         } catch (\Exception $e) {
             // エラー発生時の処理
             return redirect()->back()->withErrors(['error' => 'ユーザー作成中にエラーが発生しました。']);
@@ -78,6 +78,6 @@ class AdminController extends Controller
         $adminName = auth()->user()->name; // ログイン中の管理者の名前を取得
         $message = "{$adminName} がユーザー {$user->name} の権限を「{$oldRole}」から「{$role}」に更新しました。";
 
-        return redirect()->route('admin.users')->with('success', $message);
+        return redirect()->route('admin.users')->with('success_update', $message);
     }
 }
