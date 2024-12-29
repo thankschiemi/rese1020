@@ -7,7 +7,7 @@
 @section('content')
 <main class="edit-store">
     <a href="/owner/dashboard" class="btn btn-primary">ダッシュボードに戻る</a>
-    <h1 class="edit-store__title">{{ $store ? '店舗情報編集' : '店舗情報作成' }}</h1>
+    <h1 class="edit-store__title">{{ $store ? '店舗情報編集' : '店舗新規作成' }}</h1>
     <form class="edit-store__form" method="POST" action="{{ $store ? route('owner.update_store', $store->id) : route('owner.store_store') }}" novalidate>
         @csrf
         @if($store)

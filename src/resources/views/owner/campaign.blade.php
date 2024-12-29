@@ -13,6 +13,9 @@
     @if (session('success'))
     <p class="notification__success">{{ session('success') }}</p>
     @endif
+    @if (session('success-error'))
+    <p class="notification__success">{{ session('success-error') }}</p>
+    @endif
 
     <form method="POST" action="{{ route('owner.sendNotification') }}" class="notification__form" novalidate>
         @csrf

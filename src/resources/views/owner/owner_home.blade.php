@@ -16,7 +16,7 @@
         <ul>
             <li>
                 <a href="{{ route('owner.create_store') }}" class="dashboard__link">
-                    <i class="fas fa-store"></i> 店舗情報作成
+                    <i class="fas fa-store"></i> 新規店舗作成
                 </a>
             </li>
             <li>

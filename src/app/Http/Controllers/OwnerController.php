@@ -136,7 +136,7 @@ class OwnerController extends Controller
         })->distinct('email')->get();
 
         if ($members->isEmpty()) {
-            return redirect()->back()->with('error', '送信対象の顧客が見つかりませんでした。');
+            return redirect()->back()->with('success-error', '送信対象の顧客が見つかりませんでした。');
         }
 
         // メール送信処理
