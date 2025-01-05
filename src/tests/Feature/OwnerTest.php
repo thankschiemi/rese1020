@@ -25,7 +25,7 @@ class OwnerTest extends TestCase
         $this->actingAs($admin);
 
         $response = $this->get('/owner/dashboard');
-        $response->assertForbidden(); // 403チェック
+        $response->assertForbidden();
     }
 
 
@@ -33,7 +33,7 @@ class OwnerTest extends TestCase
     public function test_guest_redirected_to_account_settings()
     {
         $response = $this->get('/owner/dashboard');
-        $response->assertRedirect('/account-settings'); // 実際のリダイレクト先に合わせる
+        $response->assertRedirect('/account-settings');
     }
 
 
@@ -45,6 +45,6 @@ class OwnerTest extends TestCase
         $this->actingAs($member);
 
         $response = $this->get('/owner/dashboard');
-        $response->assertForbidden(); // 403 を確認
+        $response->assertForbidden();
     }
 }

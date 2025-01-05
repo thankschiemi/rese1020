@@ -1,4 +1,3 @@
-/* 全体の背景色 */
 body {
     font-family: Arial, sans-serif;
     background-color: #F5F5F5;
@@ -6,13 +5,11 @@ body {
     padding: 0;
 }
 
-/* メインコンテナ */
 .review {
     margin: 20px auto;
     max-width: 600px;
 }
 
-/* 評価作成セクション */
 .review__create {
     background-color: #005DFF;
     padding: 20px;
@@ -56,7 +53,6 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* フォーカス時の効果 */
 .review__select:focus,
 .review__textarea:focus {
     border-color: #0056b3;
@@ -81,7 +77,6 @@ body {
     transform: scale(1.02);
 }
 
-/* 評価一覧セクション */
 .review__list {
     margin-top: 30px;
     background-color: #FFFFFF;
@@ -114,11 +109,11 @@ body {
 
 .review__rating {
     font-size: 16px;
-    color: #FFD700; /* ゴールド色 */
+    color: #FFD700;
 }
 
 .review__rating .empty-star {
-    color: #CCC; /* 空の星用の淡い色 */
+    color: #CCC;
 }
 
 .review__comment {
@@ -133,7 +128,6 @@ body {
     color: #888;
 }
 
-/* ページネーション */
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -179,6 +173,7 @@ body {
     font-size: 12px;
     margin-top: 5px;
 }
+
 .reservation-create__back-btn {
     display: inline-block;
     margin-bottom: 20px;
@@ -190,7 +185,7 @@ body {
     font-size: 10px;
     text-align: left;
 }
-/* レスポンシブ対応 */
+
 @media (max-width: 768px) {
     .review {
         padding: 10px;
@@ -200,15 +195,12 @@ body {
         padding: 15px;
     }
 
-
-
     .review__title {
         font-size: 20px;
     }
 
     .review__rating {
         font-size: 14px;
-        /* 星のサイズを小さく調整 */
     }
 
     .review__button {

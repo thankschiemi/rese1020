@@ -1,4 +1,3 @@
-/* 左側の線を消すための修正 */
 body {
     background-color: #ffffff;
     margin: 0;
@@ -8,34 +7,24 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Element: menu nav */
 .menu__nav {
     display: flex;
     flex-direction: column;
-    /* 縦並びに配置 */
     align-items: center;
-    /* 中央揃え */
     gap: 20px;
-    /* 各リンクの間にスペースを追加 */
     padding-top: 100px;
 }
 
-/* Element: menu list */
 .menu__list {
     list-style: none;
-    /* リストの点を削除 */
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    /* 縦並びに配置 */
     align-items: center;
-    /* 中央揃え */
     gap: 20px;
-    /* 各リンクの間にスペースを追加 */
 }
 
-/* リンクスタイル（既存の.menu__link） */
 .menu__link {
     text-decoration: none;
     color: #005DFF;
@@ -51,16 +40,12 @@ body {
 
 .menu__form {
     display: inline;
-    /* フォームをインライン化して他のリンクと同じレイアウトに */
 }
-/* ボタンのスタイルをリンクと統一 */
+
 .menu__form button.menu__link {
     all: unset;
-    /* すべてのスタイルをリセット */
     display: inline;
-    /* インライン表示 */
     color: #005DFF;
-    /* リンクの色 */
     font-size: 28px;
     font-weight: 500;
     cursor: pointer;
@@ -68,5 +53,4 @@ body {
 
 .menu__form button.menu__link:hover {
     color: #003bb5;
-    /* ホバー時の色変更 */
 }

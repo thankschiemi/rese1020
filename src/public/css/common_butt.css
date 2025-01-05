@@ -1,20 +1,16 @@
-/* ヘッダー全体のスタイル */
 .header {
     background-color: F5F5F5;
     padding: 40px 80px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* 左寄せ */
 }
 
-/* ヘッダー内のコンテナ */
 .header__inner {
     display: flex;
     align-items: center;
 }
 
-/* Block: icon */
 .icon {
     width: 40px;
     height: 40px;
@@ -26,10 +22,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     position: relative;
-    /* ✖を配置する基準 */
 }
 
-/* ✖ボタン全体のリンク */
 .icon__link {
     display: flex;
     justify-content: center;
@@ -37,10 +31,8 @@
     width: 100%;
     height: 100%;
     text-decoration: none;
-    /* テキストの装飾を消す */
 }
 
-/* ✖の線 */
 .icon__line {
     position: absolute;
     width: 24px;
@@ -48,7 +40,6 @@
     background-color: white;
 }
 
-/* クロスにするための回転 */
 .icon__line--cross:nth-child(1) {
     transform: rotate(45deg);
 }
@@ -56,10 +47,10 @@
 .icon__line--cross:nth-child(2) {
     transform: rotate(-45deg);
 }
+
 .alert.alert-danger {
     color: red;
     font-size: 16px;
     font-weight: bold;
     display: block;
-    /* 必ず表示する */
 }

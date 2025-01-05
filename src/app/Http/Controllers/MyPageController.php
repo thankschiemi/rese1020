@@ -10,34 +10,29 @@ class MyPageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth'); // 認証済みユーザーのみアクセス可能
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        $user = Auth::user(); // ログイン中のユーザー情報を取得
+        $user = Auth::user();
 
-        // ログイン中のユーザーが存在しない場合のフォールバック
         if (!$user) {
             return redirect()->route('account-settings');
         }
 
-        // 予約情報を取得（リレーションを事前ロード）
         $reservations = Reservation::where('member_id', $user->id)
-            ->with(['restaurant', 'restaurant.genre', 'restaurant.region']) // 必要なリレーションをすべてロード
+            ->with(['restaurant', 'restaurant.genre', 'restaurant.region'])
             ->get()
             ->map(function ($reservation) {
-                // モデル内のカスタムメソッドを使用してQRコードデータを生成
                 $reservation->qrData = $reservation->generateQrData();
                 return $reservation;
             });
 
-        // お気に入り情報を取得
         $favorites = Favorite::where('member_id', $user->id)
-            ->with(['restaurant.region', 'restaurant.genre']) // 必要なリレーションをロード
+            ->with(['restaurant.region', 'restaurant.genre'])
             ->get();
 
-        // ビューにデータを渡してレンダリング
         return view('my_page', compact('reservations', 'favorites', 'user'));
     }
 }

@@ -21,39 +21,34 @@ class Restaurant extends Model
         'member_id',
     ];
 
-    // 地域（region）とのリレーション
     public function region()
     {
         return $this->belongsTo(Region::class);
     }
 
-    // ジャンル（genre）とのリレーション
     public function genre()
     {
         return $this->belongsTo(Genre::class);
     }
 
-    // お気に入り状態を取得するアクセサ
     public function getIsFavoriteAttribute()
     {
-        $user_id = Auth::id(); // ログイン中のユーザーIDを取得
+        $user_id = Auth::id();
         if ($user_id) {
-            // 現在のレストランがユーザーのお気に入りに登録されているかを確認
             return $this->favorites()->where('member_id', $user_id)->exists();
         }
-        return false; // 未ログインの場合は常に false
+        return false;
     }
 
-    // お気に入り（favorites）とのリレーション
     public function favorites()
     {
         return $this->hasMany(Favorite::class, 'restaurant_id');
     }
+
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
-
 
     public function member()
     {

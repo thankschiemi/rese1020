@@ -1,4 +1,3 @@
-/* ページ全体の背景色 */
 body {
     background-color: #F5F5F5;
     margin: 0;
@@ -16,7 +15,6 @@ body {
     background-color: #F5F5F5;
 }
 
-/* 予約エリアとお気に入りエリア */
 .mypage__reservations,
 .mypage__favorites {
     flex: 1;
@@ -49,14 +47,12 @@ body {
     margin-bottom: 30px;
 }
 
-/* 全体の文字色を白に */
 .reservation-card,
 .reservation-card__details,
 .reservation-card__detail {
     color: white;
-    /* 文字を白に設定 */
 }
-/* 通常のカード */
+
 .reservation-card {
     width: 100%;
     max-width: 400px;
@@ -70,20 +66,17 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* ホバー時のカード */
 .reservation-card:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     background-color: #004BBB;
 }
 
-
 .reservation__card-header {
     display: flex;
     align-items: center;
     padding: 0 20px;
     gap: 10px;
-
 }
 
 .reservation__icon img {
@@ -98,7 +91,6 @@ body {
     margin: 0;
 }
 
-/* 閉じるボタン */
 .reservation__close-button {
     background: none;
     border: none;
@@ -106,15 +98,12 @@ body {
     cursor: pointer;
     position: absolute;
     top: 20px;
-    /* 上から20px */
     right: 30px;
-    /* 右から30px */
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-/* 閉じるアイコン */
 .close-icon {
     width: 24px;
     height: 24px;
@@ -145,26 +134,23 @@ body {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-/* 予約カード内の詳細リスト */
 .reservation-card__details {
     list-style: none;
     padding: 20px;
     margin-top: 20px;
 }
+
 .reservation-card__detail {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     font-size: 14px;
-
 }
 
 .detail-label {
     width: 80px;
-    /* ラベル部分を固定幅に */
     text-align: left;
     padding-right: 10px;
-    /* ラベルと値の間にスペースを追加 */
 }
 
 .detail-value {
@@ -172,113 +158,71 @@ body {
     text-align: left;
 }
 
-/* お気に入り店舗のレイアウト調整 */
 .favorites__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2列表示 */
     gap: 10px;
-    /* カード間の間隔 */
     width: 100%;
-    /* 親要素に合わせる */
 }
-/* ボタン全体のレイアウト */
+
 .reservation-card__buttons {
     display: flex;
     gap: 8px;
-    /* ボタン間の間隔を少し狭める */
     justify-content: center;
-    /* ボタンを中央揃え */
     flex-wrap: nowrap;
-    /* 折り返しを無効化 */
 }
 
-/* ボタンの基本デザイン */
 .reservation-card__button {
     flex: 0 1 auto;
-    /* 幅を自動調整 */
     min-width: 80px;
-    /* ボタンの最小幅をさらに小さく */
     max-width: 100px;
-    /* ボタンの最大幅を少し狭く */
     height: 35px;
-    /* 高さを少し低く */
     line-height: 35px;
-    /* テキストを中央揃え */
     text-align: center;
     background-color: #007BFF;
-    /* 初期背景色 */
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 12px;
-    /* フォントサイズを少し小さく */
     text-decoration: none;
-    /* 下線を削除 */
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    /* ポインタ表示 */
 }
 
-/* ホバー時のデザイン */
 .reservation-card__button:hover {
     background-color: #004BBB;
-    /* ホバー時の背景色 */
     color: #E8E8E8;
-    /* 明るい文字色 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* ホバー時の影効果 */
 }
 
-/* QRコードボタンの特別スタイル */
 .reservation-card__button--qr {
     background-color: #28a745;
-    /* 緑色 */
     color: white;
     font-weight: bold;
-    text-decoration: none;
-    /* 下線を削除 */
 }
 
 .reservation-card__button--qr:hover {
     background-color: #388E3C;
-    /* ホバー時の緑色を濃く */
 }
 
-/* ボタンごとの色分け */
 .reservation-card__button--change {
     background-color: #007BFF;
-    /* 落ち着いた青 */
     color: white;
 }
 
 .reservation-card__button--refresh {
     background-color: #007BFF;
-    /* 同じ青色 */
     color: white;
 }
 
 .reservation-card__button--rate {
     background-color: #f7d0d5;
-    /* 淡いピンク */
     color: black;
     font-weight: bold;
 }
 
-
 .reservation-card__button--rate:hover {
     background-color: #FF8CB2;
-    /* 濃いピンク */
-}
-
-
-/* ホバー時の効果 */
-.reservation-card__button:hover {
-    filter: brightness(0.9);
-    /* 少し暗くなる効果 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* ホバー時の影 */
-    transition: all 0.3s ease;
 }
 
 .qr-code-wrapper {
@@ -286,37 +230,28 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* 中央揃え */
     margin-top: 20px;
     padding: 10px;
 }
 
 .qr-code svg {
     width: 100px;
-    /* QRコードの幅 */
     height: 100px;
-    /* QRコードの高さ */
     max-width: 100%;
-    /* 親要素に収まるように調整 */
     max-height: 100%;
 }
 
 .qr-instruction {
     margin-top: 20px;
-    /* QRコード下の余白 */
     font-size: 14px;
-    /* 説明文のフォントサイズ */
     color: #fff;
-    /* 文字色を白に */
     text-align: center;
-    /* 中央揃え */
     line-height: 1.5;
-    /* 行間を調整 */
 }
+
 .alert {
     padding: 10px 15px;
     margin: 10px auto;
-    /* 自動で中央揃え */
     border: 1px solid transparent;
     border-radius: 4px;
     font-size: 14px;
@@ -325,15 +260,13 @@ body {
     border-color: #c3e6cb;
     text-align: center;
     max-width: 400px;
-    /* 横幅を最大400pxに制限 */
     width: 100%;
-    /* レスポンシブ対応 */
 }
+
 #favorite-section {
     scroll-margin-top: 100px;
-    /* 固定ヘッダーがある場合に余白を確保 */
 }
-/* レスポンシブデザイン */
+
 @media screen and (max-width: 768px) {
     .mypage__content {
         flex-direction: column;
@@ -351,10 +284,12 @@ body {
         padding-left: 5px;
         font-size: 30px;
     }
+
     .mypage__section-title {
         padding-left: 10px;
         font-size: 25px;
-        }
+    }
+
     .reservation-card {
         margin: 10px auto;
         padding: 15px;
@@ -381,21 +316,15 @@ body {
         font-size: 14px;
     }
 
-    /* ボタンのタップ時のスタイル */
     .reservation-card__button:active {
         background-color: #003f7f;
-        /* タップ時に色を濃く */
         transform: scale(0.98);
-        /* 少し縮小して押している感覚を出す */
         transition: transform 0.1s ease, background-color 0.2s ease;
     }
 
-    /* カードのタップ時のスタイル */
     .reservation-card:active {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        /* タップ時の影 */
         transform: scale(0.98);
-        /* 少し縮小 */
     }
 }
 
@@ -410,14 +339,12 @@ body {
 
     .reservation-card {
         margin: 0 auto;
-
         width: 100%;
         box-sizing: border-box;
     }
 
     .mypage__status-title {
         grid-column: 1 / -1;
-        /* 全列を横断 */
         text-align: center;
         font-size: 30px;
         margin-bottom: 20px;
@@ -444,13 +371,11 @@ body {
         max-width: 300px;
         width: 100%;
     }
-
 }
+
 @media screen and (max-width: 375px) {
     .favorites__list {
         grid-template-columns: repeat(2, 1fr);
-
     }
-
 }
 

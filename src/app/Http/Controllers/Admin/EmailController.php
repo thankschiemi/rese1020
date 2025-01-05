@@ -3,35 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\OwnerNotificationRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationMail;
 
 class EmailController extends Controller
 {
-    // メール作成フォームの表示
+
     public function create()
     {
         return view('emails.create');
     }
 
-    // メール送信処理
-    public function send(Request $request)
+    public function send(OwnerNotificationRequest $request)
     {
-        $request->validate([
-            'subject' => 'required|string|max:255',
-            'body' => 'required|string',
-            'recipient' => 'required|email',
-        ]);
+        $subject = $request->subject;
+        $message = $request->message;
+        $recipientEmail = $request->recipient;
 
-        // メール送信
-        $messageContent = [
-            'title' => $request->input('subject'),
-            'message' => $request->input('body'),
+        $member = (object) [
+            'name' => auth()->check() ? auth()->user()->name : '送信者名（仮）',
+            'email' => $recipientEmail,
         ];
 
-        Mail::to($request->input('recipient'))->send(new NotificationMail($messageContent));
-
-        return redirect()->back()->with('success', 'メールが送信されました！');
+        try {
+            Mail::to($recipientEmail)->send(new NotificationMail($subject, $message, $member));
+            return redirect()->back()->with('success', 'メールが送信されました！');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'メール送信に失敗しました。');
+        }
     }
 }

@@ -10,7 +10,6 @@
     <div class="payment__message-box">
         <p class="payment__message">決済情報を入力してください</p>
 
-        <!-- 決済フォーム -->
         <form id="payment-form" class="payment-form">
             <ul class="payment-list" novalidate>
                 <li>
@@ -54,18 +53,12 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Stripe公開キーを使用してインスタンスを1度だけ作成
         const stripe = Stripe("{{ config('app.stripe_key') }}");
-
-        // Elementsの初期化 (重複しないよう注意)
         const elements = stripe.elements();
-
-        // カード情報の入力フィールドを作成 (1回のみ)
         const cardNumber = elements.create('cardNumber');
         const cardExpiry = elements.create('cardExpiry');
         const cardCvc = elements.create('cardCvc');
 
-        // マウントする (重複しないように)
         cardNumber.mount('#card-number');
         cardExpiry.mount('#card-expiry');
         cardCvc.mount('#card-cvc');
@@ -77,17 +70,14 @@
             event.preventDefault();
             submitButton.disabled = true;
 
-            // カード名義人を取得
             const cardHolderName = document.getElementById('card-holder-name').value;
 
-            // 名義人が空の場合のバリデーション
             if (!cardHolderName.trim()) {
                 alert("名義人を入力してください。");
                 submitButton.disabled = false;
                 return;
             }
 
-            // PaymentMethod作成
             const {
                 error,
                 paymentMethod
@@ -99,7 +89,6 @@
                 },
             });
 
-            // エラーハンドリング
             if (error) {
                 console.error(error.message);
                 alert("エラー: " + error.message);
@@ -107,7 +96,6 @@
             } else {
                 console.log("PaymentMethod成功: ", paymentMethod.id);
 
-                // サーバーにデータ送信
                 const response = await fetch('/process-payment', {
                     method: 'POST',
                     headers: {

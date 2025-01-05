@@ -7,7 +7,6 @@
 @section('content')
 
 <main class="shop-page__content">
-    <!-- レストラン情報の表示 -->
     <section class="shop-info">
         <div class="shop-info__header">
             <a href="{{ url()->previous() }}" class="shop-info__back-button">◀</a>
@@ -16,10 +15,8 @@
 
         <div class="shop-info__image">
             @if (!empty($restaurant->image_url) && file_exists(public_path('storage/' . $restaurant->image_url)))
-            <!-- 画像が存在する場合 -->
             <img src="{{ asset('storage/' . $restaurant->image_url) }}" alt="{{ $restaurant->name }}の画像" class="restaurant__image">
             @else
-            <!-- デフォルト画像を表示 -->
             <img src="{{ asset('images/default-image.png') }}" alt="デフォルト画像" class="default-image">
             @endif
         </div>
@@ -32,18 +29,12 @@
         </p>
     </section>
 
-
-    <!-- 予約フォーム -->
     <section class="reservation-form">
         <h2 class="reservation-form__title">予約</h2>
-
-        <!-- フォーム -->
         <form action="{{ route('reserve.store') }}" method="POST" class="reservation-form__form" novalidate>
             @csrf
             <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
             <input type="hidden" name="member_id" value="1">
-
-            <!-- 日付フィールド -->
             <div class="reservation-form__group">
                 <label for="date" class="reservation-form__label"></label>
                 <input type="date" id="date" name="date"
@@ -54,7 +45,6 @@
                 @enderror
             </div>
 
-            <!-- 時間フィールド -->
             <div class="reservation-form__group">
                 <label for="time" class="reservation-form__label"></label>
                 <select id="time" name="time"
@@ -80,7 +70,6 @@
                 @enderror
             </div>
 
-            <!-- 人数フィールド -->
             <div class="reservation-form__group">
                 <label for="number" class="reservation-form__label"></label>
                 <select id="number" name="number"
@@ -102,12 +91,10 @@
                 @enderror
             </div>
 
-            <!-- 予約するボタン -->
             <button type="submit" name="action" value="reserve"
                 class="reservation-form__button--submit">予約する</button>
         </form>
     </section>
-    <!-- 予約詳細エリア -->
     <section class="reservation-summary__container">
         <div class="reservation-summary">
             <p class="reservation-summary__text">
@@ -125,8 +112,5 @@
             </p>
         </div>
     </section>
-
-
 </main>
-
 @endsection

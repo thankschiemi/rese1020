@@ -1,4 +1,3 @@
-/* 全体スタイル */
 .dashboard {
     display: flex;
     flex-direction: column;
@@ -7,29 +6,23 @@
     min-height: 100vh;
     background-color: #F5F5F5;
     padding: 30px 20px;
-    /* パディングを調整 */
 }
 
-/* タイトル部分 */
 .dashboard__title {
     font-size: 28px;
-    /* タイトルサイズを調整 */
     font-weight: bold;
     color: #007BFF;
     margin-bottom: 10px;
-    /* 余白を減少 */
     text-align: center;
 }
 
 .dashboard__subtitle {
     font-size: 16px;
-    /* サブタイトルを少し小さく */
     color: #666;
     margin-top: 5px;
     text-align: center;
 }
 
-/* メニュー部分 */
 .dashboard__menu {
     text-align: center;
 }
@@ -42,7 +35,6 @@
 
 .dashboard__menu li {
     margin: 8px 0;
-    /* 各リンク間の間隔を減少 */
 }
 
 .dashboard__menu a {
@@ -56,20 +48,16 @@
     color: #0056b3;
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .dashboard__title {
         font-size: 24px;
-        /* タイトルサイズを少し小さく */
     }
 
     .dashboard__subtitle {
         font-size: 14px;
-        /* サブタイトルをさらに小さく */
     }
 
     .dashboard__menu a {
         font-size: 14px;
-        /* メニューのフォントサイズを調整 */
     }
 }

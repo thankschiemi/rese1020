@@ -7,7 +7,6 @@
     <h1 class="user-management__title">ユーザー管理</h1>
 </div>
 
-<!-- 新規作成カード -->
 <div class="user-management__card user-management__card--form">
     <a href="{{ route('admin.dashboard') }}" class="user-management__back-btn">ダッシュボードに戻る</a>
     <h2 class="user-management__subtitle">店舗代表者の新規作成</h2>
@@ -54,7 +53,6 @@
     </form>
 </div>
 
-<!-- 登録済みユーザー権限変更カード -->
 <div class="user-management__card user-management__card--table">
 
     <h2 class="user-management__subtitle">登録済みユーザーの権限変更</h2>

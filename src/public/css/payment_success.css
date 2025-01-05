@@ -1,4 +1,3 @@
-/* 全体背景とフォント設定 */
 .success__content {
     background-color: #F5F5F5;
     font-family: 'Roboto', 'Noto Sans JP', sans-serif;
@@ -10,26 +9,19 @@
     align-items: center;
 }
 
-/* メッセージボックスのスタイル */
-/* フォームを上に移動 */
 .success__message-box {
     background-color: #fff;
     padding: 60px 50px;
-    /* 内側の余白 */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     text-align: center;
-
-    /* 画面の中央から少し上に移動 */
     position: absolute;
     top: 30%;
-    /* 画面の上から30%の位置に設定 */
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* 成功メッセージ */
 .success__message {
     font-size: 24px;
     font-weight: bold;
@@ -38,7 +30,6 @@
     line-height: 1.5;
 }
 
-/* ホームに戻るボタン */
 .home-button {
     display: inline-block;
     padding: 12px 24px;
@@ -55,7 +46,6 @@
     background-color: #0041CC;
 }
 
-/* タブレット用スタイル */
 @media (min-width: 600px) and (max-width: 768px) {
     .success__message-box {
         width: 80%;
@@ -73,7 +63,6 @@
     }
 }
 
-/* スマートフォン用スタイル */
 @media (max-width: 600px) {
     .success__message-box {
         width: 90%;

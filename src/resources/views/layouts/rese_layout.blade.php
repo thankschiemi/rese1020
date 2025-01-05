@@ -8,7 +8,7 @@
     <title>Rese</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Robotoフォントを読み込む -->
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,7 +20,6 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <!-- アイコンとテキストをリンク化 -->
             <a href="{{ route('home') }}" class="icon">
                 <div class="icon__line icon__line--medium"></div>
                 <div class="icon__line icon__line--long"></div>

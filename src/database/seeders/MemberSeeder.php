@@ -9,9 +9,9 @@ class MemberSeeder extends Seeder
 {
     public function run()
     {
-        // 管理者、オーナー、一般ユーザーを固定で作成
+
         Member::firstOrCreate(
-            ['email' => 'admin@example.com'], // ユニークキーでチェック
+            ['email' => 'admin@example.com'],
             [
                 'name' => 'Test Admin',
                 'password' => bcrypt('adminpassword'),
@@ -32,7 +32,6 @@ class MemberSeeder extends Seeder
             ]
         );
 
-        // ランダムな一般ユーザーを作成
         Member::factory()->count(10)->create();
     }
 }

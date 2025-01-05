@@ -1,16 +1,12 @@
-/* 全体の背景色 */
 body {
     font-family: Arial, sans-serif;
     background-color: #F5F5F5;
-    /* 薄い灰色 */
     margin: 0;
     padding: 0;
 }
 
-/* メインコンテナ */
 .store-list {
     background-color: #005DFF;
-    /* メイン背景色（青） */
     padding: 20px;
     border-radius: 10px;
     max-width: 700px;
@@ -18,21 +14,17 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* タイトル */
 .store-list__title {
     font-size: 24px;
     color: #ffffff;
-    /* 白文字 */
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* テーブル */
 .store-list__table {
     width: 100%;
     border-collapse: collapse;
     background-color: #ffffff;
-    /* 白背景 */
     border-radius: 5px;
     overflow: hidden;
 }
@@ -46,15 +38,12 @@ body {
 
 .store-list__table th {
     background-color: #007bff;
-    /* ヘッダーの青色 */
     color: #ffffff;
-    /* 白文字 */
     font-weight: bold;
 }
 
 .store-list__table td {
     color: #333;
-    /* テキスト色 */
 }
 
 .store-list__table td a {
@@ -67,16 +56,13 @@ body {
     text-decoration: underline;
 }
 
-/* 空の状態のメッセージ */
 .store-list p {
     color: #ffffff;
-    /* 白文字 */
     text-align: center;
     font-size: 16px;
     margin-top: 20px;
 }
 
-/* 成功メッセージ */
 .success-message {
     background-color: #d4edda;
     color: #155724;
@@ -86,10 +72,8 @@ body {
     margin-bottom: 20px;
     text-align: center;
     animation: fadeOut 6s ease-in-out forwards;
-    /* アニメーションの適用 */
 }
 
-/* フェードアウトのアニメーション */
 @keyframes fadeOut {
     0% {
         opacity: 1;
@@ -97,7 +81,6 @@ body {
 
     50% {
         opacity: 1;
-        /* 3秒間完全に表示 */
     }
 
     100% {
@@ -106,15 +89,12 @@ body {
     }
 }
 
-/* ボタン */
 .btn {
     display: inline-block;
     padding: 10px 20px;
     font-size: 10px;
-    /* ボタンテキストサイズ */
     color: #fff;
     background-color: #007bff;
-    /* 青色 */
     text-decoration: none;
     border-radius: 5px;
     margin-top: 20px;
@@ -125,10 +105,8 @@ body {
 
 .btn:hover {
     background-color: #0056b3;
-    /* ホバー時の濃い青色 */
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .store-list {
         padding: 10px;
@@ -138,15 +116,12 @@ body {
 
     .store-list__title {
         font-size: 18px;
-        /* タイトルの文字サイズを調整 */
     }
 
     .store-list__table th,
     .store-list__table td {
         font-size: 14px;
-        /* テーブル内の文字サイズを調整 */
         padding: 6px;
-        /* セルのパディングを減らす */
     }
 }
 
@@ -154,32 +129,25 @@ body {
     .store-list {
         padding: 8px;
         max-width: 95%;
-        /* 画面幅に応じて幅を縮小 */
         margin: 10px auto;
     }
 
     .store-list__title {
         font-size: 16px;
-        /* タイトルをさらに小さく */
     }
-    
+
     .store-list p {
         font-size: 10px;
-        /* タイトルをさらに小さく */
     }
 
     .store-list__table th,
     .store-list__table td {
         font-size: 12px;
-        /* フォントサイズをより小さく */
         padding: 4px;
-        /* パディングをさらに減らす */
     }
 
     .btn {
         font-size: 10px;
-        /* ボタンのフォントサイズを調整 */
         padding: 6px 10px;
-        /* ボタンのパディングを調整 */
     }
 }

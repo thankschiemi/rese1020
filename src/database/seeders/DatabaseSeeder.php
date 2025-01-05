@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // 他のシーダーを追加する場合は、ここに追加
         $this->call([
 
             RegionSeeder::class,

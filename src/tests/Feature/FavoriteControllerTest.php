@@ -15,8 +15,6 @@ class FavoriteControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        // シーダーデータを事前に適用
         $this->artisan('db:seed', ['--class' => 'DatabaseSeeder']);
     }
 
@@ -27,7 +25,6 @@ class FavoriteControllerTest extends TestCase
             'genre_id' => 1,
         ]);
 
-        // ルート名を使用してURLを生成
         $response = $this->post(route('favorites.store', ['restaurant_id' => $restaurant->id]));
         $response->assertRedirect('/account-settings');
     }
@@ -40,7 +37,7 @@ class FavoriteControllerTest extends TestCase
             'genre_id' => 1,
         ]);
 
-        /** @var \App\Models\Member $user */
+        /** @var \App\Models\Member $user*/
         $this->actingAs($user);
 
         $response = $this->post(route('favorites.store', ['restaurant_id' => $restaurant->id]));
@@ -55,6 +52,7 @@ class FavoriteControllerTest extends TestCase
 
     public function test_removes_favorite_for_authenticated_user()
     {
+        /** @var \App\Models\Member $user */
         $user = Member::factory()->create();
         $restaurant = Restaurant::factory()->create([
             'region_id' => 1,
@@ -66,7 +64,6 @@ class FavoriteControllerTest extends TestCase
             'restaurant_id' => $restaurant->id,
         ]);
 
-        /** @var \App\Models\Member $user */
         $this->actingAs($user);
 
         $response = $this->post(route('favorites.store', ['restaurant_id' => $restaurant->id]));

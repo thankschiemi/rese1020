@@ -9,13 +9,13 @@ class CreateMembersTable extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->bigIncrements('id'); // ユーザーID
-            $table->string('name', 255); // ユーザー名
-            $table->string('email', 255)->unique(); // メールアドレス（ユニーク）
-            $table->timestamp('email_verified_at')->nullable(); // メール認証日時
-            $table->string('password', 255); // パスワード
-            $table->rememberToken(); // ログイン状態保持トークン
-            $table->timestamps(); // 作成日時・更新日時
+            $table->bigIncrements('id');
+            $table->string('name', 255);
+            $table->string('email', 255)->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password', 255);
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

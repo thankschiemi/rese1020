@@ -7,20 +7,18 @@ use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
-    // 決済画面を表示
     public function showPaymentPage()
     {
         return view('payment');
     }
 
-    // 決済処理
     public function processPayment(PaymentRequest $request)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
-                'amount' => $request->input('amount', 1000), // 動的金額
+                'amount' => $request->input('amount', 1000),
                 'currency' => 'jpy',
                 'automatic_payment_methods' => [
                     'enabled' => true,
@@ -31,11 +29,11 @@ class PaymentController extends Controller
                 'success' => true,
                 'client_secret' => $paymentIntent->client_secret,
             ]);
-        } catch (\Exception $e) { // 汎用的な例外キャッチ
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'error' => '決済処理中にエラーが発生しました。',
-            ], 200); // ステータスコードを 200 に設定
+            ], 200);
         }
     }
 }

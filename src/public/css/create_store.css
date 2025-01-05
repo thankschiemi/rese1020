@@ -1,4 +1,3 @@
-/* 全体の背景色 */
 body {
     font-family: Arial, sans-serif;
     background-color: #F5F5F5;
@@ -6,19 +5,15 @@ body {
     padding: 0;
 }
 
-/* メインコンテナ */
 .create-store {
     background-color: #005DFF;
-    /* フォームの背景色 */
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
     margin: 50px auto;
-    /* 上下に余白を追加 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* タイトル */
 .create-store__title {
     font-size: 24px;
     color: #ffffff;
@@ -26,7 +21,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* 成功メッセージ */
 .success-message {
     background-color: #d4edda;
     color: #155724;
@@ -36,15 +30,14 @@ body {
     margin-bottom: 20px;
     text-align: center;
     animation: fadeOut 3s ease-in-out 3s forwards;
-    /* 3秒後に3秒かけてフェードアウト */
 }
+
 .error-message {
     color: red;
     font-size: 14px;
     margin-top: 2px;
 }
 
-/* フェードアウトのアニメーション */
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -56,7 +49,6 @@ body {
     }
 }
 
-/* フォーム */
 .create-store form {
     display: flex;
     flex-direction: column;
@@ -76,14 +68,12 @@ body {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #007bff;
-    /* 枠線をフォーム全体のテーマ色に統一 */
     border-radius: 5px;
     box-sizing: border-box;
     width: 100%;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* フォーカス時の効果 */
 .create-store input[type="text"]:focus,
 .create-store textarea:focus,
 .create-store select:focus {
@@ -91,47 +81,29 @@ body {
     box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
     outline: none;
 }
-/* ファイル選択ボタンのスタイル */
+
 .create-store input[type="file"] {
     border-radius: 5px;
-    /* 角を丸くする */
     padding: 5px;
-    /* 内側の余白を調整 */
     font-size: 14px;
-    /* フォントサイズを統一 */
-    border: 1px solid #007bff;
-    /* 枠線を追加 */
-    background-color: #fff;
-    /* 背景色を白に設定 */
-    color: #333;
-    /* テキスト色 */
-    cursor: pointer;
-    /* カーソルをポインターに変更 */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #ccc;
-    /* 少し薄い枠線 */
-    font-family: Arial, sans-serif;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-/* ホバー時の効果 */
 .create-store input[type="file"]:hover {
     border-color: #0056b3;
-    /* 枠線の色を濃く */
     box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
-    /* ホバー時の影を追加 */
 }
 
-/* フォーカス時の効果 */
 .create-store input[type="file"]:focus {
     outline: none;
-    /* デフォルトのアウトラインを削除 */
     border-color: #0056b3;
-    /* フォーカス時の枠線色 */
     box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
-    /* フォーカス時の影 */
 }
-/* ボタン */
+
 .create-store button {
     background-color: #007bff;
     color: #fff;
@@ -141,27 +113,21 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    /* ボタン幅をフォーム全体に広げる */
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .create-store button:hover {
     background-color: #0056b3;
     transform: scale(1.02);
-    /* ホバー時に軽く拡大 */
 }
 
-/* エラーメッセージのスタイル */
 .create-store .error-message {
     color: #ff4d4f;
-    /* 赤文字 */
     font-size: 14px;
-    /* 適度なサイズ */
     margin-top: 5px;
-    /* フィールドとの余白 */
     font-weight: bold;
-    /* 強調 */
 }
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -177,14 +143,11 @@ body {
     background-color: #0056b3;
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .create-store {
         margin: 20px auto;
-        /* 左右中央寄せ */
         padding: 15px;
         width: auto;
-        /* サイズを自動調整 */
     }
 
     .create-store__title {
@@ -199,10 +162,8 @@ body {
 @media (max-width: 480px) {
     .create-store {
         margin: 10px auto;
-        /* 小さいデバイス向けの調整 */
         padding: 10px;
         max-width: 90%;
-        /* デバイス幅に収める */
     }
 
     .create-store__title {

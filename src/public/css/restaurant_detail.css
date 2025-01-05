@@ -56,17 +56,13 @@ body {
     height: auto;
     object-fit: cover;
 }
+
 .default-image {
     width: 200px;
-    /* デフォルト画像の幅を指定 */
     height: 200px;
-    /* デフォルト画像の高さを指定 */
     object-fit: contain;
-    /* アスペクト比を崩さず枠内に収める */
     margin: 0 auto;
-    /* 中央寄せ */
     display: block;
-    /* 余分な余白を削除 */
 }
 
 .shop-info__description {
@@ -78,7 +74,6 @@ body {
     margin-top: 10px;
 }
 
-/* 予約フォーム全体 */
 .reservation-form {
     position: absolute;
     top: 50px;
@@ -144,7 +139,6 @@ body {
     font-size: 12px;
 }
 
-/* 予約詳細エリアと確認ボタンのコンテナ */
 .reservation-summary__container {
     margin-top: 170px;
     margin-right: 120px;
@@ -169,7 +163,6 @@ body {
     color: white;
 }
 
-/* 予約するボタンのスタイル */
 .reservation-form__button--submit {
     width: 600px;
     padding: 15px 0;
@@ -190,39 +183,27 @@ body {
 .reservation-form__button--submit:hover {
     background-color: #001a66;
 }
-/* 入力フィールドのエラー状態 */
+
 .is-invalid {
     border: 2px solid #ff4d4f;
-    /* 赤いボーダー */
 }
 
-/* エラーメッセージのスタイル */
 .reservation-form__error-message {
     color: #ff4d4f;
-    /* 赤文字で目立たせる */
     font-size: 14px;
-    /* 適度なサイズ */
     margin-top: 5px;
-    /* フィールドとの間に余白 */
     position: absolute;
-    /* 入力フィールドの直下に固定 */
     bottom: 0px;
-    /* 入力欄の下に配置 */
     left: 30px;
-    /* 左揃え */
     width: 100%;
-    /* 親幅に合わせる */
     font-weight: bold;
-    /* 強調 */
 }
 
-/* タブレット・スマートフォン用のレスポンシブデザイン */
 @media (max-width: 768px) {
     .shop-page__content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* 子要素を中央揃え */
         padding: 20px;
         gap: 20px;
     }
@@ -233,17 +214,15 @@ body {
 
     .reservation-form {
         position: static;
-        /* 固定配置を解除 */
         width: 100%;
-        /* 画面幅に合わせる */
         margin-top: 20px;
         margin-bottom: 50px;
-
     }
-        .reservation-form__input--date{
-            width: 50%;
-            margin-bottom: 10px;
-        }
+
+    .reservation-form__input--date {
+        width: 50%;
+        margin-bottom: 10px;
+    }
 
     .reservation-form__select--time,
     .reservation-form__select--people {
@@ -251,11 +230,10 @@ body {
         margin-bottom: 10px;
     }
 
-.reservation-summary__container {
-    margin: -500px auto 20px auto;
-    /* 上に大きく持ち上げて、下部に少し余白を追加 */
-    width: 90%;
-}
+    .reservation-summary__container {
+        margin: -500px auto 20px auto;
+        width: 90%;
+    }
 
     .reservation-form__button--submit {
         width: 100%;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    use HasFactory; // HasFactoryを追加（オプション）
+    use HasFactory;
 
     protected $fillable = ['name'];
 

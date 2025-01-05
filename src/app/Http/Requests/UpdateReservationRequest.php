@@ -8,7 +8,7 @@ class UpdateReservationRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // 必要に応じて認可ロジックを追加
+        return true;
     }
 
     public function rules()

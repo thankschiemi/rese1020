@@ -14,8 +14,8 @@ class AddMemberIdToRestaurantsTable extends Migration
     public function up()
     {
         Schema::table('restaurants', function (Blueprint $table) {
-            $table->unsignedBigInteger('member_id')->nullable()->after('id'); // member_idカラムを追加
-            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade'); // 外部キー制約
+            $table->unsignedBigInteger('member_id')->nullable()->after('id');
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
         });
     }
 

@@ -17,17 +17,13 @@ body {
 
 .page_content>article:only-child {
     max-width: 300px;
-    /* 単一の要素の最大幅を制限 */
     margin: 0 auto;
-    /* 中央揃え */
     justify-self: center;
-    /* グリッド内で中央に配置 */
 }
 
 @media (max-width: 768px) {
     .page_content {
         grid-template-columns: repeat(2, 1fr);
-        /* 2列表示に変更 */
         padding: 10px;
     }
 }

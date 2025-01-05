@@ -9,7 +9,7 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $table = 'reservations'; // テーブル名の指定
+    protected $table = 'reservations';
 
     protected $fillable = [
         'member_id',
@@ -21,25 +21,21 @@ class Reservation extends Model
 
     public $timestamps = true;
 
-    // 会員（ユーザー）とのリレーション
     public function member()
     {
         return $this->belongsTo(Member::class, 'member_id');
     }
 
-    // レストランとのリレーション
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 
-    // スコープ: ログイン中のユーザーの予約を取得
     public function scopeForUser($query, $userId)
     {
         return $query->where('member_id', $userId);
     }
 
-    // QRコードデータを生成するメソッド
     public function generateQrData()
     {
         return "予約情報:\n"

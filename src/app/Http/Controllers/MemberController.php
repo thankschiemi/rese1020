@@ -45,10 +45,8 @@ class MemberController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // 自動ログイン
         Auth::login($member);
 
-        // メール認証画面へリダイレクト
         return redirect()->route('verification.notice');
     }
 
@@ -63,7 +61,6 @@ class MemberController extends Controller
 
     public function accountSettings(Request $request)
     {
-        // 直前のURLを取得
         $previousUrl = $request->headers->get('referer') ?? route('restaurants.index');
 
         return view(Auth::check() ? 'main_menu' : 'account_settings', [
@@ -74,13 +71,10 @@ class MemberController extends Controller
 
     public function mainmenu(Request $request)
     {
-        // ログイン状態の確認
         if (!Auth::check()) {
-            // セッションにエラーメッセージを保存
             return redirect()->route('account-settings')->with('error', 'ログインが必要です。');
         }
 
-        // 直前のURLを取得
         $previousUrl = $request->headers->get('referer') ?? route('restaurants.index');
 
         return view('main_menu', [
@@ -88,10 +82,6 @@ class MemberController extends Controller
             'previousUrl' => $previousUrl,
         ]);
     }
-
-
-
-
 
     public function thanks()
     {

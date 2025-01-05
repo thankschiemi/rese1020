@@ -9,9 +9,7 @@
 <main class="mypage">
     <div class="mypage__content">
 
-        <!-- 左カラム：予約情報 -->
         <section class="mypage__reservations">
-            <!-- フラッシュメッセージ表示 -->
             @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -73,7 +71,6 @@
             @endforelse
         </section>
 
-        <!-- 右カラム：お気に入り店舗 -->
         <section id="mypage-favorite-section" class="mypage__favorites">
             <p class="mypage__user-name">{{ $user->name }}さん</p>
             <h2 class="mypage__section-title">お気に入り店舗</h2>

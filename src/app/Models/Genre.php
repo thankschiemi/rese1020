@@ -12,7 +12,6 @@ class Genre extends Model
     protected $table = 'genres';
     protected $fillable = ['name'];
 
-    // レストランとのリレーション
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class, 'genre_id');

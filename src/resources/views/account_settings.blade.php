@@ -14,13 +14,13 @@
     <nav class="menu__nav">
         <ul class="menu__list">
             <li class="menu__item">
-                <a href="{{ url('/') }}" class="menu__link">Home</a> <!-- ホーム画面のリンク -->
+                <a href="{{ url('/') }}" class="menu__link">Home</a>
             </li>
             <li class="menu__item">
-                <a href="{{ url('/register') }}" class="menu__link">Registration</a> <!-- 新規登録画面へのリンク -->
+                <a href="{{ url('/register') }}" class="menu__link">Registration</a>
             </li>
             <li class="menu__item">
-                <a href="{{ url('/login') }}" class="menu__link">Login</a> <!-- ログイン画面へのリンク -->
+                <a href="{{ url('/login') }}" class="menu__link">Login</a>
             </li>
         </ul>
     </nav>

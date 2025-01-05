@@ -18,7 +18,7 @@ class StoreReservationRequest extends FormRequest
             'date' => [
                 'required',
                 'date',
-                'after_or_equal:today', // 今日以降の日付のみ許可
+                'after_or_equal:today',
             ],
             'time' => [
                 'required',

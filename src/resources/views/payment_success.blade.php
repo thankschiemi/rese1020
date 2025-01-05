@@ -1,4 +1,3 @@
-<!-- resources/views/payment_success.blade.php -->
 @extends('layouts.rese_layout')
 
 @section('css')

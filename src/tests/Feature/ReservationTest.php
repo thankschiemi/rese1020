@@ -16,11 +16,7 @@ class ReservationTest extends TestCase
     {
         parent::setUp();
 
-        // テーブルが空の状態からシード
-        $this->seed(); // DatabaseSeeder 全体を呼ぶ
-
-        // あるいは個別シーダーだけ呼ぶ: 
-        // $this->seed(\Database\Seeders\RestaurantSeeder::class);
+        $this->seed();
     }
 
     public function test_reservation_can_be_updated_with_valid_data()
@@ -47,7 +43,6 @@ class ReservationTest extends TestCase
     {
         $member = Member::factory()->create();
 
-        // このIDは存在しない想定
         $nonexistentId = 99999;
         /** @var \App\Models\Member $member */
         $response = $this->actingAs($member)->put('/reservation/' . $nonexistentId, [
@@ -57,7 +52,6 @@ class ReservationTest extends TestCase
             'number_of_people' => 4,
         ]);
 
-        // 存在しないIDなので、404を期待
         $response->assertStatus(404);
     }
 

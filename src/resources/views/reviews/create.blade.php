@@ -14,7 +14,6 @@
             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
             <input type="hidden" name="restaurant_id" value="{{ $reservation->restaurant->id }}">
 
-            <!-- 評価 -->
             <div class="review__form-group">
                 <label for="rating" class="review__label">評価 (1～5)</label>
                 <select id="rating" name="rating" class="review__select @error('rating') is-invalid @enderror">
@@ -30,7 +29,6 @@
                 @enderror
             </div>
 
-            <!-- コメント -->
             <div class="review__form-group">
                 <label for="comment" class="review__label">コメント</label>
                 <textarea id="comment" name="comment" rows="4" class="review__textarea @error('comment') is-invalid @enderror" placeholder="店舗へのコメントを記入してください">{{ old('comment') }}</textarea>
@@ -59,7 +57,6 @@
         </div>
         @endforeach
 
-        <!-- ページネーション -->
         <div class="pagination-container">
             {{ $reviews->links('vendor.pagination.default') }}
         </div>

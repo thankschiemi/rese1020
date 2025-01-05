@@ -3,7 +3,6 @@ body {
     height: 100%;
     margin: 0;
     background-color: #f5f5f5;
-    /* 背景色 */
 }
 
 .register__container {
@@ -26,7 +25,6 @@ body {
     margin: 0;
 }
 
-/* フォームタイトルのスタイル */
 .register__form-title {
     background-color: #005DFF;
     color: #fff;
@@ -39,21 +37,16 @@ body {
     border-top-right-radius: 8px;
 }
 
-/* フォームグループのスタイル */
 .register__form-group {
     display: flex;
     align-items: center;
-    /* アイコンとラベルを縦に中央揃え */
     padding: 10px 0;
     padding-left: 35px;
-    /* 左の余白 */
     gap: 10px;
-    /* アイコンとテキストの間の余白 */
     width: 100%;
     position: relative;
 }
 
-/* ラベルのスタイル */
 .register__label {
     font-size: 20px;
     color: #666;
@@ -61,14 +54,12 @@ body {
     white-space: nowrap;
 }
 
-/* アイコンのスタイル */
 .register__icon {
     width: 30px;
     height: 30px;
     color: #666;
 }
 
-/* 入力フィールドのスタイル */
 .register__input {
     width: 350px;
     border: none;
@@ -86,7 +77,6 @@ body {
     border-bottom: 1.8px solid #005DFF;
 }
 
-/* ボタンのスタイル */
 .register__button {
     padding: 5px 20px;
     background-color: #005DFF;
@@ -102,29 +92,22 @@ body {
 .register__button:hover {
     background-color: #004BB5;
 }
-/* エラーメッセージのスタイル */
+
 .error {
     color: #ff4d4f;
-    /* 赤い文字で目立たせる */
     font-size: 14px;
-    /* 入力欄に合う小さめのフォントサイズ */
     position: absolute;
-    /* 入力欄の下に固定 */
     left: 80px;
-    /* メッセージを少し右に移動 */
     bottom: -20px;
-    /* 入力欄の下にスペースを確保 */
     font-weight: bold;
     text-align: left;
 }
 
-/* エラーが発生した入力フィールドのスタイル */
 .register__input.is-invalid {
     border-bottom: 2px solid #ff4d4f;
-    /* 赤いボーダーで強調 */
     background-color: transparent;
-    /* 背景色は透明に */
 }
+
 @media (max-width: 768px) {
     .register__form {
         width: 90%;
@@ -145,7 +128,5 @@ body {
         left: 80px;
         bottom: -5px;
         font-size: 8px;
-        
     }
-
 }

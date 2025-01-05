@@ -19,7 +19,7 @@ class CreateFavoritesTable extends Migration
             $table->bigInteger('restaurant_id')->unsigned();
             $table->timestamps();
 
-            $table->unique(['member_id', 'restaurant_id']); // UNIQUE制約
+            $table->unique(['member_id', 'restaurant_id']);
             $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });

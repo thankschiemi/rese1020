@@ -6,8 +6,8 @@
 </head>
 
 <body>
-    <h1>{{ $subject }}</h1> <!-- 件名 -->
-    <p>{{ $emailMessage }}</p> <!-- メール本文 -->
+    <h1>{{ $subject }}</h1>
+    <p>{{ $emailMessage }}</p>
     <p>Reseをご利用いただきありがとうございます。</p>
 </body>
 

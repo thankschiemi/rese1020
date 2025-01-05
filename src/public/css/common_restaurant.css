@@ -14,24 +14,17 @@
 
 .restaurant__image {
     width: 100%;
-        height: 150px;
-        /* デフォルト高さ */
-        max-height: 150px;
-        /* 高さを超えないようにする */
-        object-fit: cover;
-        /* 画像が変形しないように */
-        border-radius: 5px;
-        /* 画像の角を丸める */
+    height: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
 }
+
 .default-image {
     display: block;
-    /* ブロック要素に設定 */
     margin: 20px auto 0;
-    /* 上に余白を追加し、左右中央揃え */
     max-width: 70%;
-    /* 画像の幅を調整 */
     max-height: 70%;
-    /* 画像の高さを調整 */
 }
 
 .restaurant__details {
@@ -52,7 +45,6 @@
     margin: 0;
 }
 
-
 .restaurant_button,
 .restaurant__button {
     padding: 8px 16px;
@@ -72,19 +64,14 @@
 
 .restaurant__actions {
     margin-top: 10px;
-    /* 上の要素からの間隔 */
 }
 
 .restaurant_buttons {
     display: flex;
     align-items: center;
-    /* 縦方向の中央揃え */
     justify-content: space-between;
-    /* 左右に配置 */
     padding: 0 10px;
-    /* 余白を追加 */
     width: 100%;
-    /* 横幅を親要素に合わせる */
 }
 
 .restaurant_button:hover {
@@ -93,11 +80,9 @@
 
 .restaurant_favorite-button {
     font-size: 60px;
-    /* ハートの大きさ */
     background: none;
     border: none;
     color: #ccc;
-    /* デフォルトの薄い灰色 */
     cursor: pointer;
     transition: color 0.2s, transform 0.2s;
     padding: 0;
@@ -106,73 +91,56 @@
 
 .restaurant_favorite-button.active {
     color: red;
-    /* お気に入り状態の赤色 */
 }
 
 .restaurant_favorite-button:hover {
     transform: scale(1.2);
-    /* ホバー時に少し拡大 */
     color: #ff6666;
-    /* ホバー時の明るい赤 */
 }
+
 @media (max-width: 768px) {
     .restaurant {
         flex-direction: column;
-        /* カード内の要素を縦並びに */
         border-radius: 8px;
-        /* 少し角を丸める */
     }
 
     .restaurant__image img {
         height: 120px;
-        /* 画像の高さを縮小 */
     }
 
     .restaurant__details {
         padding: 8px;
-        /* 余白を少し縮小 */
         gap: 6px;
-        /* 要素間の間隔を縮小 */
     }
 
     .restaurant__name {
         font-size: 16px;
-        /* 店舗名のフォントサイズを調整 */
     }
 
     .restaurant__tags {
         font-size: 10px;
-        /* タグのフォントサイズを縮小 */
     }
 
-        .restaurant_buttons {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            /* ボタンとハート間の余白 */
-            padding: 0 10px;
-            /* ボタン周囲の余白 */
-            width: 100%;
-            /* コンテナ幅いっぱいにする */
-        }
-    
-        .restaurant_button {
-            font-size: 12px;
-            /* ボタンの文字サイズを縮小 */
-            padding: 6px 10px;
-            /* ボタンの内側の余白 */
-        }
-    
-        .restaurant_favorite-button {
-            font-size: 40px;
-            /* ハートのサイズを調整 */
-            margin-left: auto;
-            /* ボタンの右側に固定 */
-        }
-    
-        .restaurant__actions {
-            margin-top: 10px;
-            /* 上の要素との余白を調整 */
-        }
+    .restaurant_buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    .restaurant_button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .restaurant_favorite-button {
+        font-size: 40px;
+        margin-left: auto;
+    }
+
+    .restaurant__actions {
+        margin-top: 10px;
+    }
 }

@@ -2,20 +2,14 @@
 
 namespace Tests\Feature;
 
-
 use App\Models\Member;
 use Tests\TestCase;
 
 class AdminTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_admin_can_update_user_role()
     {
-        /** @var \App\Models\Member $admin */
+        /** @var \App\Models\Member $admin*/
         $admin = Member::factory()->create(['role' => 'admin']);
         $this->actingAs($admin);
 
@@ -33,7 +27,7 @@ class AdminTest extends TestCase
 
     public function test_owner_cannot_update_user_role()
     {
-        /** @var \App\Models\Member $owner */
+        /** @var \App\Models\Member $owner*/
         $owner = Member::factory()->create(['role' => 'owner']);
         $this->actingAs($owner);
 
@@ -42,6 +36,6 @@ class AdminTest extends TestCase
             'role' => 'admin',
         ]);
 
-        $response->assertStatus(403); // アクセス拒否
+        $response->assertStatus(403);
     }
 }

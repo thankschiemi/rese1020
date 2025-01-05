@@ -11,11 +11,8 @@ class ReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $reservation; // 予約データを保持
+    public $reservation;
 
-    /**
-     * コンストラクタで予約データを受け取る
-     */
     public function __construct($reservation)
     {
         $this->reservation = $reservation;

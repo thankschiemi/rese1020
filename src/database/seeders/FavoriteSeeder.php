@@ -11,7 +11,7 @@ class FavoriteSeeder extends Seeder
 {
     public function run()
     {
-        // すべての Member と Restaurant の組み合わせを作成する例
+
         $members = Member::all();
         $restaurants = Restaurant::all();
 
@@ -20,9 +20,9 @@ class FavoriteSeeder extends Seeder
             return;
         }
 
-        // 複数の Favorites をランダムに生成
+
         foreach ($members as $member) {
-            $selectedRestaurants = $restaurants->random(rand(1, min(3, $restaurants->count()))); // ランダムに1〜3店舗選択
+            $selectedRestaurants = $restaurants->random(rand(1, min(3, $restaurants->count())));
 
             foreach ($selectedRestaurants as $restaurant) {
                 Favorite::firstOrCreate([

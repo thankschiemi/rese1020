@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
-
 
 class FavoriteController extends Controller
 {
@@ -17,7 +15,6 @@ class FavoriteController extends Controller
             return redirect()->route('account-settings');
         }
 
-        // お気に入り登録または削除の処理
         $favorite = Favorite::where('member_id', $user->id)
             ->where('restaurant_id', $restaurant_id)
             ->first();
@@ -34,11 +31,8 @@ class FavoriteController extends Controller
         }
     }
 
-
-
-
     public function __construct()
     {
-        $this->middleware('auth'); // ログイン済みユーザーのみアクセス可能
+        $this->middleware('auth');
     }
 }

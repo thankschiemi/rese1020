@@ -19,7 +19,6 @@ class RestaurantController extends Controller
 
         $query = Restaurant::query();
 
-        // フィルタリング処理
         if ($request->filled('region_id')) {
             $query->where('region_id', $request->region_id);
         }
@@ -30,10 +29,8 @@ class RestaurantController extends Controller
             $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        // 飲食店データを取得
         $restaurants = $query->select('id', 'name', 'region_id', 'genre_id', 'image_url')->distinct()->get();
 
-        // 現在ログイン中のユーザーのお気に入り情報を付与
         $user_id = Auth::id();
         foreach ($restaurants as $restaurant) {
             $restaurant->is_favorite = Favorite::where('member_id', $user_id)->where('restaurant_id', $restaurant->id)->exists();
@@ -41,11 +38,11 @@ class RestaurantController extends Controller
 
         return view('restaurant_all', compact('restaurants', 'regions', 'genres'));
     }
+
     public function detail($shop_id)
     {
         $restaurant = Restaurant::with(['region', 'genre'])->findOrFail($shop_id);
 
-        // ログイン中のユーザーの予約状況を取得
         $user_id = Auth::id();
         $latest_reservation = Reservation::where('member_id', $user_id)
             ->where('restaurant_id', $shop_id)

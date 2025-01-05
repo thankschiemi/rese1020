@@ -15,17 +15,13 @@ class RestaurantDetailTest extends TestCase
 
     public function testDetailPageDisplaysCorrectly()
     {
-        // 認証ユーザーを作成してログイン
-        $member = Member::factory()->create(); // 認証用のMemberモデルを作成
-        // 型アノテーションを明示
+        $member = Member::factory()->create();
         /** @var \App\Models\Member $member */
-        $this->actingAs($member, 'web'); // ログイン状態をシミュレート
+        $this->actingAs($member, 'web');
 
-        // 必要なデータをシーダーから取得
         $region = Region::firstOrCreate(['name' => '東京都']);
         $genre = Genre::firstOrCreate(['name' => '寿司']);
 
-        // 正常なレストランデータを作成
         $restaurant = Restaurant::factory()->create([
             'name' => '木船',
             'region_id' => $region->id,
@@ -34,13 +30,11 @@ class RestaurantDetailTest extends TestCase
             'image_url' => 'images/sushi-image.jpg',
         ]);
 
-        // 詳細ページが正常に表示されるか
         $response = $this->get('/detail/' . $restaurant->id);
         $response->assertStatus(200);
         $response->assertSee($restaurant->name);
 
-        // 存在しないレストランIDで404が返るか
-        $response = $this->get('/detail/99999'); // 存在しないID
+        $response = $this->get('/detail/99999');
         $response->assertStatus(404);
     }
 }

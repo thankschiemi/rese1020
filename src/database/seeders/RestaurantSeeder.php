@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Restaurant;
-use App\Models\Member;
-
 
 class RestaurantSeeder extends Seeder
 {

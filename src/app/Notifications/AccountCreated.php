@@ -10,35 +10,18 @@ class AccountCreated extends Notification
 {
     use Queueable;
 
-    public $password; // 初期パスワードを保持
+    public $password;
 
-    /**
-     * コンストラクタで初期パスワードを受け取る
-     *
-     * @param string $password
-     */
     public function __construct($password)
     {
-        $this->password = $password; // 初期パスワードをセット
+        $this->password = $password;
     }
 
-    /**
-     * 通知の送信チャネル
-     *
-     * @param mixed $notifiable
-     * @return array
-     */
     public function via($notifiable)
     {
         return ['mail'];
     }
 
-    /**
-     * メール通知の内容
-     *
-     * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
@@ -52,16 +35,8 @@ class AccountCreated extends Notification
             ->line('ご利用いただきありがとうございます！');
     }
 
-    /**
-     * 通知の配列表現
-     *
-     * @param mixed $notifiable
-     * @return array
-     */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

@@ -83,12 +83,10 @@
                 const isAuthenticated = this.getAttribute('data-authenticated') === 'true';
 
                 if (!isAuthenticated) {
-                    // ログインが必要な場合のポップアップ
                     alert('この機能を使用するにはログインが必要です。');
                     return;
                 }
 
-                // ログイン済みの場合、いいね処理を実行
                 const restaurantId = this.closest('.restaurant').dataset.restaurantId;
 
                 fetch(`/favorites/${restaurantId}`, {

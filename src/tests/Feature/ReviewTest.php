@@ -16,10 +16,7 @@ class ReviewTest extends TestCase
     {
         parent::setUp();
 
-        // ここで「DatabaseSeeder」を呼び出すので、テーブルが空でも初期データが再投入される
         $this->seed();
-        // もし DatabaseSeeder の中で RestaurantSeeder を呼んでいれば
-        // restaurants テーブルにデータが入るようになる
     }
 
     public function test_review_can_be_created_with_valid_data()
@@ -39,12 +36,10 @@ class ReviewTest extends TestCase
             'comment'        => 'Excellent service!',
         ]);
 
-        // 成功時はmypageへリダイレクト(302)なので
         $response->assertRedirect(route('mypage'));
-        // セッションメッセージの確認なども可能
+
         $response->assertSessionHas('success', '評価を送信しました！下記の評価ボタンをクリックすると、作成した評価を確認できます。');
 
-        // DBにレコードが保存されていることを確認
         $this->assertDatabaseHas('reviews', [
             'reservation_id' => $reservation->id,
             'rating'         => 5,
@@ -67,8 +62,8 @@ class ReviewTest extends TestCase
         $response = $this->actingAs($member)->postJson('/reviews', [
             'reservation_id' => $reservation->id,
             'restaurant_id'  => $reservation->restaurant_id,
-            'rating'         => 6, // バリデーションNG値
-            'comment'        => str_repeat('a', 1001), // 1000文字超
+            'rating'         => 6,
+            'comment'        => str_repeat('a', 1001),
         ]);
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['rating', 'comment']);

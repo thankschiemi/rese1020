@@ -10,7 +10,7 @@
     <nav class="menu__nav">
         <ul class="menu__list">
             <li class="menu__item">
-                <a href="{{ url('/') }}" class="menu__link">Home</a> <!-- ホーム画面のリンク -->
+                <a href="{{ url('/') }}" class="menu__link">Home</a>
             </li>
             <li class="menu__item">
                 <form method="POST" action="{{ route('logout') }}" class="menu__form">
@@ -19,7 +19,7 @@
                 </form>
             </li>
             <li class="menu__item">
-                <a href="{{ url('/mypage') }}" class="menu__link">Mypage</a> <!-- アカウント設定へのリンク -->
+                <a href="{{ url('/mypage') }}" class="menu__link">Mypage</a>
             </li>
             {{-- 管理者用リンク --}}
             @if(Auth::user()->role === 'admin')
