@@ -7,7 +7,7 @@ use Tests\TestCase;
 class RestaurantTest extends TestCase
 {
 
-    public function it_displays_the_restaurant_list_page()
+    public function test_displays_the_restaurant_list_page()
     {
 
         $response = $this->get('/');

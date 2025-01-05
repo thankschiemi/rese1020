@@ -7,7 +7,7 @@ use Tests\TestCase;
 use App\Models\Restaurant;
 use App\Models\Region;
 use App\Models\Genre;
-use App\Models\Member; // 認証用モデル
+use App\Models\Member;
 
 class RestaurantDetailTest extends TestCase
 {
@@ -15,14 +15,16 @@ class RestaurantDetailTest extends TestCase
 
     public function testDetailPageDisplaysCorrectly()
     {
+
         $member = Member::factory()->create();
-        /** @var \App\Models\Member $member */
         $this->actingAs($member, 'web');
+
 
         $region = Region::firstOrCreate(['name' => '東京都']);
         $genre = Genre::firstOrCreate(['name' => '寿司']);
 
-        $restaurant = Restaurant::factory()->create([
+
+        $restaurant = Restaurant::create([
             'name' => '木船',
             'region_id' => $region->id,
             'genre_id' => $genre->id,
@@ -30,9 +32,11 @@ class RestaurantDetailTest extends TestCase
             'image_url' => 'images/sushi-image.jpg',
         ]);
 
+
         $response = $this->get('/detail/' . $restaurant->id);
         $response->assertStatus(200);
         $response->assertSee($restaurant->name);
+
 
         $response = $this->get('/detail/99999');
         $response->assertStatus(404);

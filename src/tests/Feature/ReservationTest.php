@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use App\Models\Member;
 use App\Models\Reservation;
 use App\Models\Restaurant;
+use App\Models\Region;
+use App\Models\Genre;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -30,7 +32,7 @@ class ReservationTest extends TestCase
         ]);
 
         $response = $this->actingAs($member)->put('/reservation/' . $reservation->id, [
-            'reservation_date' => '2024-12-31',
+            'reservation_date' => now()->addDay()->format('Y-m-d'),
             'reservation_time' => '18:00',
             'number_of_people' => 4,
         ]);
@@ -41,13 +43,10 @@ class ReservationTest extends TestCase
 
     public function test_reservation_update_fails_with_nonexistent_id()
     {
-        $member = Member::factory()->create();
+        $this->actingAs(Member::factory()->create());
 
-        $nonexistentId = 99999;
-        /** @var \App\Models\Member $member */
-        $response = $this->actingAs($member)->put('/reservation/' . $nonexistentId, [
-            // ルールに合わせて
-            'reservation_date' => '2024-12-31',
+        $response = $this->put('/reservation/9999', [
+            'reservation_date' => '2025-12-31',
             'reservation_time' => '18:00',
             'number_of_people' => 4,
         ]);
@@ -55,17 +54,33 @@ class ReservationTest extends TestCase
         $response->assertStatus(404);
     }
 
-
-
     public function test_reservation_update_fails_with_invalid_data()
     {
-        /** @var \App\Models\Member $member */
+        $region = Region::where('name', '東京都')->first();
+        $genre = Genre::where('name', '寿司')->first();
+
         $member = Member::factory()->create();
-        $response = $this->actingAs($member)->put('/reservation/99999', [
-            'reservation_date' => '2024-12-31',
-            'reservation_time' => '18:00',
-            'number_of_people' => 4,
+
+        $restaurant = Restaurant::factory()->create([
+            'region_id' => $region->id,
+            'genre_id' => $genre->id,
         ]);
-        $response->assertStatus(404);
+
+        $reservation = Reservation::factory()->create([
+            'member_id' => $member->id,
+            'restaurant_id' => $restaurant->id,
+        ]);
+
+        $response = $this->actingAs($member)->put('/reservation/' . $reservation->id, [
+            'reservation_date' => '',
+            'reservation_time' => 'invalid-time',
+            'number_of_people' => -1,
+        ]);
+
+        $response->assertSessionHasErrors([
+            'reservation_date',
+            'reservation_time',
+            'number_of_people',
+        ]);
     }
 }

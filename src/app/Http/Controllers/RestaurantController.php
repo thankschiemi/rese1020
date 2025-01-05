@@ -41,7 +41,12 @@ class RestaurantController extends Controller
 
     public function detail($shop_id)
     {
-        $restaurant = Restaurant::with(['region', 'genre'])->findOrFail($shop_id);
+        $restaurant = Restaurant::with(['region', 'genre'])->find($shop_id);
+
+        if (!$restaurant) {
+
+            return response('Restaurant not found', 404);
+        }
 
         $user_id = Auth::id();
         $latest_reservation = Reservation::where('member_id', $user_id)

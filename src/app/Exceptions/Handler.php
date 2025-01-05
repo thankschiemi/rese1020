@@ -48,4 +48,12 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+            return response()->view('errors.404', [], 404);
+        }
+
+        return parent::render($request, $exception);
+    }
 }

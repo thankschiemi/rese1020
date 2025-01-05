@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    public function it_displays_the_register_page()
+    public function test_displays_the_register_page()
     {
         $response = $this->get('/register');
 
@@ -15,7 +15,7 @@ class RegisterTest extends TestCase
         $response->assertViewIs('auth.register');
     }
 
-    public function it_validates_user_registration()
+    public function test_validates_user_registration()
     {
         $response = $this->withoutMiddleware()->post('/register', [
             'name' => '',

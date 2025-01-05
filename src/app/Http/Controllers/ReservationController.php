@@ -6,6 +6,7 @@ use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReservationController extends Controller
 {
@@ -67,10 +68,17 @@ class ReservationController extends Controller
 
     public function update(UpdateReservationRequest $request, $id)
     {
-        $validated = $request->validated();
-        $reservation = Reservation::findOrFail($id);
-        $reservation->fill($validated)->save();
+        try {
+            $reservation = Reservation::findOrFail($id);
+            $reservation->update($request->only([
+                'reservation_date',
+                'reservation_time',
+                'number_of_people'
+            ]));
 
-        return redirect()->route('mypage')->with('success', '予約情報が変更されました。');
+            return redirect()->route('mypage')->with('success', '予約情報が変更されました。');
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Reservation not found'], 404);
+        }
     }
 }

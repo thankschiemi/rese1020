@@ -38,8 +38,9 @@ class Reservation extends Model
 
     public function generateQrData()
     {
+        $restaurantName = $this->restaurant ? $this->restaurant->name : '不明な店舗';
         return "予約情報:\n"
-            . "店舗名: {$this->restaurant->name}\n"
+            . "店舗名: {$restaurantName}\n"
             . "日時: {$this->reservation_date} {$this->reservation_time}\n"
             . "人数: {$this->number_of_people}人";
     }
