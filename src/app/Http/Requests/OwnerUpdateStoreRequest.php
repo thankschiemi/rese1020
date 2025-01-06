@@ -18,7 +18,10 @@ class OwnerUpdateStoreRequest extends FormRequest
             'region_id' => 'required|exists:regions,id',
             'genre_id' => 'required|exists:genres,id',
             'description' => 'nullable|string',
-            'image_url' => 'nullable|url',
+            'image_url' => [
+                'nullable',
+                'regex:/^(https?:\/\/|images\/)[a-zA-Z0-9._\/-]+$/',
+            ],
         ];
     }
 
@@ -28,7 +31,7 @@ class OwnerUpdateStoreRequest extends FormRequest
             'name.required' => '店舗名は必須です。',
             'region_id.required' => '地域は必須です。',
             'genre_id.required' => 'ジャンルは必須です。',
-            'image_url.url' => '画像URLの形式が正しくありません。',
+            'image_url.regex' => '画像URLは「http(s)://」または「images/」で始まる形式である必要があります。',
         ];
     }
 }
