@@ -2,3 +2,4 @@
 /myenv
 /vendor
 docker/mysql/data/*
+.env
