@@ -7,68 +7,105 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# RESE プロジェクト
+# 飲食店予約サービスアプリ -RESE
 
-## プロジェクト概要
+**RESE**は、飲食店の予約とレビュー管理を簡単に行えるシステムです
 
-**RESE**は、飲食店の予約とレビュー管理を簡単に行えるシステムです。このプロジェクトは、Laravel をベースに構築されており、以下の機能を提供します：
+![トップ画面](public/images/RESE.png)
 
--   飲食店の検索と閲覧
+## 作成した目的
+
+上級模擬案件を通して実践に近い開発経験をつむため作成しました。
+
+## アプリケーション URL
+
+http://3.112.210.128
+
+## 機能一覧
+
+-   会員登録・ログイン
+-   レストラン検索機能
+-   レストラン詳細表示
 -   予約の作成・更新・削除
 -   レビュー投稿・閲覧機能
 -   お気に入り登録機能
 
-## データベース設計
+**追加機能**
+
+-   予約変更機能
+-   評価機能
+-   バリデーション
+-   認証
+-   QR コード
+-   管理画面
+-   メール
+-   リマインダー
+-   レスポンシブデザイン
+-   ストレージ
+-   決済機能
+-   AWS
+-   環境の切り分け
+
+## 使用技術
+
+-   フレームワーク: Laravel 8.x
+-   データベース: MySQL 8.x
+-   サーバー: Nginx
+-   PHP: 8.1
+-   Node.js: 14.x or higher
+-   Composer: 2.x
+-   Docker
+-   Stripe
+-   javascript
+-   OS: Amazon Linux 2023
+    **その他**: AWS（S3, EC2, RDS）を使用した本番環境構築
+
+## テーブル設計
+
+![テーブル設計](public/images/table.png)
+
+## ER 図
 
 以下は、本プロジェクトで使用しているデータベースの ER 図です：
 
 ![ER図](resources/diagrams/index.drawio.png)
 
-この ER 図は、各テーブル間のリレーションやカラム構造を視覚的に示しています。
-
-## 使用技術
-
--   **フレームワーク**: Laravel 10.x
--   **データベース**: MySQL
--   **フロントエンド**: Blade テンプレートエンジン
--   **その他**: AWS（S3, EC2, RDS）を使用した本番環境構築
-
-## セットアップ手順
+## 環境構築
 
 1. リポジトリをクローン
     ```bash
-    git clone https://github.com/<your-repository>/rese.git
-    cd rese
+    git clone https://github.com/thankschiemi/rese1020.git
     ```
 2. 環境設定ファイルを作成
-   cp .env.example .env
+    ```bash
+    cp .env.example .env
+    ```
 3. 必要な依存関係をインストール
-   composer install
-   npm install
-   npm run dev
+    ```bash
+    composer install
+    npm install
+    npm run dev
+    ```
 4. データベースをマイグレーション
-   php artisan migrate
-5. 開発サーバーを起動
-   php artisan serve
+    ```bash
+    php artisan migrate --seed
+    ```
 
 ライセンス
 このプロジェクトは、MIT ライセンスの下で公開されています。
 
----
+## ダミーデータ情報
 
-### **ポイント**
+-   **管理者:**
+    -   Email: `admin@example.com`
+    -   Password: `adminpassword`
+-   **店舗代表者:**
+    -   Email: `owner@example.com`
+    -   Password: `ownerpassword`
+-   **一般ユーザー:**
+    -   Email: `user@example.com`
+    -   Password: `userpassword`
 
-1. **元の README の構造を活かす**
+## 作者
 
-    - Laravel のロゴやリンクはそのまま残し、プロジェクトに合った内容を追記。
-
-2. **ER 図を追加**
-
-    - `![ER図](resources/diagrams/index.drawio.png)` で ER 図を簡単に挿入。
-
-3. **プロジェクト独自の情報を反映**
-    - プロジェクト名、機能、セットアップ手順、使用技術などを具体的に記述。
-
----
-
-この README をベースに、さらに必要に応じて調整
+-   **名前**: 鈴木 智恵美
