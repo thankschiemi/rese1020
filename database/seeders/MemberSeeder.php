@@ -32,6 +32,17 @@ class MemberSeeder extends Seeder
             ]
         );
 
+        Member::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => bcrypt('userpassword'),
+                'role' => 'member',
+                'email_verified_at' => now(),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+            ]
+        );
+
         Member::factory()->count(10)->create();
     }
 }
