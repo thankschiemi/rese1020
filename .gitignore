@@ -3,3 +3,4 @@
 /vendor
 docker/mysql/data/*
 .env
+.phpunit.result.cache
